@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cases list{% endblock %}
+
+{% block body %}
+
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid">
+            <h1 class="mt-4">Cases</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">Cases</li>
+                <li class="breadcrumb-item active">list</li>
+            </ol>
+            <div class="card mb-4">
+                <div class="d-flex flex-row-reverse bd-highlight mb-2">
+                  <div class="p-2 bd-highlight"><a href="#">Statistics</a></div>
+                  <div class="p-2 bd-highlight"><a href="{{path('sponsor')}}">Sponsors list</a></div>
+                  <div class="p-2 bd-highlight"><a href="{{path('new_case')}}">New Case</a></div>
+                </div>
+                <div class="card-header"><i class="fas fa-briefcase mr-1"></i>Cases list</div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Case Number</th>
+                                    <th>Contact</th>
+                                    <th>deposit date</th>
+                                    <th>Address</th>
+                                    <th>Affected</th>
+                                    <th>Satus</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Case Number</th>
+                                    <th>Contact</th>
+                                    <th>deposit date</th>
+                                    <th>Address</th>
+                                    <th>Affected</th>
+                                    <th>Satus</th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                            {% for item in items %}
+                            {% set iconAffected = 'fas fa-exclamation-triangle' %}
+                            {% set colorAffeced = 'red' %}
+                            {% if item.affected %}
+                              {% set iconAffected = 'fas fa-check-circle' %}
+                              {% set colorAffeced = 'green' %}
+                            {% endif %}
+
+                            {% set iconStatus = 'fas fa-exclamation-triangle' %}
+                            {% set colorStatus = 'red' %}
+                            {% if item.status %}
+                              {% set iconStatus = 'fas fa-check-circle' %}
+                              {% set colorStatus = 'green' %}
+                            {% endif %}
+                                <tr>
+                                    <td>{{ item }}</td>
+                                    <td>{{ (item.firstName ~ ' ' ~ item.lastName)|e }}</td>
+                                    <td>{{ item.createdAt|date("d/m/Y") }}</td>
+                                    <td>{{ item.address|e }}</td>
+                                    <td>
+                                      <span style="font-size: 2em; color: {{colorAffeced}};">
+                                        <i class="{{ iconAffected }}"></i>
+                                        </span>
+                                    </td>
+                                    <td>
+                                      <span style="font-size: 2em; color: {{colorStatus}};">
+                                      <i class="{{ iconStatus }}"></i>
+                                    </span>
+                                    </td>
+                                    <td>
+                                    <a href="{{ path('show_case',{case:item.id})}}">Show</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</div>
+{% endblock %}

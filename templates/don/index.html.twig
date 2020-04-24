@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des dons{% endblock %}
+
+{% block body %}
+
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid">
+            <h1 class="mt-4">Dons</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">Dons</li>
+            </ol>
+            <div class="card mb-4">
+                <div class="card-header"><i class="fas fa-table mr-1"></i>Liste des dons</div>
+                <div class="card-body">
+                    <div class="table-responsive">
+
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Nom Prénom</th>
+                                    <th>Mail</th>
+                                    <th>Adresse</th>
+                                    <th>Montant</th>
+                                    <th>Reçu</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Nom Prénom</th>
+                                    <th>Mail</th>
+                                    <th>Adresse</th>
+                                    <th>Montant</th>
+                                    <th>Reçu</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                            {% for don in dons %}
+                                <tr>
+                                    <td>{{ don.date|date("d/m/Y", "Europe/Paris") }}</td>
+                                    <td>{{ (don.donor.firstName ~ ' ' ~ don.donor.lastName)|e }}</td>
+                                    <td>{{ don.donor.email|e }}</td>
+                                    <td>{{ (don.donor.address ~ ' ' ~ don.donor.zipCode ~ ' ' ~ don.donor.city ~ ' ' ~ don.donor.country)|e }}</td>
+                                    <td>{{ don.amount ~ ' €' }}</td>
+                                    <td>
+                                    {% if don.reciepe == true %}
+                                      <span style="font-size: 2em; color: Green;">
+                                        <i class="fas fa-check-circle"></i>
+                                      </span>
+                                    {% else %}
+                                      <span style="font-size: 2em; color: red;">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                      </span>
+                                    {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</div>
+{% endblock %}

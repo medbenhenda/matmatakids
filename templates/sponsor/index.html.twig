@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sponsors list{% endblock %}
+
+{% block body %}
+
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid">
+            <h1 class="mt-4">Sponsors</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">sponsors list</li>
+            </ol>
+            <div class="card mb-4">
+            <div class="d-flex flex-row-reverse bd-highlight mb-2">
+              <div class="p-2 bd-highlight"><a href="#">statistics</a></div>
+              <div class="p-2 bd-highlight"><a href="{{path('case')}}">Cases list</a></div>
+              <div class="p-2 bd-highlight"><a href="{{path('new_sponsor')}}">New sponsor</a></div>
+            </div>
+                <div class="card-header"><i class="fas fa-hand-holding-heart mr-1"></i>Sponsors list</div>
+
+                <div class="card-body">
+
+                    <div class="table-responsive">
+
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>First name</th>
+                                    <th>Last name</th>
+                                    <th>Created At</th>
+                                    <th>Email</th>
+                                    <th>Mobile</th>
+                                    <th>Address</th>
+                                    <th>Case</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>First name</th>
+                                    <th>Last name</th>
+                                    <th>Created At</th>
+                                    <th>Email</th>
+                                    <th>Mobile</th>
+                                    <th>Address</th>
+                                    <th>Case</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                            {% for item in items %}
+                                <tr>
+                                    <td>{{ item.firstName }}</td>
+                                    <td>{{ item.lastName|e }}</td>
+                                    <td>{{ item.createdAt|date("d/m/Y") }}</td>
+                                    <td>{{ item.email|e }}</td>
+                                    <td>{{ item.mobile|e }}</td>
+                                    <td>{{ (item.address ~ ' ' ~ item.zipCode ~ ' ' ~ item.city ~ ' ' ~ item.country)|e }}</td>
+                                    <td><ul>{%for affectation in item.affectations%}<li>{{affectation.folder}}</li>{%endfor%}</ul></td>
+                                    <td >
+                                        <ul>
+                                            <li>
+                                                <a href="{{ path('edit_sponsor', {entity: item.id})}}" class="">Edit</a>
+                                            </li>
+                                            {%if not item.affectations.count %}
+                                            <li>
+                                                <a href="{{ path('affect_case_sponsor', {sponsor: item.id})}}" class="">
+                                                    Affect Cases
+                                                </a>
+                                            </li>
+                                            {% endif %}
+                                            <li>
+                                                <a href="{{ path('affectation')}}" class="">
+                                                    Show the affectations
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</div>
+{% endblock %}
