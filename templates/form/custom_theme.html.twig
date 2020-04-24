@@ -1,0 +1,225 @@
+{% use "form_div_layout.html.twig" %}
+
+
+
+    {%- block form_row -%}
+    {%- set widget_attr = {} -%}
+    {%- if help is not empty -%}
+        {%- set widget_attr = {attr: {'aria-describedby': id ~"_help"}} -%}
+    {%- endif -%}
+    <div{% with {attr: row_attr} %}{{ block('attributes') }}{% endwith %}>
+
+    {% if 'checkbox' in block_prefixes %}
+          {{- form_widget(form, widget_attr) -}}
+          {{- form_label(form) -}}
+        {% else %}
+          {{- form_label(form) -}}
+          {{- form_errors(form) -}}
+          {{- form_widget(form, widget_attr) -}}
+          {{- form_help(form) -}}
+        {% endif %}
+
+
+    </div>
+{%- endblock form_row -%}
+{# Widgets #}
+
+{%- block form_widget -%}
+    {% if compound %}
+        {{- block('form_widget_compound') -}}
+    {% else %}
+        {{- block('form_widget_simple') -}}
+    {% endif %}
+{%- endblock form_widget -%}
+
+{% block datetime_widget -%}
+    {%- if widget == 'single_text' -%}
+    <div class="input-group date" >
+         <input type="text" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        <span class="input-group-addon" style="font-size: 1.6em;"><i class="fas fa-calendar-alt"></i></span>
+        </div>
+
+    {%- else -%}
+        {% set attr = attr|merge({class: (attr.class|default('') ~ ' form-inline')|trim}) -%}
+        <div {{ block('widget_container_attributes') }}>
+            {{- form_errors(form.date) -}}
+            {{- form_errors(form.time) -}}
+
+            <div class="sr-only">
+                {%- if form.date.year is defined %}{{ form_label(form.date.year) }}{% endif -%}
+                {%- if form.date.month is defined %}{{ form_label(form.date.month) }}{% endif -%}
+                {%- if form.date.day is defined %}{{ form_label(form.date.day) }}{% endif -%}
+                {%- if form.time.hour is defined %}{{ form_label(form.time.hour) }}{% endif -%}
+                {%- if form.time.minute is defined %}{{ form_label(form.time.minute) }}{% endif -%}
+                {%- if form.time.second is defined %}{{ form_label(form.time.second) }}{% endif -%}
+            </div>
+
+            {{- form_widget(form.date, { datetime: true } ) -}}
+            {{- form_widget(form.time, { datetime: true } ) -}}
+        </div>
+    {%- endif -%}
+{%- endblock datetime_widget %}
+
+{% block date_widget -%}
+    {%- if widget == 'single_text' -%}
+    <div class="input-group date">
+         <input type="text" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        <span class="input-group-addon" style="font-size: 1.6em;"><i class="fas fa-calendar-alt"></i></span>
+        </div>
+    {%- else -%}
+        {%- set attr = attr|merge({class: (attr.class|default('') ~ ' form-inline')|trim}) -%}
+        {%- if datetime is not defined or not datetime -%}
+            <div {{ block('widget_container_attributes') -}}>
+        {%- endif %}
+        {%- if label is not same as(false) -%}
+            <div class="sr-only">
+                {{ form_label(form.year) }}
+                {{ form_label(form.month) }}
+                {{ form_label(form.day) }}
+            </div>
+        {%- endif -%}
+
+            {{- date_pattern|replace({
+                '{{ year }}': form_widget(form.year),
+                '{{ month }}': form_widget(form.month),
+                '{{ day }}': form_widget(form.day),
+            })|raw -}}
+        {%- if datetime is not defined or not datetime -%}
+            </div>
+        {%- endif -%}
+    {%- endif -%}
+{%- endblock date_widget %}
+
+{% block time_widget -%}
+    {%- if widget == 'single_text' -%}
+        {{- block('form_widget_simple') -}}
+    {%- else -%}
+        {%- set attr = attr|merge({class: (attr.class|default('') ~ ' form-inline')|trim}) -%}
+        {%- if datetime is not defined or false == datetime -%}
+            <div {{ block('widget_container_attributes') -}}>
+        {%- endif -%}
+        {%- if label is not same as(false) -%}<div class="sr-only">{{ form_label(form.hour) }}</div>{%- endif -%}
+        {{- form_widget(form.hour) -}}
+        {%- if with_minutes -%}:{%- if label is not same as(false) -%}<div class="sr-only">{{ form_label(form.minute) }}</div>{%- endif -%}{{ form_widget(form.minute) }}{%- endif -%}
+        {%- if with_seconds -%}:{%- if label is not same as(false) -%}<div class="sr-only">{{ form_label(form.second) }}</div>{%- endif -%}{{ form_widget(form.second) }}{%- endif -%}
+        {%- if datetime is not defined or false == datetime -%}
+            </div>
+        {%- endif -%}
+    {%- endif -%}
+{%- endblock time_widget %}
+
+
+{%- block checkbox_widget -%}
+    <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+
+{%- endblock checkbox_widget -%}
+
+{%- block money_widget -%}
+    &nbsp;{{ money_pattern|form_encode_currency(block('custom_widget_money')) }}
+{%- endblock money_widget -%}
+
+{%- block custom_widget_money -%}
+    {%- set type = type|default('text') -%}
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">€</span>
+      </div>
+      <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+
+    </div>
+
+{%- endblock custom_widget_money -%}
+
+
+{# Labels #}
+{% block checkbox_radio_label -%}
+    {# {% block _user_registration_form_termsAccepted_label %} - use this if you need it for just a single field, amend accordingly to your form type/field #}
+    {#- Do not display the label if widget is not defined in order to prevent double label rendering -#}
+    {%- if widget is defined -%}
+        {% set is_parent_custom = parent_label_class is defined and ('checkbox-custom' in parent_label_class or 'radio-custom' in parent_label_class) %}
+        {% set is_custom = label_attr.class is defined and ('checkbox-custom' in label_attr.class or 'radio-custom' in label_attr.class) %}
+        {%- if is_parent_custom or is_custom -%}
+            {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' custom-control-label')|trim}) -%}
+        {%- else %}
+            {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' form-check-label')|trim}) -%}
+        {%- endif %}
+        {%- if not compound -%}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {%- endif -%}
+        {%- if required -%}
+            {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' required')|trim}) -%}
+        {%- endif -%}
+        {%- if parent_label_class is defined -%}
+            {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' ' ~ parent_label_class)|replace({'checkbox-inline': '', 'radio-inline': '', 'checkbox-custom': '', 'radio-custom': ''})|trim}) -%}
+        {%- endif -%}
+        {%- if label is not same as(false) and label is empty -%}
+            {%- if label_format is not empty -%}
+                {%- set label = label_format|replace({
+                    '%name%': name,
+                    '%id%': id,
+                }) -%}
+            {%- else -%}
+                {%- set label = name|humanize -%}
+            {%- endif -%}
+        {%- endif -%}
+
+        {{ widget|raw }}
+        <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+        {{- label is not same as(false) ? (translation_domain is same as(false) ? label : label|trans({}, translation_domain))|raw -}}
+        {{- form_errors(form) -}}
+        </label>
+    {%- endif -%}
+{%- endblock checkbox_radio_label %}
+
+{% block choice_label -%}
+    {# remove the checkbox-inline and radio-inline class, it's only useful for embed labels #}
+    {%- set label_attr = label_attr|merge({class: label_attr.class|default('')|replace({'checkbox-inline': '', 'radio-inline': '', 'checkbox-custom': '', 'radio-custom': '', 'switch-custom': ''})|trim}) -%}
+    {{- block('form_label') -}}
+{% endblock choice_label %}
+
+{% block form_label_class -%}
+col-sm-2
+{%- endblock form_label_class %}
+{# Rows #}
+
+{% block form_group_class -%}
+col-sm-10
+{%- endblock form_group_class %}
+
+{% block checkbox_row -%}
+    <div{% with {attr: row_attr|merge({class: (row_attr.class|default('') ~ ' col-md-6 mb-3 form-group' ~ (not valid ? ' has-error'))|trim})} %}{{ block('attributes') }}{% endwith %}>{#--#}
+
+        <div class="col-md-6 mb-3">
+            <div class="{{ block('form_label_class') }}">{{- form_widget(form) -}}</div>
+            <div class="{{ block('form_label_class') }}">{{- form_label(form) -}}</div>{#--#}
+            {{- form_help(form) -}}
+            {{- form_errors(form) -}}
+        </div>{#--#}
+    </div>
+{%- endblock checkbox_row %}
+
+{% block button_row -%}
+    <div{% with {attr: row_attr|merge({class: (row_attr.class|default('') ~ ' form-group')|trim})} %}{{ block('attributes') }}{% endwith %}>
+        {{- form_widget(form) -}}
+    </div>
+{%- endblock button_row %}
+
+{% block choice_row -%}
+    {%- set force_error = true -%}
+    {{- block('form_row') -}}
+{%- endblock choice_row %}
+
+{% block date_row -%}
+    {%- set force_error = true -%}
+    {{- block('form_row') -}}
+{%- endblock date_row %}
+
+{% block time_row -%}
+    {%- set force_error = true -%}
+    {{- block('form_row') -}}
+{%- endblock time_row %}
+
+{% block datetime_row -%}
+    {%- set force_error = true -%}
+    {{- block('form_row') -}}
+{%- endblock datetime_row %}

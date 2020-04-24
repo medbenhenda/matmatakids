@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'form/custom_theme.html.twig' %}
+{% block title %}Affect case to Sponsor{% endblock %}
+
+{% block body %}
+
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid">
+            <h1 class="mt-4">Affect case to Sponsor</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">Sponsor</li>
+                <li class="breadcrumb-item active">Affect</li>
+            </ol>
+            <div class="card mb-4">
+                <div class="d-flex flex-row-reverse bd-highlight mb-2">
+                    <div class="p-2 bd-highlight"><a href="#">statistics</a></div>
+                    <div class="p-2 bd-highlight"><a href="{{path('case')}}">Cases list</a></div>
+                    <div class="p-2 bd-highlight"><a href="{{path('sponsor')}}">sponsors list</a></div>
+                </div>
+                <div class="card-header"><i class="fas fa-hand-holding-heart mr-1"></i>Affect case to Sponsor</div>
+                <div class="card-body">
+                    <div class="card bg-light mb-3">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="text-left col-md-6"><p class="nav-link">
+                                    {{sponsor.firstName ~ ' ' ~ sponsor.lastName}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{ form(form) }}
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+{% endblock %}

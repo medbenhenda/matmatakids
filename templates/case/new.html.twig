@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'form/custom_theme.html.twig' %}
+{% block title %}New case{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css" crossorigin="anonymous">
+{% endblock %}
+
+{% block body %}
+
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid">
+            <h1 class="mt-4">Cases</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">Case/New</li>
+            </ol>
+            <div class="card mb-4">
+            <div class="d-flex flex-row-reverse bd-highlight mb-2">
+              <div class="p-2 bd-highlight"><a href="#">statistics</a></div>
+              <div class="p-2 bd-highlight"><a href="{{path('case')}}">Cases list</a></div>
+            </div>
+                <div class="card-header"><i class="fas fa-briefcase mr-1"></i>New Case</div>
+                <div class="card-body">
+
+                {{ form_start(form) }}
+                    <div class="my-custom-class-for-errors">
+                        {{ form_errors(form) }}
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                         {{ form_row(form.firstName) }}
+                      </div>
+                      <div class="form-group col-md-6">
+                        {{ form_row(form.lastName) }}
+                      </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                           {{ form_row(form.email) }}
+                        </div>
+                        <div class="form-group col-md-6">
+                          {{ form_row(form.mobile) }}
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        {{ form_row(form.address) }}
+                      </div>
+
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        {{ form_row(form.details) }}
+                      </div>
+
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-12">
+                      <div class="card" style="">
+                          <ul class="list-group itemsRef" data-prototype="{{ form_widget(form.proof.vars.prototype)|e('html_attr') }}">
+
+                          </ul>
+                          </div>
+                      </div>
+                    </div>
+                  {{ form_rest(form) }}
+                {{ form_end(form) }}
+                <input type="hidden" value="proof" class="contextName"/>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+{% endblock %}
+{% block javascripts %}
+  {{ parent() }}
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" crossorigin="anonymous" ></script>
+
+  <script src="{{ asset('js/date.js') }}"></script>
+  <script src="{{ asset('js/add_ref_entity.js') }}"></script>
+{% endblock %}

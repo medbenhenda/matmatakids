@@ -4,7 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-
+     proof_directory: '%kernel.project_dir%/public/uploads/proofs'
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -25,3 +25,12 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Service\FileUploader:
+        arguments:
+            $targetDirectory: '%proof_directory%'
+
+    App\EventListener\NewActivitySubscriber:
+        arguments:    ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: 'doctrine.event_subscriber' }
