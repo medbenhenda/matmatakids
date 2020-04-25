@@ -56,7 +56,7 @@ class NewActivitySubscriber implements EventSubscriber
 
     private function setOwner(string $action, LifecycleEventArgs $args)
     {
-      if ($action != 'remove') {
+      if ($action == 'persist' && property_exists($args->getEntity(), 'createdBy')) {
         $entity = $args->getObject();
         $user = $this->security->getUser();
         $entity->setCreatedBy($user);

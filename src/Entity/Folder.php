@@ -61,12 +61,12 @@ class Folder
     private $proof;
 
     /**
-     * @ORM\Column(type="boolean", options={"default":false})
+     * @ORM\Column(type="boolean", options={"default":false}, nullable=true)
      */
     private $affected;
 
     /**
-     * @ORM\Column(type="boolean", options={"default":false})
+     * @ORM\Column(type="boolean", options={"default":false}, nullable=true)
      */
     private $status;
 

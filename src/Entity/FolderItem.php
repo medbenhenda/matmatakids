@@ -36,24 +36,24 @@ class FolderItem
     private $birthdate;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $handicapped;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $unhealthy;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $orphan;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-     
+
     private $schoolboy;
     /**
      * @ORM\Column(type="text")

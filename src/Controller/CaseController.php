@@ -9,6 +9,7 @@ use App\Form\FolderType;
 use Symfony\Component\HttpFoundation\Request;
 use App\Service\FileUploader;
 use App\Form\AffectationType;
+use App\Form\FolderItemType;
 
 class CaseController extends AbstractController
 {
@@ -26,53 +27,16 @@ class CaseController extends AbstractController
     }
 
     /**
-    * @Route("/case/new", name="new_case")
+    * @Route("/case/edit/{case}", name="edit_case", defaults={"case"=null})
     */
-    public function new(Request $request, FileUploader $fileUploader)
+    public function edit(Request $request, ?Entity\Folder $case)
     {
-        $case = new Entity\Folder();
 
-        $case->setAffected(0);
-        $case->setStatus(0);
-        $form = $this->createForm(FolderType::class, $case);
-        if ($request->isMethod('POST')) {
-
-            $form->handleRequest($request);
-
-            if ($form->isSubmitted() && $form->isValid()) {
-
-                /** @var UploadedFile $brochureFile */
-
-                foreach ($form['proof'] as $key => $childForm) {
-                    $file = $childForm->get('imageFile')->getData();
-                    if ($file) {
-                        $entityDocument = $childForm->getData();
-
-                        $fileName = $fileUploader->upload($file);
-                        $entityDocument->setImageName($fileName);
-                    }
-
-                }
-
-                $em = $this->getDoctrine()->getManager();
-
-                $em->persist($case);
-                $em->flush();
-
-                return $this->redirectToRoute('new_case');
-            }
+        $action = 'Update';
+        if (!$case) {
+            $case = new Entity\Folder();
+            $action = 'New';
         }
-
-        return $this->render('case/new.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-    * @Route("/case/edit/{case}", name="edit_case")
-    */
-    public function edit(Request $request, Entity\Folder $case, FileUploader $fileUploader)
-    {
         $form = $this->createForm(FolderType::class, $case);
         if ($request->isMethod('POST')) {
 
@@ -102,8 +66,10 @@ class CaseController extends AbstractController
             }
         }
 
-        return $this->render('case/new.html.twig', [
+        return $this->render('case/edit.html.twig', [
             'form' => $form->createView(),
+            'case' => $case,
+            'action' => 'update'
         ]);
     }
 
@@ -160,6 +126,39 @@ class CaseController extends AbstractController
             'item' => $case,
         ]);
 
+    }
+
+
+    /**
+    * @Route("/case/item/{case}/{item}", name="case_item", defaults={"item"=null})
+    */
+    public function newItem(Request $request, ?Entity\Folder $case, ?Entity\FolderItem $item)
+    {
+        $action = 'Update';
+        if (!$item) {
+            $item = new Entity\FolderItem();
+            $action = 'New';
+        }
+        $form = $this->createForm(FolderItemType::class, $item, ['folder' => $case]);
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+
+
+                $em = $this->getDoctrine()->getManager();
+
+                $em->persist($item);
+                $em->flush();
+
+                return $this->redirectToRoute('show_case',['case' => $case->getId()]);
+            }
+        }
+
+        return $this->render('case/new_item.html.twig', [
+            'form' => $form->createView(),
+            'action' => $action,
+            'case' => $case,
+        ]);
     }
 
 }
