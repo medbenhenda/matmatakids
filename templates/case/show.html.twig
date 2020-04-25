@@ -33,7 +33,7 @@
             <div class="d-flex flex-row-reverse bd-highlight mb-2">
               <div class="p-2 bd-highlight"><a href="#">statistics</a></div>
               <div class="p-2 bd-highlight"><a href="{{path('case')}}">Cases list</a></div>
-              <div class="p-2 bd-highlight"><a href="{{path('new_case')}}">New Case</a></div>
+              <div class="p-2 bd-highlight"><a href="{{path('edit_case')}}">New Case</a></div>
             </div>
             <div class="card-header">
             <div class="row">
@@ -65,10 +65,12 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-sm-8">
+                    <div class="col-sm-12">
+
+
                         <div class="card-body row">
-                            <div class="mb-3 col-sm-6">
-                                  <div class="card bg-light ">
+                            <div class="mb-3 col-sm-4">
+                                  <div class="card bg-light mb-2">
                                       <div class="card-header">
                                           <div class="row">
                                               <div class="text-left col-md-6"><p class="nav-link">Contact</p></div>
@@ -83,35 +85,69 @@
                                         Email: {{ item.email }}<br/>
                                       </div>
                                   </div>
+
+                                  <div class="card bg-info text-white ">
+                                  <div class="card-header">
+                                  Description
+                                  </div>
+                                  <div class="card-body ">
+                                            <h5 class="card-title">{{item.firstName ~ ' ' ~ item.lastName }}</h5>
+                                            <p>{{item.address }}</p>
+                                            <p class="card-text">{{item.details}}</p>
+
+
+                                            <div class="card" style="width: 100%;">
+                                                <ul class="list-group list-group-flush">
+                                                    {%for proof in item.proof %}
+                                                        <li class="list-group-item">  {{proof.title}}<br><img src="{{ vich_uploader_asset(proof, 'imageFile', 'App\\Entity\\Document') }}" class="img-thumbnail" alt="{{ proof.title }}" /></li>
+                                                    {%endfor%}
+                                                </ul>
+                                            </div>
+                                  </div>
+
+                                  </div>
+
+
+
+
                               </div>
 
-                              <div class="mb-3 col-sm-6">
+                              <div class="mb-3 col-sm-8">
+                              {%for item_folder in item.folderItems %}
+                                <div class="card bg-light mb-2">
+                                    <div class="card-header">
+                                        <div class="row">
+                                            <div class="col-sm-10">{{ item_folder.firstName ~ ' ' ~  item_folder.lastName}}</div>
+                                            <div class="col-sm-2"><a class="float-right" href="{{path('case_item', {case: item.id, item: item_folder.id})}}">Edit</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="card-text">
+                                    <ul class="list-group list-group-flush">
+                                       <li class="list-group-item">Age: {{ item_folder.birthdate|age }}<br/></li>
+                                       <li class="list-group-item"> is Orphan:  {%if item_folder.orphan %}<span class="badge badge-pill badge-warning">{{'Yes'|trans}}</span>{%else%}<span class="badge badge-pill badge-info">{{'No'|trans}}</span> {%endif%}</li>
+                                       <li class="list-group-item"> is handicapped:  {%if item_folder.handicapped %}<span class="badge badge-pill badge-warning">{{'Yes'|trans}}</span>{%else%}<span class="badge badge-pill badge-info">{{'No'|trans}}</span> {%endif%}</li>
 
+                                        <li class="list-group-item"> is unhealthy:  {%if item_folder.unhealthy %}<span class="badge badge-pill badge-warning">{{'Yes'|trans}}</span>{%else%}<span class="badge badge-pill badge-info">{{'No'|trans}}</span> {%endif%}</li>
+
+                                        <li class="list-group-item"> is schoolBoy:  {%if item_folder.schoolBoy %}<span class="badge badge-pill badge-warning">{{'Yes'|trans}}</span>{%else%}<span class="badge badge-pill badge-info">{{'No'|trans}}</span> {%endif%}</li>
+                                     </ul>
+
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                        {{ item_folder.description }}
+                                    </div>
+                                </div>
+
+                              {%endfor%}
+
+                                <div>
+                                    <a href="{{path('case_item', {case: item.id})}}">
+                                    <button type="button" class="btn btn-info">{{'Add item'|trans}}
+                                    </button>
+                                    </a>
+                                    </div>
                               </div>
                           </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="card-body ">
-                            <div class="card text-white bg-info mb-3 text-left">
-                                <div class="card-header">
-                                Description
-                                </div>
-                                <div class="card-body">
-                                  <h5 class="card-title">{{item.firstName ~ ' ' ~ item.lastName }}</h5>
-                                  <p>{{item.address }}</p>
-                                  <p class="card-text">{{item.details}}</p>
-
-
-                                  <div class="card" style="width: 100%;">
-                                      <ul class="list-group list-group-flush">
-                                          {%for proof in item.proof %}
-                                              <li class="list-group-item">  {{proof.title}}<br><img src="{{ vich_uploader_asset(proof, 'imageFile', 'App\\Entity\\Document') }}" class="img-thumbnail" alt="{{ proof.title }}" /></li>
-                                          {%endfor%}
-                                      </ul>
-                                  </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
