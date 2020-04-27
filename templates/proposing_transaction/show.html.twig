@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProposingTransaction{% endblock %}
+
+{% block body %}
+    <h1>ProposingTransaction</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ proposing_transaction.id }}</td>
+            </tr>
+            <tr>
+                <th>TransactionDate</th>
+                <td>{{ proposing_transaction.transactionDate ? proposing_transaction.transactionDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Amount</th>
+                <td>{{ proposing_transaction.amount }}</td>
+            </tr>
+            <tr>
+                <th>Month</th>
+                <td>{{ proposing_transaction.month }}</td>
+            </tr>
+            <tr>
+                <th>Year</th>
+                <td>{{ proposing_transaction.year }}</td>
+            </tr>
+            <tr>
+                <th>Recieved</th>
+                <td>{{ proposing_transaction.recieved ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>RecievedDate</th>
+                <td>{{ proposing_transaction.recievedDate ? proposing_transaction.recievedDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('proposing_transaction_index') }}">back to list</a>
+
+    <a href="{{ path('proposing_transaction_edit', {'id': proposing_transaction.id}) }}">edit</a>
+
+    {{ include('proposing_transaction/_delete_form.html.twig') }}
+{% endblock %}

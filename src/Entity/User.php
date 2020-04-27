@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
-  use TimestampableEntity;
+    use TimestampableEntity;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -127,6 +127,16 @@ class User implements UserInterface
      */
     private $ownAffectaions;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProposingTransaction", mappedBy="createdBy")
+     */
+    private $proposingTransactions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProposingTransaction", mappedBy="responsible")
+     */
+    private $responsibleTransactions;
+
 
 
     public function __construct()
@@ -139,8 +149,17 @@ class User implements UserInterface
         $this->documents = new ArrayCollection();
         $this->affectations = new ArrayCollection();
         $this->ownAffectaions = new ArrayCollection();
+        $this->proposingTransactions = new ArrayCollection();
+        $this->responsibleTransactions = new ArrayCollection();
     }
 
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return sprintf('%s %s', $this->firstName, $this->lastName);
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -587,6 +606,65 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return Collection|ProposingTransaction[]
+     */
+    public function getProposingTransactions(): Collection
+    {
+        return $this->proposingTransactions;
+    }
 
+    public function addProposingTransaction(ProposingTransaction $proposingTransaction): self
+    {
+        if (!$this->proposingTransactions->contains($proposingTransaction)) {
+            $this->proposingTransactions[] = $proposingTransaction;
+            $proposingTransaction->setCreatedBy($this);
+        }
 
+        return $this;
+    }
+
+    public function removeProposingTransaction(ProposingTransaction $proposingTransaction): self
+    {
+        if ($this->proposingTransactions->contains($proposingTransaction)) {
+            $this->proposingTransactions->removeElement($proposingTransaction);
+            // set the owning side to null (unless already changed)
+            if ($proposingTransaction->getCreatedBy() === $this) {
+                $proposingTransaction->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProposingTransaction[]
+     */
+    public function getResponsibleTransactions(): Collection
+    {
+        return $this->responsibleTransactions;
+    }
+
+    public function addResponsibleTransaction(ProposingTransaction $responsibleTransaction): self
+    {
+        if (!$this->responsibleTransactions->contains($responsibleTransaction)) {
+            $this->responsibleTransactions[] = $responsibleTransaction;
+            $responsibleTransaction->setResponsible($this);
+        }
+
+        return $this;
+    }
+
+    public function removeResponsibleTransaction(ProposingTransaction $responsibleTransaction): self
+    {
+        if ($this->responsibleTransactions->contains($responsibleTransaction)) {
+            $this->responsibleTransactions->removeElement($responsibleTransaction);
+            // set the owning side to null (unless already changed)
+            if ($responsibleTransaction->getResponsible() === $this) {
+                $responsibleTransaction->setResponsible(null);
+            }
+        }
+
+        return $this;
+    }
 }

@@ -4,8 +4,9 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity as Entity;
-use App\Form\DonType, App\Form\DonorType, App\Form\DonateType;
+use App\Entity;
+use App\Form\DonorType;
+use App\Form\DonateType;
 use Symfony\Component\HttpFoundation\Request;
 
 class DonController extends AbstractController
@@ -19,8 +20,8 @@ class DonController extends AbstractController
      */
     public function index()
     {
-      $repository = $this->getDoctrine()->getRepository(Entity\Don::class);
-      $dons = $repository->findAll();
+        $repository = $this->getDoctrine()->getRepository(Entity\Don::class);
+        $dons = $repository->findAll();
         return $this->render('don/index.html.twig', [
             'dons' => $dons,
         ]);
@@ -36,11 +37,9 @@ class DonController extends AbstractController
         $donor->addDon($don);
         $form = $this->createForm(DonorType::class, $donor);
         if ($request->isMethod('POST')) {
-
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-
                 $em = $this->getDoctrine()->getManager();
 
                 $em->persist($donor);
@@ -65,11 +64,9 @@ class DonController extends AbstractController
 
         $form = $this->createForm(DonateType::class, $don);
         if ($request->isMethod('POST')) {
-
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-
                 $em = $this->getDoctrine()->getManager();
 
                 $em->persist($don);

@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProposingTransaction index{% endblock %}
+
+{% block body %}
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h1 class="mt-4">Cases</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">Cases</li>
+                    <li class="breadcrumb-item active">list</li>
+                </ol>
+                <div class="card mb-4">
+                    <div class="d-flex flex-row-reverse bd-highlight mb-2">
+                        <div class="p-2 bd-highlight"><a href="#">Statistics</a></div>
+                        <div class="p-2 bd-highlight"><a href="{{path('sponsor')}}">Sponsors list</a></div>
+                        <div class="p-2 bd-highlight"><a href="{{path('edit_case')}}">New Case</a></div>
+                    </div>
+                    <div class="card-header"><i class="fas fa-briefcase mr-1"></i>Cases list</div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>TransactionDate</th>
+                                    <th>Amount</th>
+                                    <th>Month</th>
+                                    <th>Year</th>
+                                    <th>Recieved</th>
+                                    <th>RecievedDate</th>
+                                    <th>actions</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                {% for proposing_transaction in proposing_transactions %}
+                                    <tr>
+                                        <td>{{ proposing_transaction.id }}</td>
+                                        <td>{{ proposing_transaction.transactionDate ? proposing_transaction.transactionDate|date('Y-m-d H:i:s') : '' }}</td>
+                                        <td>{{ proposing_transaction.amount }}</td>
+                                        <td>{{ proposing_transaction.month }}</td>
+                                        <td>{{ proposing_transaction.year }}</td>
+                                        <td>{{ proposing_transaction.recieved ? 'Yes' : 'No' }}</td>
+                                        <td>{{ proposing_transaction.recievedDate ? proposing_transaction.recievedDate|date('Y-m-d H:i:s') : '' }}</td>
+                                        <td>
+                                            <a href="{{ path('proposing_transaction_show', {'id': proposing_transaction.id}) }}">show</a>
+                                            <a href="{{ path('proposing_transaction_edit', {'id': proposing_transaction.id}) }}">edit</a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="8">no records found</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+{% endblock %}

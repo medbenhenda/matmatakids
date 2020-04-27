@@ -3,156 +3,328 @@
 {% block title %}Case {{ item }}{% endblock %}
 
 {% block body %}
-{% set status = 'activate' %}
-{% set action = 1 %}
-{% if item.status %}
-  {% set status = 'disable' %}
- {% set action = 0 %}
-{% endif %}
-{% set iconAffected = 'fas fa-exclamation-triangle' %}
-{% set colorAffected = 'red' %}
-{% if item.affected %}
-  {% set iconAffected = 'fas fa-check-circle' %}
-  {% set colorAffected = 'green' %}
-{% endif %}
+	{# cases #}
+	{% set status = 'activate' %}
+	{% set action = 1 %}
+	{% if item.status %}
+		{% set status = 'disable' %}
+		{% set action = 0 %}
+	{% endif %}
+	{% set iconAffected = 'fas fa-exclamation-triangle' %}
+	{% set colorAffected = 'red' %}
+	{% if item.affected %}
+		{% set iconAffected = 'fas fa-check-circle' %}
+		{% set colorAffected = 'green' %}
+	{% endif %}
 
-{% set iconStatus = 'fas fa-exclamation-triangle' %}
-{% set colorStatus = 'red' %}
-{% if item.status %}
-  {% set iconStatus = 'fas fa-check-circle' %}
-  {% set colorStatus = 'green' %}
-{% endif %}
-<div id="layoutSidenav_content">
-    <main>
-        <div class="container-fluid">
-            <h1 class="mt-4">Cases</h1>
-            <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active">Case : {{ item }}</li>
-            </ol>
-            <div class="card mb-4">
-            <div class="d-flex flex-row-reverse bd-highlight mb-2">
-              <div class="p-2 bd-highlight"><a href="#">statistics</a></div>
-              <div class="p-2 bd-highlight"><a href="{{path('case')}}">Cases list</a></div>
-              <div class="p-2 bd-highlight"><a href="{{path('edit_case')}}">New Case</a></div>
-            </div>
-            <div class="card-header">
-            <div class="row">
-                <div class="col-sm-6">
-                    <i class="fas fa-briefcase mr-1"></i>Case N° {{ item }}
-                </div>
-                <div class="col-sm-6">
-                <div class="float-right">
-                    <span style="font-size: 1em; color: {{colorStatus}};">
+	{% set iconStatus = 'fas fa-exclamation-triangle' %}
+	{% set colorStatus = 'red' %}
+	{% if item.status %}
+		{% set iconStatus = 'fas fa-check-circle' %}
+		{% set colorStatus = 'green' %}
+	{% endif %}
+	<div id="layoutSidenav_content">
+		<main>
+			<div class="container-fluid">
+				<h1 class="mt-4">Cases</h1>
+				<ol class="breadcrumb mb-4">
+					<li class="breadcrumb-item active">Case : {{ item }}</li>
+				</ol>
+				<div class="card mb-4">
+					<div class="d-flex flex-row-reverse bd-highlight mb-2">
+						<div class="p-2 bd-highlight"><a href="#">statistics</a></div>
+						<div class="p-2 bd-highlight"><a href="{{ path('case') }}">Cases list</a></div>
+						<div class="p-2 bd-highlight"><a href="{{ path('edit_case') }}">New Case</a></div>
+					</div>
+					<div class="card-header">
+						<div class="row">
+							<div class="col-sm-6">
+								<i class="fas fa-briefcase mr-1"></i>Case N° {{ item }}
+							</div>
+							<div class="col-sm-6">
+								<div class="float-right">
+                    <span style="font-size: 1em; color: {{ colorStatus }};">
                         Status : <i class="{{ iconStatus }}"></i>
                     </span>
 
-                    <span style="font-size: 1em; color: {{colorAffected}};">
+									<span style="font-size: 1em; color: {{ colorAffected }};">
                         Affectation : <i class="{{ iconAffected }}"></i>
                     </span>
-                    </div>
-                </div>
-                </div>
-            </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                    <div class="card-body">
-                        <div class="text-right col-md-12">
-                        {%if action == 0%}<a href="{{path('affect_sponsor_case', {case: item.id})}}"><button type="button" class="btn btn-success">Affect to sponsor</button></a>{%endif%}
-                        <a href="{{path('manage_case', {case: item.id, status: action})}}"><button type="button" class="btn btn-info">{{ status|capitalize }}</button></a>
-                        </div>
-                        </div>
-                    </div>
-                </div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="card-body">
+								<div class="text-right col-md-12">
+									{% if action == 0 %}<a href="{{ path('affect_sponsor_case', {case: item.id}) }}">
+											<button type="button" class="btn btn-success">Affect to sponsor</button></a>{% endif %}
+									<a href="{{ path('manage_case', {case: item.id, status: action}) }}">
+										<button type="button" class="btn btn-info">{{ status|capitalize }}</button>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
 
-                <div class="row">
-                    <div class="col-sm-12">
-
-
-                        <div class="card-body row">
-                            <div class="mb-3 col-sm-4">
-                                  <div class="card bg-light mb-2">
-                                      <div class="card-header">
-                                          <div class="row">
-                                              <div class="text-left col-md-6"><p class="nav-link">Contact</p></div>
-                                              <div class="text-right col-md-6"><a class="nav-link active" href="{{path('edit_case', {case: item.id})}}">Edit</a></div>
-                                          </div>
-                                      </div>
-                                      <div class="card-body">
-                                        First name: {{ item.firstName }}<br/>
-                                        Last name: {{ item.lastName }}<br/>
-                                        Address: {{ item.address }}<br/>
-                                        Mobile: {{ item.mobile }}<br/>
-                                        Email: {{ item.email }}<br/>
-                                      </div>
-                                  </div>
-
-                                  <div class="card bg-info text-white ">
-                                  <div class="card-header">
-                                  Description
-                                  </div>
-                                  <div class="card-body ">
-                                            <h5 class="card-title">{{item.firstName ~ ' ' ~ item.lastName }}</h5>
-                                            <p>{{item.address }}</p>
-                                            <p class="card-text">{{item.details}}</p>
+					<div class="row">
+						<div class="col-sm-12">
 
 
-                                            <div class="card" style="width: 100%;">
-                                                <ul class="list-group list-group-flush">
-                                                    {%for proof in item.proof %}
-                                                        <li class="list-group-item">  {{proof.title}}<br><img src="{{ vich_uploader_asset(proof, 'imageFile', 'App\\Entity\\Document') }}" class="img-thumbnail" alt="{{ proof.title }}" /></li>
-                                                    {%endfor%}
-                                                </ul>
-                                            </div>
-                                  </div>
+							<div class="card-body row">
+								<div class="mb-3 col-sm-4">
+									<div class="card bg-light mb-2">
+										<div class="card-header">
+											<div class="row">
+												<div class="text-left col-md-6"><p class="nav-link">Contact</p></div>
+												<div class="text-right col-md-6"><a class="nav-link active"
+												                                    href="{{ path('edit_case', {case: item.id}) }}">Edit</a>
+												</div>
+											</div>
+										</div>
+										<div class="card-body">
+											First name: {{ item.firstName }}<br/>
+											Last name: {{ item.lastName }}<br/>
+											Address: {{ item.address }}<br/>
+											Mobile: {{ item.mobile }}<br/>
+											Email: {{ item.email }}<br/>
+										</div>
+									</div>
 
-                                  </div>
+									<div class="card bg-info text-white ">
+										<div class="card-header">
+											Description
+										</div>
+										<div class="card-body ">
+											<h5 class="card-title">{{ item.firstName ~ ' ' ~ item.lastName }}</h5>
+											<p>{{ item.address }}</p>
+											<p class="card-text">{{ item.details }}</p>
 
 
+											<div class="card" style="width: 100%;">
+												<ul class="list-group list-group-flush">
+													{% for proof in item.proof %}
+														<li class="list-group-item">  {{ proof.title }}<br><img
+																src="{{ vich_uploader_asset(proof, 'imageFile', 'App\\Entity\\Document') }}"
+																class="img-thumbnail" alt="{{ proof.title }}"/></li>
+													{% endfor %}
+												</ul>
+											</div>
+										</div>
+
+									</div>
 
 
-                              </div>
+								</div>
 
-                              <div class="mb-3 col-sm-8">
-                              {%for item_folder in item.folderItems %}
-                                <div class="card bg-light mb-2">
-                                    <div class="card-header">
-                                        <div class="row">
-                                            <div class="col-sm-10">{{ item_folder.firstName ~ ' ' ~  item_folder.lastName}}</div>
-                                            <div class="col-sm-2"><a class="float-right" href="{{path('case_item', {case: item.id, item: item_folder.id})}}">Edit</a></div>
-                                        </div>
-                                    </div>
-                                    <div class="card-text">
-                                    <ul class="list-group list-group-flush">
-                                       <li class="list-group-item">Age: {{ item_folder.birthdate|age }}<br/></li>
-                                       <li class="list-group-item"> is Orphan:  {%if item_folder.orphan %}<span class="badge badge-pill badge-warning">{{'Yes'|trans}}</span>{%else%}<span class="badge badge-pill badge-info">{{'No'|trans}}</span> {%endif%}</li>
-                                       <li class="list-group-item"> is handicapped:  {%if item_folder.handicapped %}<span class="badge badge-pill badge-warning">{{'Yes'|trans}}</span>{%else%}<span class="badge badge-pill badge-info">{{'No'|trans}}</span> {%endif%}</li>
+								<div class="mb-3 col-sm-8">
+									{% for item_folder in item.folderItems %}
+										<div class="card bg-light mb-2">
+											<div class="card-header">
+												<div class="row">
+													<div class="col-sm-10">{{ item_folder.firstName ~ ' ' ~  item_folder.lastName }}</div>
+													<div class="col-sm-2"><a class="float-right"
+													                         href="{{ path('case_item', {case: item.id, item: item_folder.id}) }}">Edit</a>
+													</div>
+												</div>
+											</div>
+											<div class="card-text">
+												<ul class="list-group list-group-flush">
+													<li class="list-group-item">Age: {{ item_folder.birthdate|age }}<br/></li>
+													<li class="list-group-item"> is Orphan: {% if item_folder.orphan %}<span
+															class="badge badge-pill badge-warning">{{ 'Yes'|trans }}</span>{% else %}<span
+															class="badge badge-pill badge-info">{{ 'No'|trans }}</span> {% endif %}</li>
+													<li class="list-group-item"> is handicapped: {% if item_folder.handicapped %}<span
+															class="badge badge-pill badge-warning">{{ 'Yes'|trans }}</span>{% else %}<span
+															class="badge badge-pill badge-info">{{ 'No'|trans }}</span> {% endif %}</li>
 
-                                        <li class="list-group-item"> is unhealthy:  {%if item_folder.unhealthy %}<span class="badge badge-pill badge-warning">{{'Yes'|trans}}</span>{%else%}<span class="badge badge-pill badge-info">{{'No'|trans}}</span> {%endif%}</li>
+													<li class="list-group-item"> is unhealthy: {% if item_folder.unhealthy %}<span
+															class="badge badge-pill badge-warning">{{ 'Yes'|trans }}</span>{% else %}<span
+															class="badge badge-pill badge-info">{{ 'No'|trans }}</span> {% endif %}</li>
 
-                                        <li class="list-group-item"> is schoolBoy:  {%if item_folder.schoolBoy %}<span class="badge badge-pill badge-warning">{{'Yes'|trans}}</span>{%else%}<span class="badge badge-pill badge-info">{{'No'|trans}}</span> {%endif%}</li>
-                                     </ul>
+													<li class="list-group-item"> is schoolBoy: {% if item_folder.schoolBoy %}<span
+															class="badge badge-pill badge-warning">{{ 'Yes'|trans }}</span>{% else %}<span
+															class="badge badge-pill badge-info">{{ 'No'|trans }}</span> {% endif %}</li>
+												</ul>
 
-                                    </div>
-                                    <div class="card-footer text-muted">
-                                        {{ item_folder.description }}
-                                    </div>
-                                </div>
+											</div>
+											<div class="card-footer text-muted">
+												{{ item_folder.description }}
+											</div>
+										</div>
 
-                              {%endfor%}
+									{% endfor %}
 
-                                <div>
-                                    <a href="{{path('case_item', {case: item.id})}}">
-                                    <button type="button" class="btn btn-info">{{'Add item'|trans}}
-                                    </button>
-                                    </a>
-                                    </div>
-                              </div>
-                          </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
+									<div>
+										<a href="{{ path('case_item', {case: item.id}) }}">
+											<button type="button" class="btn btn-info">{{ 'Add item'|trans }}
+											</button>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
 
-</div>
+						<div class="offset-md-5 col-md-2 mb-4">
+								<select class="custom-select" name="years" id="selectYear">
+
+								{% for key,year in years %}
+
+									{% set selected=""%}
+									{% if year == "now"|date("Y") %}
+										{% set selected="selected"%}
+									{% endif %}
+									<option {{ selected }}>{{ year }}</option>
+
+								{% endfor %}
+								</select>
+						</div>
+						<div class="col-md-12">
+							{% for item in affectations %}
+							{% set affectation =  item.affectation %}
+							<div class="table-responsive mb-4">
+								<table class="table table-hover table-bordered calendar-table">
+									<div class="card bg-light mb-2">
+										<div class="card-header">
+											Sponsor: {{ affectation.sponsor|e }}
+										</div>
+									</div>
+									<tbody>
+									<tr>
+										{% for month in months|slice(0, 4) %}
+											{% set css_class = 'bg-warning' %}
+											{% set isOk = false %}
+											{% if month.id in item.months %}
+												{% set isOk = true %}
+												{% set css_class = 'bg-success' %}
+											{% endif %}
+											<td class="text-center">
+												<div  id="{{ 'data-'~affectation.id~'-'~month.id }}" class="blc {{ css_class }}">{{ month.name|e }}
+													{% if isOk %}
+														<div>{{ affectation.amount }} €</div>
+													{% else %}
+														<div class="float-right p-2">
+
+															<button type="button" class="btn btn-light" data-toggle="modal" data-target="#formModal"
+															        data-affectation="{{ affectation.id }}"
+															        data-month="{{ month.id }}"
+															        id="{{ 'btn-'~affectation.id~'-'~month.id }}"
+															>
+																Validate</button>
+
+														</div>
+													{% endif %}
+												</div>
+											</td>
+										{% endfor %}
+
+									</tr>
+									<tr>
+										{% for key,month in months|slice(4, 4) %}
+											{% set css_class = 'bg-warning' %}
+											{% set isOk = false %}
+											{% if month.id in item.months %}
+												{% set css_class = 'bg-success' %}
+												{% set isOk = true %}
+											{% endif %}
+												<td class="text-center">
+													<div id="{{ 'data-'~affectation.id~'-'~month.id }}" class="blc {{ css_class }}">{{ month.name|e }}
+														{% if isOk %}
+															<div>{{ affectation.amount }} €</div>
+														{% else %}
+															<div class="float-right p-2">
+																<button type="button" class="btn btn-light" data-toggle="modal" data-target="#formModal"
+																        data-affectation="{{ affectation.id }}"
+																        data-month="{{ month.id }}"
+																        data-ref="{{ 'data-'~affectation.id~'-'~month.id }}"
+																        id="{{ 'btn-'~affectation.id~'-'~month.id }}"
+																>
+																	Validate</button>
+															</div>
+														{% endif %}
+													</div>
+												</td>
+										{% endfor %}
+									</tr>
+									<tr>
+										{% for key,month in months|slice(8, 4) %}
+											{% set css_class = 'bg-warning' %}
+											{% set isOk = false %}
+											{% if month.id in item.months %}
+												{% set css_class = 'bg-success' %}
+												{% set isOk = true %}
+											{% endif %}
+												<td class="text-center">
+													<div id="{{ 'data-'~affectation.id~'-'~month.id }}" class="blc {{ css_class }}">{{ month.name|e }}
+														{% if isOk %}
+															<div>{{ affectation.amount }} €</div>
+														{% else %}
+															<div class="float-right p-2">
+																<button type="button" class="btn btn-light" data-toggle="modal" data-target="#formModal"
+																        data-affectation="{{ affectation.id }}"
+																        data-month="{{ month.id }}"
+																        id="{{ 'btn-'~affectation.id~'-'~month.id }}"
+																>
+																	Validate
+																</button>
+															</div>
+														{% endif %}
+													</div>
+												</td>
+										{% endfor %}
+									</tr>
+						</tbody>
+						</table>
+							{% endfor %}
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+
+	</div>
+
+	<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="formModalLabel">New message</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="amount-name" class="col-form-label">Amount:</label>
+							<input type="text" class="form-control" id="amount-name">
+						</div>
+
+
+						<input type="hidden" id="month-name">
+						<input type="hidden" id="affectation-name">
+						<input type="hidden" id="td-ref">
+
+
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" id="saveTransaction"class="btn btn-primary">Validate</button>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}
+ {% block javascripts %}
+	 {{ parent() }}
+	 <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+	 <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+
+	 <script src="{{ asset('js/modal.js') }}"></script>
+ {% endblock %}

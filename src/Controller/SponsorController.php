@@ -7,7 +7,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity;
 use App\Form\SponsorFormType;
 use App\Form\AffectationType;
-use App\Service\SponsorAffectation;
 use Symfony\Component\HttpFoundation\Request;
 
 class SponsorController extends AbstractController
@@ -98,7 +97,7 @@ class SponsorController extends AbstractController
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
-                $case->setAffected(true);
+
                 $em = $this->getDoctrine()->getManager();
 
                 $em->persist($sponsor);

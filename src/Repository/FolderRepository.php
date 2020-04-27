@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Folder;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use phpDocumentor\Reflection\Types\Integer;
 
 /**
  * @method Folder|null find($id, $lockMode = null, $lockVersion = null)
@@ -22,21 +23,43 @@ class FolderRepository extends ServiceEntityRepository
     // /**
     //  * @return Don[] Returns an array of Don objects
     //  */
-    public function findAll()
+    public function findAllWithProof()
     {
         return $this->createQueryBuilder('f')
           ->select('f')
-            ->join("f.proof", "d")->addSelect("d")
+            ->join('f.proof', 'd')->addSelect('d')
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    // /**
+    //  * @return Folder[] Returns an array of Don objects
+    //  */
+    /**
+     * @param Integer $id
+     *
+     * @return mixed
+     */
+    public function findFolderWithtransaction($id)
+    {
+        return $this->createQueryBuilder('f')
+            ->select('f')
+            ->leftJoin('f.proposingTransactions', 'p')->addSelect('p')
+            ->leftJoin('f.affectations', 'a')->addSelect('a')
+            ->where('f.id = :id')
+            ->setParameter('id', $id)
+            ->groupBy('f.id')
+            ->getQuery()
+            ->getResult()
+            ;
     }
 
     public function findNotAffected()
     {
         return $this->createQueryBuilder('f')
           ->select('f')
-            ->where("f.satus = 0")
+            ->where('f.satus = 0')
             ->getQuery()
             ->getResult()
         ;

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -55,6 +57,23 @@ class Affectation
      */
     private $createdBy;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProposingTransaction", mappedBy="affectation")
+     */
+    private $proposingTransactions;
+
+    public function __construct()
+    {
+        $this->proposingTransactions = new ArrayCollection();
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return 'Affectation N° : ' . $this->getId();
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -140,6 +159,37 @@ class Affectation
     public function setCreatedBy(?User $createdBy): self
     {
         $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProposingTransaction[]
+     */
+    public function getProposingTransactions(): Collection
+    {
+        return $this->proposingTransactions;
+    }
+
+    public function addProposingTransaction(ProposingTransaction $proposingTransaction): self
+    {
+        if (!$this->proposingTransactions->contains($proposingTransaction)) {
+            $this->proposingTransactions[] = $proposingTransaction;
+            $proposingTransaction->setAffectation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProposingTransaction(ProposingTransaction $proposingTransaction): self
+    {
+        if ($this->proposingTransactions->contains($proposingTransaction)) {
+            $this->proposingTransactions->removeElement($proposingTransaction);
+            // set the owning side to null (unless already changed)
+            if ($proposingTransaction->getAffectation() === $this) {
+                $proposingTransaction->setAffectation(null);
+            }
+        }
 
         return $this;
     }

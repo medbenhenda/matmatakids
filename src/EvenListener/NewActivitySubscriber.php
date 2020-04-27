@@ -1,4 +1,5 @@
 <?php
+
 namespace App\EventListener;
 
 use App\Entity\Folder;
@@ -10,21 +11,21 @@ use Doctrine\ORM\EntityManager;
 
 class NewActivitySubscriber implements EventSubscriber
 {
-  /**
-    * @Var EntityManager
-  */
-   protected $em;
+    /**
+     * @Var EntityManager
+     */
+    protected $em;
 
-   /**
+    /**
      * @Var Security
-   */
-   protected $security;
+     */
+    protected $security;
 
-   public function __construct(EntityManager $em, Security $security)
-   {
-     $this->em = $em;
-     $this->security = $security;
-   }
+    public function __construct(EntityManager $em, Security $security)
+    {
+        $this->em = $em;
+        $this->security = $security;
+    }
     // this method can only return the event names; you cannot define a
     // custom method name to execute when each event triggers
     public function getSubscribedEvents()
@@ -56,12 +57,20 @@ class NewActivitySubscriber implements EventSubscriber
 
     private function setOwner(string $action, LifecycleEventArgs $args)
     {
-      if ($action == 'persist' && property_exists($args->getEntity(), 'createdBy')) {
-        $entity = $args->getObject();
-        $user = $this->security->getUser();
-        $entity->setCreatedBy($user);
-        $this->em->persist($entity);
-        $this->em->flush();
-      }
+        if ($action == 'persist' && property_exists($args->getObject(), 'createdBy')) {
+            $entity = $args->getObject();
+            $user = $this->security->getUser();
+            $entity->setCreatedBy($user);
+            $this->em->persist($entity);
+            $this->em->flush();
+        }
+        if ($action == 'persist' && property_exists($args->getObject(), 'transactionDate')) {
+            $entity = $args->getObject();
+            if (!$entity->getTransactionDate()) {
+                $entity->setTransactionDate(new \DateTime('now'));
+                $this->em->persist($entity);
+                $this->em->flush();
+            }
+        }
     }
 }

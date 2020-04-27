@@ -20,7 +20,7 @@ Class SponsorAffectation {
 
     /**
     */
-    public function __consruct(EntityManager $em, Security $security) {
+    public function __construct(EntityManager $em, Security $security) {
         $this->em = $em;
         $this->security = $security;
     }
