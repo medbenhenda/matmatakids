@@ -4,7 +4,6 @@
 		{% for key,item in proposing_transactions %}
 			{% set recieved = false %}
 			{% if item%}
-
 				{% set recieved = item.recieved %}
 			{% set amount = item.affectation.amount %}
 			{% endif %}
@@ -39,6 +38,8 @@
 						<button type="button" class="btn btn-light" data-toggle="modal" data-target="#recievedModal"
 						        data-recievedtransaction="{{ item.id }}"
 						        id="{{ 'btn-recieved-'~item.id }}"
+						        data-affectation="{{ affectation.id }}"
+						        data-month="{{ key }}"
 						>
 							recieved?
 						</button>

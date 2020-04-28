@@ -41,13 +41,12 @@ jQuery(document).ready(function () {
                 $(id_btn).remove();
                 $(ref).removeClass("bg-warning-c");
                 $(ref).addClass("bg-success-c");
-
                 var html_div_recieved = '<button type="button" class="btn btn-light" data-toggle="modal" data-target="#recievedModal"\n' +
                     ' data-recievedtransaction="'+ data.id +'"\n' +
-                    ' id="'+ data.id +'">recieved?</button>';
+                    ' id="btn-recieved-'+ data.id +'"' +
+                    ' data-affectation="'+data.affectation.id +'"\n' +
+                    ' data-month="' + data.month +'">recieved?</button>';
                 $(icon_recieved).html('<span class="fas fa-thumbs-down"></span>');
-                console.log(div_recieved);
-                console.log(html_div_recieved);
                 $(div_recieved).html(html_div_recieved);
 
                 $(id_amount).text(data.amount + ' €');
@@ -61,21 +60,25 @@ jQuery(document).ready(function () {
     $('#recievedModal').on('show.bs.modal', function (event) {
         let button = $(event.relatedTarget) // Button that triggered the modal
         let transaction = button.data('recievedtransaction');
-
-
+        let affectation = button.data('affectation');
+        let month = button.data('month') ;
         let modal = $(this);
-        modal.find('.modal-title').text('Amount recieved');
+
         modal.find('.modal-body input#ref-transaction').val(transaction);
+        modal.find('.modal-title').text('Amount recieved');
+        modal.find('.modal-body input#affectation-ref').val(affectation);
+        modal.find('.modal-body input#month-transaction').val(month);
     })
 
 
     $('#validateRecieved').on('click', function (e) {
         var transaction = $('#ref-transaction').val();
+        var affectation = $('#affectation-ref').val();
+        var month = $('#month-transaction').val();
 
         var path = Routing.generate('proposing_transaction_update');
         var id_btn = '#btn-recieved-'+transaction;
-        var id_icon = '#down-recieved-'+transaction;
-
+        var icon_recieved = '#icon-recieved-'+affectation+'-'+month;
         $.ajax({
             url: path,
             type: "POST",
@@ -87,12 +90,24 @@ jQuery(document).ready(function () {
             async: true,
             success: function (data) {
                 $(id_btn).remove();
-                $(id_icon).removeClass("fa-thumbs-down");
-                $(id_icon).addClass("fa-thumbs-up");
+                $(icon_recieved).html('<span class="fas fa-thumbs-up"></span>');
+                //$(id_icon).addClass("fa-thumbs-up");
 
                 $('#recievedModal').modal('hide');
 
             }
         })
+    });
+
+    $('#selectYear').on('change', function () {
+
+        var el = $(this);
+
+        let folder = $(this).data("folder");
+        let current_year = $(this).data("currentyear");
+        if (this.value != current_year) {
+            window.location.href = Routing.generate('show_case',{case: folder, year: this.value});
+        }
+
     });
 });

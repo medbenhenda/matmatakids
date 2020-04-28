@@ -26,28 +26,6 @@ use App\Form\FolderItemType;
 class CaseController extends AbstractController
 {
     /**
-     * @return array
-     */
-    private static function monthsList(): array
-    {
-        $months = [
-            ['id' => 1, 'name' => 'Janvier'],
-            ['id' => 2, 'name' => 'Février'],
-            ['id' => 3, 'name' => 'Mars'],
-            ['id' => 4, 'name' => 'Avril'],
-            ['id' => 5, 'name' => 'Mai'],
-            ['id' => 6, 'name' => 'Juin'],
-            ['id' => 7, 'name' => 'Juillet'],
-            ['id' => 8, 'name' => 'Août'],
-            ['id' => 9, 'name' => 'Septembre'],
-            ['id' => 10, 'name' => 'Octobre'],
-            ['id' => 11, 'name' => 'Novembre'],
-            ['id' => 12, 'name' => 'Décembre'],
-        ];
-        return $months;
-    }
-
-    /**
      * @Route("/case", name="case")
      */
     public function index()
@@ -111,7 +89,7 @@ class CaseController extends AbstractController
     }
 
     /**
-     * @Route("/case/show/{case}", name="show_case")
+     * @Route("/case/show/{case}", name="show_case",options = { "expose" = true },)
      * @param Request       $request
      * @param Entity\Folder $case
      * @param Affectation   $affectation
@@ -119,29 +97,38 @@ class CaseController extends AbstractController
      * @return Response
      * @throws Exception
      */
-    public function show(Request $request, Entity\Folder $case, Affectation $affectation)
+    public function show(Request $request, Entity\Folder $case, Affectation $affectation): Response
     {
-        $affectations = $affectation->getAffectationsByFolder($case);
-        $months = self::monthsList();
-
+        $year = date('Y');
+        if ($request->query->has('year')) {
+            $year = $request->query->get('year');
+        }
 
         return $this->render('case/show.html.twig', [
+            'affectations' =>$affectation->getAffectationsByFolder($case),
             'item' => $case,
-            'affectations' => $affectations,
-            'months' => $months,
             'years' => self::getYears(),
-            'year' =>date('Y'),
+            'year' => $year,
         ]);
     }
 
-
     /**
      * @Route("/case/affect/{case}", name="affect_sponsor_case")
+     * @param Request       $request
+     * @param Entity\Folder $case
+     *
+     * @return RedirectResponse|Response
      */
     public function affectCaseToSponsor(Request $request, Entity\Folder $case)
     {
         $affectation = new Entity\Affectation();
-        $form = $this->createForm(AffectationType::class, $affectation, ['folder' => $case]);
+        $affectations = $case->getAffectations();
+        $existedSponsors = [];
+        foreach ($affectations as $aff) {
+            $existedSponsors[] = $aff->getSponsor()->getId();
+        }
+
+        $form = $this->createForm(AffectationType::class, $affectation, ['folder' => $case, 'existed_sponsor' => $existedSponsors]);
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {

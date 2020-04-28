@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
-use App\Entity\Affectation, App\Entity\Folder, App\Entity\Sponsor;
+use App\Entity\Affectation;
+use App\Entity\Folder;
+use App\Entity\Sponsor;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,6 +15,10 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class AffectationType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array                $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -37,7 +43,7 @@ class AffectationType extends AbstractType
             'html5' => false,
             'format' => 'dd/mm/YYYY'
         ])
-        ->add('folder', EntityType::class,[
+        ->add('folder', EntityType::class, [
             'class' => Folder::class,
             'row_attr' => ['class' => 'col-md-6 mb-3', ],
             'label_attr' => ['class' => 'text-sm-left'],
@@ -52,7 +58,7 @@ class AffectationType extends AbstractType
             },
             //'preferred_choices' => $options['folder'] ? $options['folder']->getId() : [],
         ])
-        ->add('sponsor', EntityType::class,[
+        ->add('sponsor', EntityType::class, [
             'class' => Sponsor::class,
             'row_attr' => ['class' => 'col-md-6 mb-3', ],
             'label_attr' => ['class' => 'text-sm-left'],
@@ -62,21 +68,26 @@ class AffectationType extends AbstractType
                 if ($options['sponsor']) {
                     $qb->where('s.id = :id')
                     ->setParameter('id', $options['sponsor']->getid());
+                } elseif ($options['existed_sponsor']) {
+                    $qb->where($qb->expr()->notIn('s.id', $options['existed_sponsor']));
                 }
                 return $qb;
             },
             //'preferred_choices' => $options['sponsor'] ? $options['sponsor']->getId() : [],
         ])
         ->add('save', SubmitType::class, ['label' => 'Affect']);
-        ;
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => Affectation::class,
             'folder' => null,
             'sponsor' => null,
+            'existed_sponsor' => null,
         ]);
     }
 }

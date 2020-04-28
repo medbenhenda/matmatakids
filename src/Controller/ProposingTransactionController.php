@@ -159,7 +159,7 @@ class ProposingTransactionController extends AbstractController
 
         $serializer = $this->getSerializer();
 
-        $data = $serializer->normalize($proposingTransaction, null, [AbstractNormalizer::ATTRIBUTES => ['id', 'amount']]);
+        $data = $serializer->normalize($proposingTransaction, null, [AbstractNormalizer::ATTRIBUTES => ['id', 'amount', 'month', 'affectation' => ['id']]]);
 
         return new JsonResponse($data);
     }

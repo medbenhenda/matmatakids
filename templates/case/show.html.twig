@@ -25,17 +25,17 @@
 	{% endif %}
 	<div id="layoutSidenav_content">
 		<main>
-			<div class="container-fluid">
-				<h1 class="mt-4">Cases</h1>
-				<ol class="breadcrumb mb-4">
-					<li class="breadcrumb-item active">Case : {{ item }}</li>
-				</ol>
+			<div class="container-fluid pt-3 pb-3">
+				<h1 class="mt-4">Case details : ({{ item }})</h1>
+
 				<div class="card mb-4">
-					<div class="d-flex flex-row-reverse bd-highlight mb-2">
+
+					{#<div class="d-flex flex-row-reverse bd-highlight mb-2">
 						<div class="p-2 bd-highlight"><a href="#">statistics</a></div>
 						<div class="p-2 bd-highlight"><a href="{{ path('case') }}">Cases list</a></div>
 						<div class="p-2 bd-highlight"><a href="{{ path('edit_case') }}">New Case</a></div>
 					</div>
+					#}
 					<div class="card-header">
 						<div class="row">
 							<div class="col-sm-6">
@@ -55,17 +55,27 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-12">
-							<div class="card-body">
-								<div class="text-right col-md-12">
-									{% if action == 0 %}<a href="{{ path('affect_sponsor_case', {case: item.id}) }}">
-											<button type="button" class="btn btn-success">Affect to sponsor</button></a>{% endif %}
-									<a href="{{ path('manage_case', {case: item.id, status: action}) }}">
-										<button type="button" class="btn btn-info">{{ status|capitalize }}</button>
-									</a>
+							<div class="col-md-6">
+								<div class="p-3">
+								{% if item.affected %}
+									sponsors: <ul>
+									{% for item in affectations %}
+										{% set affectation =  item.affectation %}
+										<li><a href="{{ path('show_sponsor', {entity:affectation.sponsor.id}) }}">{{ affectation.sponsor|e }}</a></li>
+									{% endfor %}
+								</ul>
+								{% endif %}
 								</div>
 							</div>
-						</div>
+							<div class="col-md-6">
+								<div class="p-3 text-right">
+								{% if action == 0 %}<a href="{{ path('affect_sponsor_case', {case: item.id}) }}">
+										<button type="button" class="btn btn-success">Affect to sponsor</button></a>{% endif %}
+								<a href="{{ path('manage_case', {case: item.id, status: action}) }}">
+									<button type="button" class="btn btn-info">{{ status|capitalize }}</button>
+								</a>
+								</div>
+							</div>
 					</div>
 
 					<div class="row">
@@ -169,15 +179,15 @@
 					<div class="row">
 
 						<div class="offset-md-5 col-md-2 mb-4">
-								<select class="custom-select" name="years" id="selectYear">
+								<select class="custom-select" name="years" id="selectYear" data-folder="{{ item.id }}" data-currentyear="{{ year}}">
 
-								{% for key,year in years %}
+								{% for key,y in years %}
 
 									{% set selected=""%}
-									{% if year == "now"|date("Y") %}
+									{% if y == year %}
 										{% set selected="selected"%}
 									{% endif %}
-									<option {{ selected }}>{{ year }}</option>
+									<option {{ selected }}>{{ y }}</option>
 
 								{% endfor %}
 								</select>
@@ -224,6 +234,7 @@
 
 
 						<input type="hidden" id="month-name">
+						<input type="hidden" id="transaction-name">
 						<input type="hidden" id="affectation-name">
 						<input type="hidden" id="td-ref">
 
@@ -249,6 +260,7 @@
 				</div>
 				<div class="modal-body">
 					<input type="hidden" id="ref-transaction">
+					<input type="hidden" id="affectation-ref">
 					<input type="hidden" id="month-transaction">
 				</div>
 				<div class="modal-footer">

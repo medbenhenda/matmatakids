@@ -2,19 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f0c7074e-3a4c-4268-93dc-70fda9becc5d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Service/Helper.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Service/ProposingTransaction.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/proposing_transaction/transaction.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/sponsor/show.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/framework.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/framework.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/custom.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/modal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/CaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CaseController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ProposingTransactionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProposingTransactionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/ProposingTransactionRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ProposingTransactionRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Twig/AppExtension.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Twig/AppExtension.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/SponsorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SponsorController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/AffectationType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/AffectationType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/case/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/case/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/proposing_transaction/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/proposing_transaction/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/proposing_transaction/transaction.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/proposing_transaction/transaction.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,10 +43,36 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/case/show.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="239" selection-start-line="239" selection-end-line="239" />
+            <state relative-caret-position="205">
+              <caret line="63" column="125" selection-start-line="63" selection-start-column="125" selection-end-line="63" selection-end-column="125" />
               <folding>
-                <element signature="n#div#0;n#div#4;n#div#0;n#div#0;n#main#0;n#div#0;n#!!top" />
+                <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#main#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="e#2042#2054#0#Twig" expanded="true" />
+                <element signature="e#2423#2434#0#Twig" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/SponsorController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="350">
+              <caret line="93" column="17" selection-start-line="93" selection-start-column="13" selection-end-line="93" selection-end-column="17" />
+              <folding>
+                <element signature="e#34#99#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/sponsor/show.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="115">
+              <caret line="41" column="50" selection-start-line="41" selection-start-column="50" selection-end-line="41" selection-end-column="50" />
+              <folding>
+                <element signature="e#12#26#0#Twig" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -59,8 +81,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/modal.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="365">
-              <caret line="48" column="40" selection-start-line="48" selection-start-column="40" selection-end-line="48" selection-end-column="40" />
+            <state relative-caret-position="45">
+              <caret line="3" column="18" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -68,8 +90,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/CaseController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="138" column="18" selection-start-line="138" selection-start-column="18" selection-end-line="138" selection-end-column="18" />
+            <state relative-caret-position="123">
+              <caret line="130" column="101" selection-start-line="130" selection-start-column="101" selection-end-line="130" selection-end-column="101" />
               <folding>
                 <element signature="e#34#62#0#PHP" expanded="true" />
               </folding>
@@ -77,11 +99,20 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Form/AffectationType.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="21" column="26" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/ProposingTransactionController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="407">
-              <caret line="91" selection-start-line="91" selection-end-line="91" />
+            <state relative-caret-position="60">
+              <caret line="131" column="74" selection-start-line="131" selection-start-column="74" selection-end-line="131" selection-end-column="105" />
               <folding>
                 <element signature="e#34#70#0#PHP" expanded="true" />
               </folding>
@@ -90,28 +121,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Service/ProposingTransaction.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="16" column="10" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/proposing_transaction/transaction.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="589">
-              <caret line="61" column="16" selection-start-line="61" selection-start-column="16" selection-end-line="61" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entity/ProposingTransaction.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="118" column="26" selection-start-line="118" selection-start-column="23" selection-end-line="118" selection-end-column="26" />
+            <state relative-caret-position="427">
+              <caret line="41" column="42" selection-start-line="40" selection-start-column="20" selection-end-line="41" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -136,13 +149,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>respo</find>
-      <find>recie</find>
-      <find>affec</find>
-      <find>spon</find>
-      <find>propo</find>
-      <find>propos</find>
-      <find>findAll</find>
       <find>$fileUploader</find>
       <find>repos</find>
       <find>folder</find>
@@ -163,9 +169,16 @@
       <find>rec</find>
       <find>td-ref</find>
       <find>aja</find>
-      <find>ajax</find>
-      <find>recivedModal</find>
       <find>saveTransaction</find>
+      <find>target=&quot;#f</find>
+      <find>ajax</find>
+      <find>monthsList</find>
+      <find>icon-recieved</find>
+      <find>recivedModal</find>
+      <find>ffectation in affectations</find>
+      <find>ffectations</find>
+      <find>affect</find>
+      <find>existed_sponsor</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -186,7 +199,6 @@
         <option value="$PROJECT_DIR$/src/Form/ProposingTransactionType.php" />
         <option value="$PROJECT_DIR$/public/js/scripts.js" />
         <option value="$PROJECT_DIR$/src/Controller/DonController.php" />
-        <option value="$PROJECT_DIR$/src/Controller/SponsorController.php" />
         <option value="$PROJECT_DIR$/src/Entity/ProposingTransaction.php" />
         <option value="$PROJECT_DIR$/src/Service/Affectation.php" />
         <option value="$PROJECT_DIR$/src/EvenListener/NewActivitySubscriber.php" />
@@ -195,13 +207,16 @@
         <option value="$PROJECT_DIR$/src/Service/Helper.php" />
         <option value="$PROJECT_DIR$/src/Service/ProposingTransaction.php" />
         <option value="$PROJECT_DIR$/src/Twig/AppExtension.php" />
-        <option value="$PROJECT_DIR$/src/Controller/CaseController.php" />
         <option value="$PROJECT_DIR$/config/packages/framework.yaml" />
         <option value="$PROJECT_DIR$/public/css/custom.css" />
-        <option value="$PROJECT_DIR$/src/Controller/ProposingTransactionController.php" />
-        <option value="$PROJECT_DIR$/templates/case/show.html.twig" />
-        <option value="$PROJECT_DIR$/public/js/modal.js" />
         <option value="$PROJECT_DIR$/templates/proposing_transaction/transaction.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/ProposingTransactionController.php" />
+        <option value="$PROJECT_DIR$/public/js/modal.js" />
+        <option value="$PROJECT_DIR$/templates/case/show.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/SponsorController.php" />
+        <option value="$PROJECT_DIR$/templates/sponsor/show.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/CaseController.php" />
+        <option value="$PROJECT_DIR$/src/Form/AffectationType.php" />
       </list>
     </option>
   </component>
@@ -355,30 +370,19 @@
             <path>
               <item name="matmatakids" type="b2602c69:ProjectViewProjectNode" />
               <item name="matmatakids" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="matmatakids" type="b2602c69:ProjectViewProjectNode" />
-              <item name="matmatakids" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="matmatakids" type="b2602c69:ProjectViewProjectNode" />
-              <item name="matmatakids" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="EvenListener" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="matmatakids" type="b2602c69:ProjectViewProjectNode" />
-              <item name="matmatakids" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Twig" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="matmatakids" type="b2602c69:ProjectViewProjectNode" />
               <item name="matmatakids" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="case" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="matmatakids" type="b2602c69:ProjectViewProjectNode" />
+              <item name="matmatakids" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="sponsor" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -390,9 +394,16 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/sponsor" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/sponsor" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -420,12 +431,12 @@
       <workItem from="1587855930287" duration="17428000" />
       <workItem from="1587915710332" duration="15167000" />
       <workItem from="1588027546270" duration="698000" />
-      <workItem from="1588028624308" duration="16274000" />
+      <workItem from="1588028624308" duration="24950000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52858000" />
+    <option name="totallyTimeSpent" value="61534000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="27" width="1533" height="873" extended-state="6" />
@@ -444,21 +455,39 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49966374" weight="0.3286517" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49899125" visible="true" weight="0.14466292" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49899125" visible="true" weight="0.36516854" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50100875" side_tool="true" weight="0.34129214" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" weight="0.32952252" />
     </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12373907" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49966374" weight="0.3286517" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49899125" visible="true" weight="0.36516854" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50100875" side_tool="true" weight="0.34129214" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" weight="0.32952252" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/composer.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Form/DonorType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -487,13 +516,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-468">
           <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/AffectationType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="69" column="64" selection-start-line="54" selection-start-column="8" selection-end-line="69" selection-end-column="64" />
         </state>
       </provider>
     </entry>
@@ -650,13 +672,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/SponsorController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/routes/fos_js_routing.yaml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -775,16 +790,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/CaseController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="138" column="18" selection-start-line="138" selection-start-column="18" selection-end-line="138" selection-end-column="18" />
-          <folding>
-            <element signature="e#34#62#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/EvenListener/NewActivitySubscriber.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="411">
@@ -799,37 +804,76 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/proposing_transaction/transaction.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="427">
+          <caret line="41" column="42" selection-start-line="40" selection-start-column="20" selection-end-line="41" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/ProposingTransactionController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="91" selection-start-line="91" selection-end-line="91" />
+        <state relative-caret-position="60">
+          <caret line="131" column="74" selection-start-line="131" selection-start-column="74" selection-end-line="131" selection-end-column="105" />
           <folding>
             <element signature="e#34#70#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/modal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="18" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/case/show.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="239" selection-start-line="239" selection-end-line="239" />
+        <state relative-caret-position="205">
+          <caret line="63" column="125" selection-start-line="63" selection-start-column="125" selection-end-line="63" selection-end-column="125" />
           <folding>
-            <element signature="n#div#0;n#div#4;n#div#0;n#div#0;n#main#0;n#div#0;n#!!top" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#main#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#2042#2054#0#Twig" expanded="true" />
+            <element signature="e#2423#2434#0#Twig" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/modal.js">
+    <entry file="file://$PROJECT_DIR$/src/Controller/SponsorController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="48" column="40" selection-start-line="48" selection-start-column="40" selection-end-line="48" selection-end-column="40" />
+        <state relative-caret-position="350">
+          <caret line="93" column="17" selection-start-line="93" selection-start-column="13" selection-end-line="93" selection-end-column="17" />
+          <folding>
+            <element signature="e#34#99#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/proposing_transaction/transaction.html.twig">
+    <entry file="file://$PROJECT_DIR$/templates/sponsor/show.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="61" column="16" selection-start-line="61" selection-start-column="16" selection-end-line="61" selection-end-column="16" />
+        <state relative-caret-position="115">
+          <caret line="41" column="50" selection-start-line="41" selection-start-column="50" selection-end-line="41" selection-end-column="50" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/CaseController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="130" column="101" selection-start-line="130" selection-start-column="101" selection-end-line="130" selection-end-column="101" />
+          <folding>
+            <element signature="e#34#62#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/AffectationType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="21" column="26" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
         </state>
       </provider>
     </entry>
