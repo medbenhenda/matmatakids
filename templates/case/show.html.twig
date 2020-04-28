@@ -184,103 +184,20 @@
 						</div>
 						<div class="col-md-12">
 							{% for item in affectations %}
-							{% set affectation =  item.affectation %}
-							<div class="table-responsive mb-4">
-								<table class="table table-hover table-bordered calendar-table">
+								{% set affectation =  item.affectation %}
+
 									<div class="card bg-light mb-2">
 										<div class="card-header">
 											Sponsor: {{ affectation.sponsor|e }}
 										</div>
+										<div class="card-body">
+											{{ render(controller(
+												'App\\Controller\\ProposingTransactionController::getTransactionByYear', {year: year, affectation: affectation.id}
+											)) }}
+										</div>
 									</div>
-									<tbody>
-									<tr>
-										{% for month in months|slice(0, 4) %}
-											{% set css_class = 'bg-warning' %}
-											{% set isOk = false %}
-											{% if month.id in item.months %}
-												{% set isOk = true %}
-												{% set css_class = 'bg-success' %}
-											{% endif %}
-											<td class="text-center">
-												<div  id="{{ 'data-'~affectation.id~'-'~month.id }}" class="blc {{ css_class }}">{{ month.name|e }}
-													{% if isOk %}
-														<div>{{ affectation.amount }} €</div>
-													{% else %}
-														<div class="float-right p-2">
 
-															<button type="button" class="btn btn-light" data-toggle="modal" data-target="#formModal"
-															        data-affectation="{{ affectation.id }}"
-															        data-month="{{ month.id }}"
-															        id="{{ 'btn-'~affectation.id~'-'~month.id }}"
-															>
-																Validate</button>
-
-														</div>
-													{% endif %}
-												</div>
-											</td>
-										{% endfor %}
-
-									</tr>
-									<tr>
-										{% for key,month in months|slice(4, 4) %}
-											{% set css_class = 'bg-warning' %}
-											{% set isOk = false %}
-											{% if month.id in item.months %}
-												{% set css_class = 'bg-success' %}
-												{% set isOk = true %}
-											{% endif %}
-												<td class="text-center">
-													<div id="{{ 'data-'~affectation.id~'-'~month.id }}" class="blc {{ css_class }}">{{ month.name|e }}
-														{% if isOk %}
-															<div>{{ affectation.amount }} €</div>
-														{% else %}
-															<div class="float-right p-2">
-																<button type="button" class="btn btn-light" data-toggle="modal" data-target="#formModal"
-																        data-affectation="{{ affectation.id }}"
-																        data-month="{{ month.id }}"
-																        data-ref="{{ 'data-'~affectation.id~'-'~month.id }}"
-																        id="{{ 'btn-'~affectation.id~'-'~month.id }}"
-																>
-																	Validate</button>
-															</div>
-														{% endif %}
-													</div>
-												</td>
-										{% endfor %}
-									</tr>
-									<tr>
-										{% for key,month in months|slice(8, 4) %}
-											{% set css_class = 'bg-warning' %}
-											{% set isOk = false %}
-											{% if month.id in item.months %}
-												{% set css_class = 'bg-success' %}
-												{% set isOk = true %}
-											{% endif %}
-												<td class="text-center">
-													<div id="{{ 'data-'~affectation.id~'-'~month.id }}" class="blc {{ css_class }}">{{ month.name|e }}
-														{% if isOk %}
-															<div>{{ affectation.amount }} €</div>
-														{% else %}
-															<div class="float-right p-2">
-																<button type="button" class="btn btn-light" data-toggle="modal" data-target="#formModal"
-																        data-affectation="{{ affectation.id }}"
-																        data-month="{{ month.id }}"
-																        id="{{ 'btn-'~affectation.id~'-'~month.id }}"
-																>
-																	Validate
-																</button>
-															</div>
-														{% endif %}
-													</div>
-												</td>
-										{% endfor %}
-									</tr>
-						</tbody>
-						</table>
 							{% endfor %}
-
-							</div>
 						</div>
 					</div>
 				</div>
@@ -315,7 +232,28 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="button" id="saveTransaction"class="btn btn-primary">Validate</button>
+					<button type="button" id="saveTransaction" class="btn btn-primary">Validate</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="recievedModal" tabindex="-1" role="dialog" aria-labelledby="recievedModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="recievedModalLabel">New message</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" id="ref-transaction">
+					<input type="hidden" id="month-transaction">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" id="validateRecieved"class="btn btn-primary">Validate</button>
 				</div>
 			</div>
 		</div>

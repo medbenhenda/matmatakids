@@ -3,12 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\ProposingTransaction;
-use App\Entity\Folder;
-use App\Entity\Sponsor;
 use App\Entity\Affectation as EntityAffectation;
 use App\Form\ProposingTransactionType;
 use App\Repository\AffectationRepository;
 use App\Repository\ProposingTransactionRepository;
+use App\Service\Helper;
+use App\Service\ProposingTransaction as ProposingTransactionAlias;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Exception\LogicException;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -39,6 +39,60 @@ class ProposingTransactionController extends AbstractController
             'proposing_transactions' => $proposingTransactionRepository->findAll(),
             'folder' => ''
         ]);
+    }
+
+    /**
+
+     * @param int                            $year
+     * @param EntityAffectation              $affectation
+     * @param ProposingTransactionRepository $proposingTransactionRepository
+     * @param Helper                         $helper
+     *
+     * @param ProposingTransactionAlias      $service
+     *
+     * @return Response
+     * @throws \Exception
+     */
+    public function getTransactionByYear($year, EntityAffectation $affectation, ProposingTransactionRepository $proposingTransactionRepository, Helper $helper, ProposingTransactionAlias $service): Response
+    {
+        return $this->render('proposing_transaction/transaction.html.twig', [
+            'proposing_transactions' => $service->getTransactionByYearAndAffectation($affectation, $year),
+            'months' => $helper::monthsList(),
+            'years' => $helper::getYears(),
+            'current_year' => $year,
+            'affectation' => $affectation,
+        ]);
+    }
+
+    /**
+     * @Route("/update", name="proposing_transaction_update", methods={"POST"},options = { "expose" = true },)
+     * @param Request                        $request
+     *
+     * @param ProposingTransactionRepository $repository
+     *
+     * @return Response
+     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
+     */
+    public function ajaxUpdateTransaction(Request $request, ProposingTransactionRepository $repository): Response
+    {
+        $postedData = $request->request->all();
+        $field = $postedData['field'];
+
+        $setter = 'set'.strtoupper($field);
+        $transaction = $repository->find($postedData['id']);
+        $transaction->$setter(true);
+        if ($field == 'recieved') {
+            $transaction->setRecievedDate(new \DateTime('now'));
+        }
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($transaction);
+        $entityManager->flush();
+
+        $serializer = $this->getSerializer();
+
+        $data = $serializer->normalize($transaction, null, [AbstractNormalizer::ATTRIBUTES => ['id', 'recieved', 'recievedDate']]);
+
+        return new JsonResponse($data);
     }
 
     /**
@@ -83,6 +137,7 @@ class ProposingTransactionController extends AbstractController
      * @return Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
      */
     public function ajaxSaveTransaction(Request $request, AffectationRepository $affectationRepository): Response
     {
@@ -102,11 +157,7 @@ class ProposingTransactionController extends AbstractController
         $entityManager->persist($proposingTransaction);
         $entityManager->flush();
 
-        $encoders = [new JsonEncoder()];
-
-        $normalizers = [new ObjectNormalizer()];
-
-        $serializer = new Serializer($normalizers, $encoders);
+        $serializer = $this->getSerializer();
 
         $data = $serializer->normalize($proposingTransaction, null, [AbstractNormalizer::ATTRIBUTES => ['id', 'amount']]);
 
@@ -155,5 +206,18 @@ class ProposingTransactionController extends AbstractController
         }
 
         return $this->redirectToRoute('proposing_transaction_index');
+    }
+
+    /**
+     * @return Serializer
+     */
+    private function getSerializer(): Serializer
+    {
+        $encoders = [new JsonEncoder()];
+
+        $normalizers = [new ObjectNormalizer()];
+
+        $serializer = new Serializer($normalizers, $encoders);
+        return $serializer;
     }
 }

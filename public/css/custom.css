@@ -9,3 +9,11 @@ table.calendar-table td {
 .blc {
     height: 100px;
 }
+.bg-warning-c {
+    background-color: #dee2e6 !important;
+}
+
+.bg-success-c {
+    background-color: #367888  !important;
+    color: #fff;
+}

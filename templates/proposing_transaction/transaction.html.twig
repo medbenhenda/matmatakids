@@ -1,0 +1,67 @@
+{% block calendar %}
+	<div class="row">
+		{% set amount = 20 %}
+		{% for key,item in proposing_transactions %}
+			{% set recieved = false %}
+			{% if item%}
+
+				{% set recieved = item.recieved %}
+			{% set amount = item.affectation.amount %}
+			{% endif %}
+			{% set css_class = 'bg-warning-c' %}
+			{% set isOk = false %}
+
+			{% if item %}
+				{% set isOk = true %}
+				{% set css_class = 'bg-success-c' %}
+			{% endif %}
+
+			<div class="col-md-3 text-center p-0">
+				<div id="{{ 'data-'~affectation.id~'-'~key }}" class="border border-dark blc {{ css_class }}">{{ key|map_month}}
+					<div class="float-right pb-2" id="{{ 'icon-recieved-'~affectation.id~'-'~key }}">
+
+						{% if isOk %}
+							{% if recieved == true %}
+								<span class="fas fa-thumbs-up"></span>
+							{% else %}
+								<span id="{{ 'down-recieved-'~item.id }}" class="fas fa-thumbs-down"></span>
+							{% endif %}
+						{% endif %}
+					</div>
+						<div id="{{ 'amount-'~affectation.id~'-'~key }}">
+							{% if isOk %}{{ item.amount }} €{% endif %}
+						</div>
+					<div id="{{ 'div-recieved-'~affectation.id~'-'~key }}">
+					{% if isOk %}
+
+
+						{% if recieved == false %}
+						<button type="button" class="btn btn-light" data-toggle="modal" data-target="#recievedModal"
+						        data-recievedtransaction="{{ item.id }}"
+						        id="{{ 'btn-recieved-'~item.id }}"
+						>
+							recieved?
+						</button>
+						{% endif %}
+
+
+						{% else %}
+						<div class="float-right p-2">
+							<button type="button" class="btn btn-light" data-toggle="modal" data-target="#formModal"
+							        data-affectation="{{ affectation.id }}"
+							        data-month="{{ key }}"
+							        data-amount="{{ amount }}"
+							        data-ref="{{ 'data-'~affectation.id~'-'~key }}"
+							        id="{{ 'btn-'~affectation.id~'-'~key }}"
+							>
+								Validate
+							</button>
+
+						</div>
+					{% endif %}
+					</div>
+				</div>
+			</div>
+		{% endfor%}
+	</div>
+{% endblock %}

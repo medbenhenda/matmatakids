@@ -19,6 +19,22 @@ class ProposingTransactionRepository extends ServiceEntityRepository
         parent::__construct($registry, ProposingTransaction::class);
     }
 
+    /**
+     * @param $year
+     *
+     * @return ProposingTransaction[] Returns an array of ProposingTransaction objects
+     */
+    public function getTransactionByYeay($year)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.year = :val')
+            ->setParameter('val', $year)
+            ->groupBy('p.affectation, p.month')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return ProposingTransaction[] Returns an array of ProposingTransaction objects
     //  */
