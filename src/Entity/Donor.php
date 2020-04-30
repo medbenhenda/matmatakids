@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Donor
 {
-  use TimestampableEntity;
+    use TimestampableEntity;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -209,8 +209,9 @@ class Donor
         return $this;
     }
 
-    public function __toString() {
-      return $this->firstName . ' ' . $this->lastName;
+    public function __toString()
+    {
+        return $this->firstName . ' ' . $this->lastName;
     }
 
     public function getCreatedBy(): ?User
@@ -224,7 +225,4 @@ class Donor
 
         return $this;
     }
-
-
-
 }

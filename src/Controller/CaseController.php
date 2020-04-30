@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
+use App\Repository\FolderRepository;
 use App\Service\Affectation;
 use DateInterval;
 use DatePeriod;
 use DateTime;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,14 +29,28 @@ class CaseController extends AbstractController
 {
     /**
      * @Route("/case", name="case")
+     * @param FolderRepository $repository
+     *
+     * @return Response
      */
-    public function index()
+    public function index(FolderRepository $repository): Response
     {
-        $repository = $this->getDoctrine()->getRepository(Entity\Folder::class);
-        $items = $repository->findAllWithProof();
+        //dump( $repository->findActiveWithSumAmount()); exit;
+         return $this->render('case/index.html.twig', [
+            'items' => $repository->findActiveWithSumAmount(),
+         ]);
+    }
 
-        return $this->render('case/index.html.twig', [
-            'items' => $items
+    /**
+     * @Route("/case/disabled", name="disabled_case")
+     * @param FolderRepository $repository
+     *
+     * @return Response
+     */
+    public function disabled(FolderRepository $repository): Response
+    {
+        return $this->render('case/disabled.html.twig', [
+            'items' => $repository->findBy(['status' => false])
         ]);
     }
 
@@ -152,34 +168,49 @@ class CaseController extends AbstractController
 
     /**
      * @Route("/case/manage/{case}/{status}", name="manage_case")
+     * @param Entity\Folder $case
+     * @param               $status
+     *
+     * @return Response
      */
-    public function manageCase(Request $request, Entity\Folder $case, $status)
+    public function manageCase(Entity\Folder $case, $status): Response
     {
-        $case->setStatus($status);
         $em = $this->getDoctrine()->getManager();
-        $em->persist($case);
+        if (!$status) {
+            $affectations = $case->getAffectations();
+            foreach ($affectations as $affectation) {
+                $affectation->setStatus($status);
+                $em->persist($case);
+            }
+        }
+        $case->setStatus($status);
         $em->flush();
-        return $this->render('case/show.html.twig', [
-            'item' => $case,
-        ]);
+
+        return $this->redirectToRoute('show_case', ['case' => $case->getId()]);
     }
 
     /**
      * @Route("/case/item/{case}/{item}", name="case_item", defaults={"item"=null})
+     * @param Request                $request
+     * @param Entity\Folder|null     $case
+     * @param Entity\FolderItem|null $item
+     *
+     * @return RedirectResponse|Response
      */
     public function newItem(Request $request, ?Entity\Folder $case, ?Entity\FolderItem $item)
     {
+       // dump($item); exit;
         $action = 'Update';
         if (!$item) {
             $item = new Entity\FolderItem();
             $action = 'New';
         }
+
         $form = $this->createForm(FolderItemType::class, $item, ['folder' => $case]);
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
-
                 $em->persist($item);
                 $em->flush();
 
@@ -192,6 +223,30 @@ class CaseController extends AbstractController
             'action' => $action,
             'case' => $case,
         ]);
+    }
+
+    /**
+     * @Route("/delete/case/item/{item}", name="delete_case_item", options = { "expose" = true })
+     * @param Request           $request
+     * @param Entity\FolderItem $item
+     *
+     * @return JsonResponse
+     */
+    public function deleteItem(Request $request, Entity\FolderItem $item): JsonResponse
+    {
+        $data = ['status' => false, 'message' => 'item does not exist'];
+        if ($item) {
+            try {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($item);
+                $em->flush();
+                $data = ['status' => true, 'message' => 'success'];
+            } catch (Exception $e) {
+                $data = ['status' => false, 'message' => $e->getMessage()];
+            }
+        }
+
+        return new JsonResponse($data);
     }
 
     /**

@@ -133,9 +133,21 @@
 										<div class="card bg-light mb-2">
 											<div class="card-header">
 												<div class="row">
-													<div class="col-sm-10">{{ item_folder.firstName ~ ' ' ~  item_folder.lastName }}</div>
-													<div class="col-sm-2"><a class="float-right"
-													                         href="{{ path('case_item', {case: item.id, item: item_folder.id}) }}">Edit</a>
+													<div class="col-sm-8">{{ item_folder.firstName ~ ' ' ~  item_folder.lastName }}</div>
+													<div class="col-sm-2">
+														<button type="button" class="btn btn-light" data-toggle="modal" data-target="#deleteModal"
+														        data-item="{{ item_folder.id}}"
+														>
+															delete
+														</button>
+
+													</div>
+													<div class="col-sm-2">
+														<a class="float-right" href="{{ path('case_item', {case: item.id, item: item_folder.id}) }}">
+															<button type="button" class="btn btn-light">
+																Edit
+															</button>
+														</a>
 													</div>
 												</div>
 											</div>
@@ -177,7 +189,7 @@
 						</div>
 					</div>
 					<div class="row">
-
+						{% if item.affectations|length %}
 						<div class="offset-md-5 col-md-2 mb-4">
 								<select class="custom-select" name="years" id="selectYear" data-folder="{{ item.id }}" data-currentyear="{{ year}}">
 
@@ -192,6 +204,7 @@
 								{% endfor %}
 								</select>
 						</div>
+						{% endif %}
 						<div class="col-md-12">
 							{% for item in affectations %}
 								{% set affectation =  item.affectation %}
@@ -206,6 +219,7 @@
 											)) }}
 										</div>
 									</div>
+								{% else %}
 
 							{% endfor %}
 						</div>
@@ -270,11 +284,32 @@
 			</div>
 		</div>
 	</div>
+
+
+	<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="deleteModalLabel">New message</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" id="ref-item">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" id="confirmDelete" class="btn btn-primary">Confirm delete</button>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}
  {% block javascripts %}
 	 {{ parent() }}
 	 <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
 	 <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
 
-	 <script src="{{ asset('js/modal.js') }}"></script>
+	 <script src="{{ asset('js/custom_scripts.js') }}"></script>
  {% endblock %}

@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\FolderItem;
 use App\Entity\Folder;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -27,38 +28,33 @@ class FolderItemType extends AbstractType
               'attr' => ['class' => 'form-control',],
               'row_attr' => ['class' => 'col-md-6 mb-3', ],
             ])
-            ->add('birthdate', null, [
+            ->add('birthdate', BirthdayType::class, [
               'widget' => 'single_text',
               'label_attr' => ['class' => 'text-sm-left'],
               'attr' => ['class' => 'form-control js-datepicker'],
               'row_attr' => ['class' => 'col-md-6 mb-3', ],
               'html5' => false,
-              'format' => 'dd/mm/YYYY'
 
             ])
             ->add('handicapped', CheckboxType::class, [
-              'data' => true,
               'label_attr' => ['class' => 'form-check-label'],
               'attr' => ['class' => 'form-check-input is-invalid ',],
               'row_attr' => ['class' => 'form-group', ],
               'required' => false
             ])
             ->add('unhealthy', CheckboxType::class, [
-              'data' => true,
               'label_attr' => ['class' => 'form-check-label'],
               'attr' => ['class' => 'form-check-input is-invalid ',],
               'row_attr' => ['class' => 'form-group', ],
               'required' => false
             ])
             ->add('orphan', CheckboxType::class, [
-              'data' => true,
               'label_attr' => ['class' => 'form-check-label'],
               'attr' => ['class' => 'form-check-input is-invalid ',],
               'row_attr' => ['class' => 'form-group', ],
               'required' => false
             ])
             ->add('schoolboy', CheckboxType::class, [
-              'data' => true,
               'label_attr' => ['class' => 'form-check-label'],
               'attr' => ['class' => 'form-check-input is-invalid ',],
               'row_attr' => ['class' => 'form-group', ],

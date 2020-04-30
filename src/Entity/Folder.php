@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Folder
 {
-  use TimestampableEntity;
+    use TimestampableEntity;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -83,14 +83,14 @@ class Folder
     public function __construct()
     {
         $this->proof = new ArrayCollection();
-        $this->sponsors = new ArrayCollection();
         $this->affectations = new ArrayCollection();
         $this->folderItems = new ArrayCollection();
     }
 
 
-    public function __toString() {
-      return $this->id . '/' . $this->createdAt->format('Y');
+    public function __toString()
+    {
+        return $this->id . '/' . $this->createdAt->format('Y');
     }
 
     public function getId(): ?int
@@ -298,5 +298,4 @@ class Folder
 
         return $this;
     }
-
 }

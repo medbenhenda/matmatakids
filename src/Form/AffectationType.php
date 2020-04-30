@@ -33,7 +33,6 @@ class AffectationType extends AbstractType
             'attr' => ['class' => 'form-control js-datepicker'],
             'row_attr' => ['class' => 'col-md-6 mb-3', ],
             'html5' => false,
-            'format' => 'dd/mm/YYYY'
         ])
         ->add('endDate', null, [
             'widget' => 'single_text',
@@ -41,7 +40,6 @@ class AffectationType extends AbstractType
             'attr' => ['class' => 'form-control js-datepicker'],
             'row_attr' => ['class' => 'col-md-6 mb-3', ],
             'html5' => false,
-            'format' => 'dd/mm/YYYY'
         ])
         ->add('folder', EntityType::class, [
             'class' => Folder::class,

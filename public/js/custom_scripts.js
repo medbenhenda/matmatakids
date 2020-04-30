@@ -99,6 +99,35 @@ jQuery(document).ready(function () {
         })
     });
 
+    $('#deleteModal').on('show.bs.modal', function (event) {
+        let button = $(event.relatedTarget) // Button that triggered the modal
+        let item = button.data('item');
+        let modal = $(this);
+        modal.find('.modal-body input#ref-item').val(item);
+    })
+
+
+    $('#confirmDelete').on('click', function (e) {
+        var item = $('#ref-item').val();
+        var path = Routing.generate('delete_case_item', {item: item});
+
+        console.log(item);
+        console.log(path);
+        $.ajax({
+            url: path,
+            type: "GET",
+            success: function (data) {
+                console.log(data);
+                if (data.status) {
+                    window.location.href =  window.location.pathname;
+                } else {
+                    alert('Error deleting');
+                }
+
+            }
+        })
+    });
+
     $('#selectYear').on('change', function () {
 
         var el = $(this);
@@ -110,4 +139,7 @@ jQuery(document).ready(function () {
         }
 
     });
+
+
+
 });

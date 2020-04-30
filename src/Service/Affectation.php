@@ -49,7 +49,7 @@ class Affectation
      */
     public function getAffectationsByFolder(Folder $folder)
     {
-        $affectations = $this->repository->findBy(['folder' => $folder->getId()]);
+        $affectations = $this->repository->findBy(['folder' => $folder->getId(), 'status' => true]);
         $result = [];
         foreach ($affectations as $affectation) {
             $months = [];

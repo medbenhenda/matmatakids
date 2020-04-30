@@ -137,6 +137,11 @@ class User implements UserInterface
      */
     private $responsibleTransactions;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Expenses", mappedBy="createdBy")
+     */
+    private $expenses;
+
 
 
     public function __construct()
@@ -151,6 +156,7 @@ class User implements UserInterface
         $this->ownAffectaions = new ArrayCollection();
         $this->proposingTransactions = new ArrayCollection();
         $this->responsibleTransactions = new ArrayCollection();
+        $this->expenses = new ArrayCollection();
     }
 
     /**
@@ -662,6 +668,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($responsibleTransaction->getResponsible() === $this) {
                 $responsibleTransaction->setResponsible(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Expenses[]
+     */
+    public function getExpenses(): Collection
+    {
+        return $this->expenses;
+    }
+
+    public function addExpense(Expenses $expense): self
+    {
+        if (!$this->expenses->contains($expense)) {
+            $this->expenses[] = $expense;
+            $expense->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExpense(Expenses $expense): self
+    {
+        if ($this->expenses->contains($expense)) {
+            $this->expenses->removeElement($expense);
+            // set the owning side to null (unless already changed)
+            if ($expense->getCreatedBy() === $this) {
+                $expense->setCreatedBy(null);
             }
         }
 

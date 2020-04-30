@@ -23,11 +23,15 @@ class FolderRepository extends ServiceEntityRepository
     // /**
     //  * @return Don[] Returns an array of Don objects
     //  */
-    public function findAllWithProof()
+    public function findActiveWithSumAmount()
     {
         return $this->createQueryBuilder('f')
           ->select('f')
-            ->join('f.proof', 'd')->addSelect('d')
+            ->leftJoin('f.affectations', 'a')
+            ->addSelect('SUM(a.amount) as amount_total')
+            //->where('a.status = true')
+            ->groupBy('f.id')
+
             ->getQuery()
             ->getResult()
         ;

@@ -57,9 +57,26 @@
                                     <td>{{ item.email|e }}</td>
                                     <td>{{ item.mobile|e }}</td>
                                     <td>{{ (item.address ~ ' ' ~ item.zipCode ~ ' ' ~ item.city ~ ' ' ~ item.country)|e }}</td>
-                                    <td><ul>{%for affectation in item.affectations%}<li>{{affectation.folder}}</li>{%endfor%}</ul></td>
+                                    <td>
+                                        <ul>
+                                            {%for affectation in item.affectations%}
+                                                {% if affectation.status %}
+                                                <li>
+                                                    <a href="{{ path('show_case', {case: affectation.folder.id})}}" class="">
+                                                        {{ affectation.folder }}
+                                                    </a>
+                                                </li>
+                                                {% endif %}
+                                            {%endfor%}
+                                        </ul>
+                                    </td>
                                     <td >
                                         <ul>
+                                            <li>
+                                                <a href="{{ path('show_sponsor', {entity: item.id})}}" class="">
+                                                    Show
+                                                </a>
+                                            </li>
                                             <li>
                                                 <a href="{{ path('edit_sponsor', {entity: item.id})}}" class="">Edit</a>
                                             </li>
@@ -70,11 +87,7 @@
                                                 </a>
                                             </li>
                                             {% endif %}
-                                            <li>
-                                                <a href="{{ path('affectation')}}" class="">
-                                                    Show the affectations
-                                                </a>
-                                            </li>
+
                                         </ul>
                                     </td>
                                 </tr>
