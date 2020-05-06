@@ -73,9 +73,14 @@ class Document
     private $docFile;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\FolderItem", inversedBy="certificates")
+     * @ORM\ManyToOne(targetEntity="App\Entity\FolderItem", inversedBy="certificates", cascade={"persist"})
      */
     private $folderItem;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Expenses", inversedBy="invoice", cascade={"persist"})
+     */
+    private $expenses;
 
     public function getId(): ?int
     {
@@ -137,15 +142,15 @@ class Document
         if (null !== $imageFile) {
            // It is required that at least one field changes if you are using doctrine
            // otherwise the event listeners won't be called and the file is lost
-           $this->updatedAt = new \DateTimeImmutable();
+            $this->updatedAt = new \DateTimeImmutable();
         }
     }
 
-     public function getImageFile(): ?File
-     {
-         return $this->imageFile;
-     }
-     public function setImageName(?string $imageName): void
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+    public function setImageName(?string $imageName): void
     {
         $this->imageName = $imageName;
     }
@@ -177,4 +182,15 @@ class Document
         return $this;
     }
 
-   }
+    public function getExpenses(): ?Expenses
+    {
+        return $this->expenses;
+    }
+
+    public function setExpenses(?Expenses $expenses): self
+    {
+        $this->expenses = $expenses;
+
+        return $this;
+    }
+}

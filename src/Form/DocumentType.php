@@ -17,9 +17,9 @@ class DocumentType extends AbstractType
     {
         $builder
             ->add('title', null, [
-              'label_attr' => ['class' => 'text-sm-left',],
-              'attr' => ['class' => 'form-control',],
-              'row_attr' => ['class' => 'col-md-6 mb-3', ],
+                'label_attr' => ['class' => 'text-sm-left',],
+                'attr' => ['class' => 'form-control',],
+                'row_attr' => ['class' => 'col-md-6 mb-3',],
             ])
             ->add('imageFile', VichFileType::class, [
                 'allow_delete' => true,
@@ -27,7 +27,7 @@ class DocumentType extends AbstractType
                 'label' => '',
                 'label_attr' => ['class' => 'text-sm-left',],
                 'attr' => ['class' => 'form-control',],
-                'row_attr' => ['class' => 'col-md-6 mb-3', ],
+                'row_attr' => ['class' => 'col-md-6 mb-3',],
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
 
@@ -39,6 +39,7 @@ class DocumentType extends AbstractType
                 // in the associated entity, so you can use the PHP constraint classes
 
             ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

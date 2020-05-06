@@ -1,0 +1,24 @@
+{{ form_start(form) }}
+
+{{ form_row(form.date) }}
+{{ form_row(form.title) }}
+{{ form_row(form.description) }}
+{{ form_row(form.clientName) }}
+{{ form_row(form.category) }}
+{{ form_row(form.type) }}
+
+<div class="form-row">
+    <div class="form-group col-md-12">
+        <div class="card" style="">
+            <ul class="list-group itemsRef" data-prototype="{{ form_widget(form.invoice.vars.prototype)|e('html_attr') }}">
+
+            </ul>
+        </div>
+    </div>
+</div>
+<input type="hidden" value="invoice" class="contextName"/>
+{{ form_end(form) }}
+
+
+
+

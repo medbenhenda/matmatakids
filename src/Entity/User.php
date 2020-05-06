@@ -42,32 +42,32 @@ class User implements UserInterface
     private $lastName;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=20, nullable=true)
      */
     private $mobile;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $address;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=20, nullable=true)
      */
     private $zipCode;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $city;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $country;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $position;
 
@@ -77,7 +77,7 @@ class User implements UserInterface
     private $enterDate;
 
     /**
-     * @ORM\Column(type="boolean", options={"default":true})
+     * @ORM\Column(type="boolean", options={"default":true}, nullable=true)
      */
     private $isActive;
 

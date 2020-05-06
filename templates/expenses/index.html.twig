@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Expenses{% endblock %}
+
+{% block body %}
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h1 class="mt-4">Expenses</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">Expenses</li>
+                </ol>
+                <div class="card mb-4">
+                    <div class="d-flex flex-row-reverse bd-highlight mb-2">
+                        <div class="p-2 bd-highlight"><a href="{{ path('expenses_new') }}">Create new</a></div>
+
+                    </div>
+                    <div class="card-header"><i class="fas fa-table mr-1"></i>Liste des dons</div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Date</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>ClientName</th>
+                                    <th>Category</th>
+                                    <th>Type</th>
+                                    <th>actions</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                {% for expense in expenses %}
+                                    <tr>
+                                        <td>{{ expense.id }}</td>
+                                        <td>{{ expense.date ? expense.date|date('Y-m-d') : '' }}</td>
+                                        <td>{{ expense.title }}</td>
+                                        <td>{{ expense.description }}</td>
+                                        <td>{{ expense.clientName }}</td>
+                                        <td>{{ expense.category }}</td>
+                                        <td>{{ expense.type }}</td>
+                                        <td>
+                                            <a href="{{ path('expenses_show', {'id': expense.id}) }}">show</a> |
+                                            <a href="{{ path('expenses_edit', {'id': expense.id}) }}">edit</a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="10">no records found</td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+{% endblock %}

@@ -72,7 +72,7 @@ class FolderItemType extends AbstractType
               'row_attr' => ['class' => 'col-md-12 mb-3', ],
               'required' => false
             ])
-            ->add('folder', EntityType::class,[
+            ->add('folder', EntityType::class, [
                 'class' => Folder::class,
                 'row_attr' => ['class' => 'col-md-6 mb-3', ],
                 'label_attr' => ['class' => 'text-sm-left'],

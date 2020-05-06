@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Expenses{% endblock %}
+
+{% block body %}
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid">
+            <h1 class="mt-4">Expenses</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">Expenses</li>
+            </ol>
+            <div class="card mb-4">
+                <div class="d-flex flex-row-reverse bd-highlight mb-2">
+                    <div class="p-2 bd-highlight"><a href="{{ path('expenses_index') }}">back to list</a></div>
+                    <div class="p-2 bd-highlight"><a href="{{ path('expenses_edit', {'id': expense.id}) }}">edit</a></div>
+                    <div class="p-2 bd-highlight">{{ include('expenses/_delete_form.html.twig') }}</div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                    <div class="col-md-6">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ expense.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date</th>
+                            <td>{{ expense.date ? expense.date|date('Y-m-d') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Title</th>
+                            <td>{{ expense.title }}</td>
+                        </tr>
+                        <tr>
+                            <th>Description</th>
+                            <td>{{ expense.description }}</td>
+                        </tr>
+                        <tr>
+                            <th>ClientName</th>
+                            <td>{{ expense.clientName }}</td>
+                        </tr>
+                        <tr>
+                            <th>Category</th>
+                            <td>{{ expense.category }}</td>
+                        </tr>
+                        <tr>
+                            <th>Type</th>
+                            <td>{{ expense.type }}</td>
+                        </tr>
+                        <tr>
+                            <th>CreatedAt</th>
+                            <td>{{ expense.createdAt ? expense.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>UpdatedAt</th>
+                            <td>{{ expense.updatedAt ? expense.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                    <div class="col-md-6">
+                        <div class="card" style="width: 100%;">
+                            <ul class="list-group list-group-flush">
+                                {% for invoice in expense.invoice %}
+                                    <li class="list-group-item">  {{ invoice.title }}<br><img
+                                                src="{{ vich_uploader_asset(invoice, 'imageFile', 'App\\Entity\\Document') }}"
+                                                class="img-thumbnail" alt="{{ invoice.title }}"/></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+
+
+{% endblock %}

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -52,6 +54,16 @@ class Expenses
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="expenses")
      */
     private $createdBy;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Document", mappedBy="expenses", cascade={"remove"}, cascade={"persist"})
+     */
+    private $invoice;
+
+    public function __construct()
+    {
+        $this->invoice = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -138,6 +150,37 @@ class Expenses
     public function setCreatedBy(?User $createdBy): self
     {
         $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Document[]
+     */
+    public function getInvoice(): Collection
+    {
+        return $this->invoice;
+    }
+
+    public function addInvoice(Document $invoice): self
+    {
+        if (!$this->invoice->contains($invoice)) {
+            $this->invoice[] = $invoice;
+            $invoice->setExpenses($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInvoice(Document $invoice): self
+    {
+        if ($this->invoice->contains($invoice)) {
+            $this->invoice->removeElement($invoice);
+            // set the owning side to null (unless already changed)
+            if ($invoice->getExpenses() === $this) {
+                $invoice->setExpenses(null);
+            }
+        }
 
         return $this;
     }
