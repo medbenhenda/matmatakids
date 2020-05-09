@@ -25,5 +25,10 @@
 ###< liip/imagine-bundle ###
 
 ###> generated pdf receipt ###
-/receipt/
+/public/receipt/
 ###< generated pdf receipt ###
+
+###> IDE ###
+/.idea/
+
+###< IDE ###
