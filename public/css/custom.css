@@ -23,3 +23,6 @@ table.calendar-table td {
 .fa-thumbs-down {
     color: red;
 }
+.bullk{
+    cursor: pointer;
+}

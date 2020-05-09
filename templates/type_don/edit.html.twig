@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'form/custom_theme.html.twig' %}
+
+{% block title %}Edit TypeDon{% endblock %}
+
+{% block body %}
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <div class="card mb-4">
+
+                    <div class="card-header"><i class="fas fa-donate mr-1"></i></div>
+                    <div class="card-body">
+                        {{ include('type_don/_form.html.twig', {'button_label': 'Update'}) }}
+
+                        <a href="{{ path('type_don_index') }}">back to list</a>
+
+                        {{ include('type_don/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}
+
+
+

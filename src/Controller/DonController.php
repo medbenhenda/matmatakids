@@ -10,6 +10,7 @@ use App\Repository\DonRepository;
 use App\Service\Reciept;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -110,7 +111,36 @@ class DonController extends AbstractController
      */
     public function generateReceipt(Reciept $receipt, Don $don): Response
     {
-        return $this->pdfGeneration($receipt, $don);
+        $this->pdfGeneration($receipt, $don);
+        return $this->redirectToRoute('don_receipt_view', ['don' => $don->getId()]);
+    }
+
+
+    /**
+     * @Route("/generate-bulk-receipt", name="don_receipt_generate_bulk", options = { "expose" = true })
+     * @param Request $request
+     * @param DonRepository $donRepository
+     * @param Reciept $receipt
+     * @return Response
+     */
+    public function generateBulkReceipt(Request $request, DonRepository $donRepository, Reciept $receipt): Response
+    {
+        $data = ['status' => true, 'message' => ''];
+        try {
+            $dons = $request->request->get('dons');
+            foreach ($dons as $id) {
+                $don = $donRepository->find($id);
+                $don->getReceiptFile() ?? $receipt->deleteReceipt($don->getReceiptFile(), 'receipt');
+                $this->pdfGeneration($receipt, $don);
+            }
+            $this->addFlash('success', 'All receipt are generated!');
+        } catch (Exception $e) {
+            $data = ['status' => false, 'message' => $e->getMessage()];
+            $this->addFlash('error', 'Problems in bulk generation');
+        }
+
+
+        return new JsonResponse($data);
     }
 
     /**

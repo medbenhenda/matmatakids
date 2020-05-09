@@ -23,3 +23,7 @@
 ###> liip/imagine-bundle ###
 /public/media/cache/
 ###< liip/imagine-bundle ###
+
+###> generated pdf receipt ###
+/receipt/
+###< generated pdf receipt ###

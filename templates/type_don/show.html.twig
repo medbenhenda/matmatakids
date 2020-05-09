@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TypeDon{% endblock %}
+
+{% block body %}
+    <h1>TypeDon</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ type_don.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ type_don.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('type_don_index') }}">back to list</a>
+
+    <a href="{{ path('type_don_edit', {'id': type_don.id}) }}">edit</a>
+
+    {{ include('type_don/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Donors list{% endblock %}
+
+{% block body %}
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h1 class="mt-4">Dons list for {{ donor }}</h1>
+                <div class="card mb-4">
+
+                    <div class="card-header"><i class="fas fa-donate mr-1"></i></div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Receipt</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for don in dons %}
+                                    <tr>
+                                        <td>{{ don.id }}</td>
+                                        <td>{{ don.date|date('d-m-Y') }}</td>
+                                        <td>{{ (don.amount)|format_currency('EUR', locale='fr')}}</td>
+                                        <td>
+                                            {% if don.receipt %}
+                                                <span style="font-size: 2em; color: Green;"><i class="fas fa-thumbs-up"></i>
+                                                </span>
+                                            {% else %}
+                                                <span style="font-size: 2em; color: red;"><i class="fas fa-thumbs-down"></i></span>
+                                            {% endif %}
+                                        </td>
+
+                                        <td>
+                                            <a href="{{ path('don_show', {'id': don.id}) }}">show</a>
+                                            <a href="{{ path('don_edit', {'id': don.id}) }}">edit</a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="6">no records found</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}

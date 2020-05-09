@@ -68,7 +68,7 @@ class DonorController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="donor_show", methods={"GET"})
+     * @Route("/dons/{id}", name="dons_by_donor", methods={"GET"})
      * @param Donor $donor
      * @return Response
      */
@@ -76,6 +76,7 @@ class DonorController extends AbstractController
     {
         return $this->render('donor/dons_by_donor.html.twig', [
             'donor' => $donor,
+            'dons' => $donor->getDons(),
         ]);
     }
 

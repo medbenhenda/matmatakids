@@ -34,7 +34,8 @@
                                         <td>{{ donor.total_sum ~ ' €' }}</td>
                                         <td>{{ donor.count_don }}</td>
                                         <td>
-                                            <a href="{{ path('donor_show', {'id': donor_item.id}) }}">show</a>
+                                            <a href="{{ path('donor_show', {'id': donor_item.id}) }}">show</a> |
+                                            <a href="{{ path('dons_by_donor', {'id': donor_item.id}) }}">Show all dons</a> |
                                             <a href="{{ path('donor_edit', {'id': donor_item.id}) }}">edit</a>
                                         </td>
                                     </tr>

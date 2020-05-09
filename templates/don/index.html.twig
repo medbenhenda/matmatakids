@@ -6,13 +6,18 @@
 
     <div id="layoutSidenav_content">
         <main>
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
             <div class="container-fluid">
                 <h1 class="mt-4">Dons</h1>
                 <div class="card mb-4">
                     <div class="d-flex flex-row-reverse bd-highlight mb-2">
                         <div class="p-2 bd-highlight"><a href="{{ path('don_new') }}">Create new</a></div>
+                        <div class="p-2 bd-highlight bullk" id="bulk_generate">Generate Receipt</div>
                     </div>
-
                     <div class="card-header"><i class="fas fa-table mr-1"></i>Liste des dons</div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -20,6 +25,7 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
+                                    <th><input type='checkbox' id="checkalldons" /></th>
                                     <th>Date</th>
                                     <th>Name</th>
                                     <th>Email</th>
@@ -33,6 +39,7 @@
                                 <tbody>
                                 {% for don in dons %}
                                     <tr>
+                                        <td><input type="checkbox" class='checkall' name="dons" value="{{ don.id }}"/></td>
                                         <td>{{ don.date|date("d/m/Y", "Europe/Paris") }}</td>
                                         <td><a href="{{ path('donor_show', {'id': don.donor.id}) }}">{{ (don.donor.firstName ~ ' ' ~ don.donor.lastName)|e }}</a></td>
                                         <td>{{ don.donor.email|e }}</td>
@@ -66,4 +73,12 @@
         </main>
 
     </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script src="{{ asset('js/bulk_select.js') }}"></script>
 {% endblock %}
