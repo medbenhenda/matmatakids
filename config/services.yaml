@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
      proof_directory: '%kernel.project_dir%/public/uploads/proofs'
+     kernel.root_dir: '%kernel.project_dir%/public'
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -34,3 +35,5 @@ services:
         arguments:    ["@doctrine.orm.entity_manager"]
         tags:
             - { name: 'doctrine.event_subscriber' }
+
+    WhiteOctober\TCPDFBundle\Controller\TCPDFController: '@white_october.tcpdf'

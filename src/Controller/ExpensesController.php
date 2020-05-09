@@ -31,6 +31,7 @@ class ExpensesController extends AbstractController
     /**
      * @Route("/new", name="expenses_new", methods={"GET","POST"})
      * @param Request $request
+     * @param FileUploader $fileUploader
      * @return Response
      */
     public function new(Request $request, FileUploader $fileUploader): Response
@@ -40,7 +41,6 @@ class ExpensesController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             foreach ($form['invoice'] as $key => $childForm) {
-                //dump($childForm->getData()); exit;
                 $file = $childForm->get('imageFile')->getData();
                 if ($file) {
                     $entityDocument = $childForm->getData();

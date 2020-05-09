@@ -19,15 +19,15 @@ class DonorRepository extends ServiceEntityRepository
         parent::__construct($registry, Donor::class);
     }
 
-    // /**
-    //  * @return Donor[] Returns an array of Donor objects
-    //  */
-    public function findAll()
+     /**
+      * @return Donor[] Returns an array of Donor objects
+     */
+    public function findDonors()
     {
         return $this->createQueryBuilder('d')
           ->select('d')
             ->join("d.dons", "p")->addSelect("p")
-            ->addSelect('SUM(p.amount) AS total_sum','count(p.id) AS count_don')
+            ->addSelect('SUM(p.amount) AS total_sum', 'count(p.id) AS count_don')
             ->groupBy('d.id')
             ->getQuery()
             ->getResult()

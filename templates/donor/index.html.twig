@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Donors list{% endblock %}
+
+{% block body %}
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h1 class="mt-4">Donors</h1>
+                <div class="card mb-4">
+
+                    <div class="card-header"><i class="fas fa-donate mr-1"></i>Donors list</div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Full name</th>
+                                    <th>Email</th>
+                                    <th>Address</th>
+                                    <th>Amount</th>
+                                    <th>Dons number</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for donor in donors %}
+                                    {% set donor_item = donor[0] %}
+                                    <tr>
+                                        <td>{{ (donor_item.firstName ~ ' ' ~ donor_item.lastName)|e }}</td>
+                                        <td>{{ donor_item.email|e }}</td>
+                                        <td>{{ (donor_item.address ~ ' ' ~ donor_item.zipCode ~ ' ' ~ donor_item.city ~ ' ' ~ donor_item.country)|e }}</td>
+                                        <td>{{ donor.total_sum ~ ' €' }}</td>
+                                        <td>{{ donor.count_don }}</td>
+                                        <td>
+                                            <a href="{{ path('donor_show', {'id': donor_item.id}) }}">show</a>
+                                            <a href="{{ path('donor_edit', {'id': donor_item.id}) }}">edit</a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="6">no records found</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}

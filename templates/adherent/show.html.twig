@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adherent{% endblock %}
+
+{% block body %}
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h1 class="mt-4">Adherent</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">Adherent</li>
+                </ol>
+                <div class="card mb-4">
+                    <div class="d-flex flex-row-reverse bd-highlight mb-2">
+                        <div class="p-2 bd-highlight">
+                            {% if adherent.reciepe %}
+                                <a href="{{ path('receipt_regenerate', {adherent: adherent.id}) }}">Regenerate receipt</a>
+                            | <a href="{{ path('receipt_view', {adherent: adherent.id}) }}">view receipt</a>
+                            {% else %}
+                            <a href="{{ path('adherent_gen_receipt', {'adherent': adherent.id}) }}">Generate
+                                reciept</a>
+                            {% endif %}
+                        </div>
+                        <div class="p-2 bd-highlight">
+                            <a href="{{ path('adherent_index') }}">Adherents list</a>
+                        </div>
+                        <div class="p-2 bd-highlight">
+                            <a href="{{ path('adherent_edit', {'id': adherent.id}) }}">Edit</a>
+                        </div>
+                        <div class="p-2 bd-highlight">{{ include('adherent/_delete_form.html.twig') }}</div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <th>Id</th>
+                                    <td>{{ adherent.id }}</td>
+                                </tr>
+                                <tr>
+                                    <th>FirstName</th>
+                                    <td>{{ adherent.firstName }}</td>
+                                </tr>
+                                <tr>
+                                    <th>LastName</th>
+                                    <td>{{ adherent.lastName }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Email</th>
+                                    <td>{{ adherent.email }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Address</th>
+                                    <td>{{ adherent.address }}</td>
+                                </tr>
+                                <tr>
+                                    <th>ZipCode</th>
+                                    <td>{{ adherent.zipCode }}</td>
+                                </tr>
+                                <tr>
+                                    <th>City</th>
+                                    <td>{{ adherent.city }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Country</th>
+                                    <td>{{ adherent.country }}</td>
+                                </tr>
+                                <tr>
+                                    <th>InscriptionDate</th>
+                                    <td>{{ adherent.inscriptionDate ? adherent.inscriptionDate|date('Y-m-d') : '' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>ExpirationDate</th>
+                                    <td>{{ adherent.expirationDate ? adherent.expirationDate|date('Y-m-d') : '' }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+{% endblock %}

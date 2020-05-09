@@ -15,44 +15,52 @@ class DonorType extends AbstractType
     {
         $builder
             ->add('firstName', null, [
-              'label_attr' => ['class' => 'text-sm-left', 'for' => 'firstNameInput'],
-               'attr' => ['class' => 'form-control', 'id' => 'firstNameInput'],
+                'label_attr' => ['class' => 'text-sm-left',],
+                'row_attr' => ['class' => 'col-md-6 mb-3',],
+                'attr' => ['class' => 'form-control',],
             ])
             ->add('lastName', null, [
-              'label_attr' => ['class' => 'text-sm-left', 'for' => 'lastName'],
-               'attr' => ['class' => 'form-control', 'id' => 'lastName'],
+                'label_attr' => ['class' => 'text-sm-left',],
+                'row_attr' => ['class' => 'col-md-6 mb-3',],
+                'attr' => ['class' => 'form-control',],
             ])
             ->add('email', null, [
-              'label_attr' => ['class' => 'text-sm-left', 'for' => 'email'],
-               'attr' => ['class' => 'form-control', 'id' => 'email'],
+                'label_attr' => ['class' => 'text-sm-left',],
+                'row_attr' => ['class' => 'col-md-6 mb-3',],
+                'attr' => ['class' => 'form-control',],
             ])
             ->add('mobile', null, [
-              'label_attr' => ['class' => 'text-sm-left', 'for' => 'mobile'],
-               'attr' => ['class' => 'form-control', 'id' => 'mobile'],
+                'label_attr' => ['class' => 'text-sm-left',],
+                'row_attr' => ['class' => 'col-md-6 mb-3',],
+                'attr' => ['class' => 'form-control',],
             ])
             ->add('address', null, [
-              'label_attr' => ['class' => 'text-sm-left', 'for' => 'address'],
-               'attr' => ['class' => 'form-control', 'id' => 'address'],
+                'label_attr' => ['class' => 'text-sm-left',],
+                'row_attr' => ['class' => 'col-md-6 mb-3',],
+                'attr' => ['class' => 'form-control',],
             ])
             ->add('zipCode', null, [
-              'label_attr' => ['class' => 'text-sm-left', 'for' => 'zipCode'],
-               'attr' => ['class' => 'form-control', 'id' => 'zipCode'],
+                'label_attr' => ['class' => 'text-sm-left',],
+                'row_attr' => ['class' => 'col-md-6 mb-3',],
+                'attr' => ['class' => 'form-control',],
             ])
             ->add('city', null, [
-              'label_attr' => ['class' => 'text-sm-left', 'for' => 'city'],
-               'attr' => ['class' => 'form-control', 'id' => 'city'],
+                'label_attr' => ['class' => 'text-sm-left', 'for' => 'city'],
+                'row_attr' => ['class' => 'col-md-6 mb-3',],
+                'attr' => ['class' => 'form-control', 'id' => 'city'],
             ])
             ->add('country', null, [
-              'label_attr' => ['class' => 'text-sm-left', 'for' => 'country'],
-               'attr' => ['class' => 'form-control', 'id' => 'country'],
+                'label_attr' => ['class' => 'text-sm-left',],
+                'row_attr' => ['class' => 'col-md-6 mb-3',],
+                'attr' => ['class' => 'form-control',],
             ])
             ->add('dons', CollectionType::class, [
-              'entry_type' => DonType::class,
-              'entry_options' => ['label' => false],
-              'allow_add' => true,
+                'label' => ' ',
+                'entry_type' => DonType::class,
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
 
             ])
-                ->add('save', SubmitType::class, ['label' => 'Create']);
         ;
     }
 

@@ -16,11 +16,10 @@
                 </a>
                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                    <a class="nav-link" href="{{ path('don')}}">Dons list</a>
-                    <a class="nav-link" href="{{ path('new_don')}}">New don</a>
-                    <a class="nav-link" href="{{ path('donors')}}">Donors list</a>
-                    <a class="nav-link" href="{{ path('create_don')}}">New don for an existing donor</a>
-                    <a class="nav-link" href="{{ path('don_stats')}}">Stats</a>
+                        <a class="nav-link" href="{{ path('don_index')}}">Dons list</a>
+                        <a class="nav-link" href="{{ path('don_new')}}">New don</a>
+                        <a class="nav-link" href="{{ path('donor_index')}}">Donors list</a>
+                        <a class="nav-link" href="{{ path('don_existing_donor')}}">New don for an existing donor</a>
                     </nav>
                 </div>
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
@@ -65,8 +64,8 @@
                 </a>
                 <div class="collapse" id="adherents" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                    <a class="nav-link" href="{{ path('home')}}">adherents list</a>
-                    <a class="nav-link" href="{{ path('home')}}">New adherent</a>
+                    <a class="nav-link" href="{{ path('adherent_index')}}">adherents list</a>
+                    <a class="nav-link" href="{{ path('adherent_new')}}">New adherent</a>
                     <a class="nav-link" href="{{ path('home')}}">Receipt</a>
                     <a class="nav-link" href="{{ path('home')}}">Stats</a>
                     </nav>

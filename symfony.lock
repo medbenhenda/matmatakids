@@ -120,11 +120,45 @@
     "fzaninotto/faker": {
         "version": "v1.9.1"
     },
+    "imagine/imagine": {
+        "version": "1.2.3"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
     "jms/metadata": {
         "version": "2.1.0"
+    },
+    "knplabs/knp-snappy": {
+        "version": "v1.2.1"
+    },
+    "knplabs/knp-snappy-bundle": {
+        "version": "1.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.5",
+            "ref": "c81bdcf4a9d4e7b1959071457f9608631865d381"
+        },
+        "files": [
+            "config/packages/knp_snappy.yaml"
+        ]
+    },
+    "liip/imagine-bundle": {
+        "version": "1.8",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.8",
+            "ref": "1d42bc3f713130582e6e0c475c49bc327ab0a2a2"
+        },
+        "files": [
+            "config/packages/liip_imagine.yaml",
+            "config/routes/liip_imagine.yaml"
+        ]
+    },
+    "lorenzo/pinky": {
+        "version": "1.0.5"
     },
     "monolog/monolog": {
         "version": "2.0.2"
@@ -139,7 +173,7 @@
         "version": "2.2.3"
     },
     "php": {
-        "version": "7.3"
+        "version": "7.4"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.0.0"
@@ -487,6 +521,9 @@
     "symfony/string": {
         "version": "v5.0.5"
     },
+    "symfony/templating": {
+        "version": "v5.0.8"
+    },
     "symfony/test-pack": {
         "version": "v1.0.6"
     },
@@ -565,7 +602,13 @@
     "symfony/yaml": {
         "version": "v5.0.5"
     },
+    "tecnickcom/tcpdf": {
+        "version": "6.3.5"
+    },
     "twig/extra-bundle": {
+        "version": "v3.0.3"
+    },
+    "twig/inky-extra": {
         "version": "v3.0.3"
     },
     "twig/markdown-extra": {
@@ -588,6 +631,9 @@
     },
     "webmozart/assert": {
         "version": "1.7.0"
+    },
+    "whiteoctober/tcpdf-bundle": {
+        "version": "1.1.2"
     },
     "willdurand/jsonp-callback-validator": {
         "version": "v1.1.0"

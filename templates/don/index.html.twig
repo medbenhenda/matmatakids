@@ -4,68 +4,66 @@
 
 {% block body %}
 
-<div id="layoutSidenav_content">
-    <main>
-        <div class="container-fluid">
-            <h1 class="mt-4">Dons</h1>
-            <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active">Dons</li>
-            </ol>
-            <div class="card mb-4">
-                <div class="card-header"><i class="fas fa-table mr-1"></i>Liste des dons</div>
-                <div class="card-body">
-                    <div class="table-responsive">
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h1 class="mt-4">Dons</h1>
+                <div class="card mb-4">
+                    <div class="d-flex flex-row-reverse bd-highlight mb-2">
+                        <div class="p-2 bd-highlight"><a href="{{ path('don_new') }}">Create new</a></div>
+                    </div>
 
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
+                    <div class="card-header"><i class="fas fa-table mr-1"></i>Liste des dons</div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
                                 <tr>
                                     <th>Date</th>
-                                    <th>Nom Prénom</th>
-                                    <th>Mail</th>
-                                    <th>Adresse</th>
-                                    <th>Montant</th>
-                                    <th>Reçu</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Address</th>
+                                    <th>Amount</th>
+                                    <th>Receipt</th>
+                                    <th>actions</th>
                                 </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Nom Prénom</th>
-                                    <th>Mail</th>
-                                    <th>Adresse</th>
-                                    <th>Montant</th>
-                                    <th>Reçu</th>
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                            {% for don in dons %}
-                                <tr>
-                                    <td>{{ don.date|date("d/m/Y", "Europe/Paris") }}</td>
-                                    <td>{{ (don.donor.firstName ~ ' ' ~ don.donor.lastName)|e }}</td>
-                                    <td>{{ don.donor.email|e }}</td>
-                                    <td>{{ (don.donor.address ~ ' ' ~ don.donor.zipCode ~ ' ' ~ don.donor.city ~ ' ' ~ don.donor.country)|e }}</td>
-                                    <td>{{ don.amount ~ ' €' }}</td>
-                                    <td>
-                                    {% if don.reciepe == true %}
-                                      <span style="font-size: 2em; color: Green;">
-                                        <i class="fas fa-check-circle"></i>
-                                      </span>
-                                    {% else %}
-                                      <span style="font-size: 2em; color: red;">
-                                        <i class="fas fa-exclamation-triangle"></i>
-                                      </span>
-                                    {% endif %}
-                                    </td>
-                                </tr>
-                            {% endfor %}
+                                </thead>
 
-                            </tbody>
-                        </table>
+                                <tbody>
+                                {% for don in dons %}
+                                    <tr>
+                                        <td>{{ don.date|date("d/m/Y", "Europe/Paris") }}</td>
+                                        <td><a href="{{ path('donor_show', {'id': don.donor.id}) }}">{{ (don.donor.firstName ~ ' ' ~ don.donor.lastName)|e }}</a></td>
+                                        <td>{{ don.donor.email|e }}</td>
+                                        <td>{{ (don.donor.address ~ ' ' ~ don.donor.zipCode ~ ' ' ~ don.donor.city ~ ' ' ~ don.donor.country)|e }}</td>
+                                        <td>{{ don.amount ~ ' €' }}</td>
+                                        <td>
+                                            {% if don.receipt %}
+                                                <span style="font-size: 2em; color: Green;"><i class="fas fa-check-circle"></i>
+                                                </span>
+                                            {% else %}
+                                                <span style="font-size: 2em; color: red;"><i class="fas fa-exclamation-triangle"></i></span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <a href="{{ path('don_show', {'id': don.id}) }}">show</a>
+                                            <a href="{{ path('don_edit', {'id': don.id}) }}">edit</a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="7">no records found</td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
+        </main>
 
-</div>
+    </div>
 {% endblock %}

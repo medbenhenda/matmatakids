@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Don
 {
-  use TimestampableEntity;
+    use TimestampableEntity;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -21,7 +21,7 @@ class Don
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="dons")
      */
-    private $Project;
+    private $project;
 
     /**
      * @ORM\Column(type="decimal", precision=7, scale=2)
@@ -45,18 +45,19 @@ class Don
 
 
     /**
-     * @ORM\Column(type="boolean", options={"default":true})
+     * @ORM\Column(type="boolean", options={"default":true}, nullable=true)
      */
-    private $reciepe;
+    private $receipt;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="dons")
      */
-    private $creaedBy;
+    private $createdBy;
 
-  
-
-
+    /**
+     * @ORM\Column(type="string", length=128, nullable=true)
+     */
+    private $receiptFile;
 
     public function getId(): ?int
     {
@@ -65,12 +66,12 @@ class Don
 
     public function getProject(): ?Project
     {
-        return $this->Project;
+        return $this->project;
     }
 
-    public function setProject(?Project $Project): self
+    public function setProject(?Project $project): self
     {
-        $this->Project = $Project;
+        $this->project = $project;
 
         return $this;
     }
@@ -135,14 +136,14 @@ class Don
         return $this;
     }
 
-    public function getReciepe(): ?bool
+    public function getReceipt(): ?bool
     {
-        return $this->reciepe;
+        return $this->receipt;
     }
 
-    public function setReciepe(bool $reciepe): self
+    public function setReceipt(bool $receipt): self
     {
-        $this->reciepe = $reciepe;
+        $this->receipt = $receipt;
 
         return $this;
     }
@@ -159,17 +160,15 @@ class Don
         return $this;
     }
 
-    public function getCreaedBy(): ?User
+    public function getReceiptFile(): ?string
     {
-        return $this->creaedBy;
+        return $this->receiptFile;
     }
 
-    public function setCreaedBy(?User $creaedBy): self
+    public function setReceiptFile(?string $receiptFile): self
     {
-        $this->creaedBy = $creaedBy;
+        $this->receiptFile = $receiptFile;
 
         return $this;
     }
-
-
 }

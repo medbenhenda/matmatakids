@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adherent index{% endblock %}
+
+{% block body %}
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h1 class="mt-4">Adherent</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">Adherent</li>
+                </ol>
+                <div class="card mb-4">
+                    <div class="d-flex flex-row-reverse bd-highlight mb-2">
+                        <div class="p-2 bd-highlight"><a href="{{ path('adherent_new') }}">Create new</a></div>
+                    </div>
+                    <div class="card-header"><i class="fas fa-table mr-1"></i>Liste des adhérents</div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>FirstName</th>
+                                    <th>LastName</th>
+                                    <th>Address</th>
+                                    <th>Email</th>
+                                    <th>InscriptionDate</th>
+                                    <th>ExpirationDate</th>
+                                    <th>actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    {% for adherent in adherents %}
+                                        <tr>
+                                            <td>{{ adherent.id }}</td>
+                                            <td>{{ adherent.firstName }}</td>
+                                            <td>{{ adherent.lastName }}</td>
+                                            <td>{{ adherent.address  ~ ' ' ~ adherent.zipCode  ~ ' ' ~ adherent.city ~ ' ' ~ adherent.country}}</td>
+                                            <td>{{ adherent.email }}</td>
+                                            <td>{{ adherent.inscriptionDate ? adherent.inscriptionDate|date('d-m-Y') : '' }}</td>
+                                            <td>{{ adherent.expirationDate ? adherent.expirationDate|date('d-m-Y') : '' }}</td>
+                                            <td>
+                                                <a href="{{ path('adherent_show', {'id': adherent.id}) }}">show</a>
+                                                <a href="{{ path('adherent_edit', {'id': adherent.id}) }}">edit</a>
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="12">no records found</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+{% endblock %}

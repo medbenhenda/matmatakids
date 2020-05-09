@@ -18,38 +18,32 @@ class DonType extends AbstractType
     {
         $builder
             ->add('amount', MoneyType::class, [
-              'divisor' => 1,
-              'label' => ' Amount ',
-              'currency' => 'EUR',
-              'label_attr' => ['class' => 'text-sm-left'],
-              'attr' => ['class' => 'form-control'],
-              'row_attr' => ['class' => 'col-md-6 mb-3', ],
+                'divisor' => 1,
+                'label' => ' Amount ',
+                'currency' => 'EUR',
+                'label_attr' => ['class' => 'text-sm-left'],
+                'attr' => ['class' => 'form-control'],
+                'row_attr' => ['class' => 'col-md-6 mb-3', ],
             ])
             ->add('date', null, [
-              'widget' => 'single_text',
-              'label_attr' => ['class' => 'text-sm-left'],
-              'attr' => ['class' => 'form-control js-datepicker'],
-              'row_attr' => ['class' => 'col-md-6 mb-3', ],
-              'html5' => false,
-              'format' => 'dd/mm/YYYY'
+                'widget' => 'single_text',
+                'label_attr' => ['class' => 'text-sm-left'],
+                'attr' => ['class' => 'form-control js-datepicker'],
+                'row_attr' => ['class' => 'col-md-6 mb-3', ],
+                'html5' => false,
+                'format' => 'YYYY-mm-dd'
             ])
             ->add('type', null, [
-              'label_attr' => ['class' => 'text-sm-left', 'for' => 'type'],
-              'attr' => ['class' => 'form-control', 'id' => 'type'],
-              'row_attr' => ['class' => 'col-md-6 mb-3', ],
+                'label_attr' => ['class' => 'text-sm-left', ],
+                'attr' => ['class' => 'form-control', ],
+                'row_attr' => ['class' => 'col-md-6 mb-3', ],
             ])
-            ->add('Project', null, [
-              'label_attr' => ['class' => 'text-sm-left', 'for' => 'Project'],
-              'attr' => ['class' => 'form-control', 'id' => 'Project'],
-              'row_attr' => ['class' => 'col-md-6 mb-3', ],
+            ->add('project', null, [
+                'label_attr' => ['class' => 'text-sm-left'],
+                'attr' => ['class' => 'form-control'],
+                'row_attr' => ['class' => 'col-md-6 mb-3', ],
             ])
-            ->add('reciepe', CheckboxType::class, [
-              'data' => true,
-              'label_attr' => ['class' => 'form-check-label'],
-              'attr' => ['class' => 'form-check-input is-invalid ',],
-              'row_attr' => ['class' => 'form-group', ],
-            ])
-            ;
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

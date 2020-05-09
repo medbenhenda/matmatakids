@@ -33,23 +33,17 @@ class DonateType extends AbstractType
                'attr' => ['class' => 'form-control js-datepicker'],
                'row_attr' => ['class' => 'col-md-6 mb-3', ],
                'html5' => false,
-               'format' => 'dd/mm/YYYY'
+               'format' => 'YYYY-mm-dd'
             ])
             ->add('type', null, [
               'label_attr' => ['class' => 'text-sm-left'],
               'attr' => ['class' => 'form-control'],
               'row_attr' => ['class' => 'col-md-6 mb-3', ],
             ])
-            ->add('Project', null, [
+            ->add('project', null, [
               'label_attr' => ['class' => 'text-sm-left'],
               'attr' => ['class' => 'form-control'],
               'row_attr' => ['class' => 'col-md-6 mb-3', ],
-            ])
-            ->add('reciepe', CheckboxType::class, [
-              'data' => true,
-              'label_attr' => ['class' => 'form-check-label'],
-              'attr' => ['class' => 'form-check-input is-invalid ',],
-              'row_attr' => ['class' => 'form-group', ],
             ])
             ->add('donor', EntityType::class, [
               'class' => Donor::class,
@@ -61,7 +55,7 @@ class DonateType extends AbstractType
               'attr' => ['class' => 'form-control',],
               'row_attr' => ['class' => 'col-md-6 mb-3', ],
             ])
-            ->add('save', SubmitType::class, ['label' => 'Create']);
+            ->add('save', SubmitType::class, ['label' => 'Save'])
         ;
     }
 

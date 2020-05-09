@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Donor{% endblock %}
+
+{% block body %}
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h1 class="mt-4">Donor</h1>
+                <div class="card mb-4">
+                    <div class="d-flex flex-row-reverse bd-highlight mb-2">
+                        <div class="p-2 bd-highlight">{{ include('donor/_delete_form.html.twig') }}</div>
+                        <div class="p-2 bd-highlight"><a href="{{ path('donor_edit', {'id': donor.id}) }}">edit</a></div>
+                        <div class="p-2 bd-highlight"><a href="{{ path('donor_index') }}">back to list</a></div>
+                    </div>
+                    <div class="card-header"><i class="fas fa-donate mr-1"></i></div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <th>Id</th>
+                                    <td>{{ donor.id }}</td>
+                                </tr>
+                                <tr>
+                                    <th>FirstName</th>
+                                    <td>{{ donor.firstName }}</td>
+                                </tr>
+                                <tr>
+                                    <th>LastName</th>
+                                    <td>{{ donor.lastName }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Email</th>
+                                    <td>{{ donor.email }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Mobile</th>
+                                    <td>{{ donor.mobile }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Address</th>
+                                    <td>{{ donor.address }}</td>
+                                </tr>
+                                <tr>
+                                    <th>ZipCode</th>
+                                    <td>{{ donor.zipCode }}</td>
+                                </tr>
+                                <tr>
+                                    <th>City</th>
+                                    <td>{{ donor.city }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Country</th>
+                                    <td>{{ donor.country }}</td>
+                                </tr>
+                                <tr>
+                                    <th>CreatedAt</th>
+                                    <td>{{ donor.createdAt ? donor.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>UpdatedAt</th>
+                                    <td>{{ donor.updatedAt ? donor.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}
+

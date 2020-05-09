@@ -17,3 +17,9 @@ table.calendar-table td {
     background-color: #367888  !important;
     color: #fff;
 }
+.fa-thumbs-up {
+    color: green;
+}
+.fa-thumbs-down {
+    color: red;
+}

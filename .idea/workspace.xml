@@ -20,56 +20,49 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0c7074e-3a4c-4268-93dc-70fda9becc5d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/mhemed.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/foundation-emails.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/logo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/logo_120.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/logo_80.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/MkTCPDF.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/Reciept.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/donor/dons_by_donor.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/reciept/reciept.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/reciept/recieptEmail.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/recieptBase.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/matmatakids.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/matmatakids.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/cache.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/cache.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/vich_uploader.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/vich_uploader.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataFixtures/UserFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/UserFixtures.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Document.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Document.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Expenses.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Expenses.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/custom.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/GE709_sa000_nvz.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/DonController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ExpensesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ExpensesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Don.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Don.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Donor.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Donor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Project.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Project.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/TypeDon.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/TypeDon.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/DocumentType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/DocumentType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/DonType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/DonType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Form/DonateType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/DonateType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/FolderItemType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/FolderItemType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200414170847.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200419200512.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200420154738.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200420165157.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200420170607.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200421162554.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200421165443.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200421175513.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200422155734.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200422160606.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200422160731.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200422170737.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200422174955.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200422184808.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200422190750.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200422191230.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200422192124.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200422223726.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200422225726.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200422231719.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200423235653.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200424002440.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200424002757.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200424014817.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200424233614.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200425002338.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200425225520.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200426005835.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200426020839.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200427001841.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200430003454.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200430024924.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200430025040.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200430035329.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/DonorType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/DonorType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/DonorRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/DonorRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Helper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/_common/navleft.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/_common/navleft.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/don/donors.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/don/index.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/don/new.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/don/new_don.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/don/new_don_for_existing.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/don/stats.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/expenses/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/expenses/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,6 +227,15 @@
       <path value="$PROJECT_DIR$/vendor/squizlabs/php_codesniffer" />
       <path value="$PROJECT_DIR$/vendor/willdurand/jsonp-callback-validator" />
       <path value="$PROJECT_DIR$/vendor/friendsofsymfony/jsrouting-bundle" />
+      <path value="$PROJECT_DIR$/vendor/knplabs/knp-snappy-bundle" />
+      <path value="$PROJECT_DIR$/vendor/knplabs/knp-snappy" />
+      <path value="$PROJECT_DIR$/vendor/lorenzo/pinky" />
+      <path value="$PROJECT_DIR$/vendor/twig/inky-extra" />
+      <path value="$PROJECT_DIR$/vendor/symfony/templating" />
+      <path value="$PROJECT_DIR$/vendor/liip/imagine-bundle" />
+      <path value="$PROJECT_DIR$/vendor/imagine/imagine" />
+      <path value="$PROJECT_DIR$/vendor/whiteoctober/tcpdf-bundle" />
+      <path value="$PROJECT_DIR$/vendor/tecnickcom/tcpdf" />
     </include_path>
   </component>
   <component name="ProjectId" id="1bY8SaSTeoGsqNERrzrMp8lzq5Q" />
@@ -244,14 +246,16 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/case" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/don" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.PHP" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/don" />
+      <recent name="$PROJECT_DIR$/public/img" />
       <recent name="$PROJECT_DIR$/templates/case" />
       <recent name="$PROJECT_DIR$/templates/sponsor" />
     </key>
@@ -271,7 +275,10 @@
       <workItem from="1587915710332" duration="15167000" />
       <workItem from="1588027546270" duration="698000" />
       <workItem from="1588028624308" duration="38564000" />
-      <workItem from="1588797675230" duration="9370000" />
+      <workItem from="1588797675230" duration="9736000" />
+      <workItem from="1588880846361" duration="28738000" />
+      <workItem from="1588952654930" duration="9721000" />
+      <workItem from="1588971683749" duration="15335000" />
     </task>
     <servers />
   </component>
@@ -288,6 +295,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="419" y="124" width="824" height="691" key="#CLI_Interpreters" timestamp="1588797885169">
@@ -314,26 +322,62 @@
       <screen x="72" y="27" width="1528" height="873" />
     </state>
     <state x="419" y="124" width="824" height="691" key="#PHP_CodeSniffer/72.27.1528.873@72.27.1528.873" timestamp="1588798511727" />
-    <state x="569" y="221" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1588806447738">
+    <state x="72" y="27" width="686" height="873" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1588985735148">
       <screen x="72" y="27" width="1528" height="873" />
     </state>
-    <state x="569" y="221" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/72.27.1528.873@72.27.1528.873" timestamp="1588806447738" />
+    <state x="72" y="27" width="686" height="873" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/72.27.1528.873@72.27.1528.873" timestamp="1588985735148" />
+    <state x="569" y="212" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1588985372931">
+      <screen x="72" y="27" width="1528" height="873" />
+    </state>
+    <state x="569" y="212" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/72.27.1528.873@72.27.1528.873" timestamp="1588985372931" />
+    <state x="569" y="221" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1588982144090">
+      <screen x="72" y="27" width="1528" height="873" />
+    </state>
+    <state x="569" y="221" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/72.27.1528.873@72.27.1528.873" timestamp="1588982144090" />
+    <state x="624" y="165" width="414" height="603" key="#com.jetbrains.php.refactoring.extractMethod.PhpExtractMethodDialog#method1" timestamp="1588980625066">
+      <screen x="72" y="27" width="1528" height="873" />
+    </state>
+    <state x="624" y="165" width="414" height="603" key="#com.jetbrains.php.refactoring.extractMethod.PhpExtractMethodDialog#method1/72.27.1528.873@72.27.1528.873" timestamp="1588980625066" />
+    <state x="172" y="127" width="1328" height="673" key="DiffContextDialog" timestamp="1588970336667">
+      <screen x="72" y="27" width="1528" height="873" />
+    </state>
+    <state x="172" y="127" width="1328" height="673" key="DiffContextDialog/72.27.1528.873@72.27.1528.873" timestamp="1588970336667" />
     <state x="614" y="227" width="424" height="491" key="FileChooserDialogImpl" timestamp="1588798371769">
       <screen x="72" y="27" width="1528" height="873" />
     </state>
     <state x="614" y="227" width="424" height="491" key="FileChooserDialogImpl/72.27.1528.873@72.27.1528.873" timestamp="1588798371769" />
-    <state x="325" y="98" width="1022" height="737" key="SettingsEditor" timestamp="1588800562568">
+    <state x="526" y="183" width="609" height="568" key="NewPhpClassDialog" timestamp="1588909657647">
       <screen x="72" y="27" width="1528" height="873" />
     </state>
-    <state x="325" y="98" width="1022" height="737" key="SettingsEditor/72.27.1528.873@72.27.1528.873" timestamp="1588800562568" />
-    <state x="172" y="127" width="1328" height="673" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1588802085515">
+    <state x="526" y="183" width="609" height="568" key="NewPhpClassDialog/72.27.1528.873@72.27.1528.873" timestamp="1588909657647" />
+    <state x="575" y="147" width="511" height="640" key="RollbackChangesDialog" timestamp="1588970567189">
       <screen x="72" y="27" width="1528" height="873" />
     </state>
-    <state x="172" y="127" width="1328" height="673" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/72.27.1528.873@72.27.1528.873" timestamp="1588802085515" />
-    <state x="527" y="72" width="780" height="783" key="find.popup" timestamp="1588806084049">
+    <state x="575" y="147" width="511" height="640" key="RollbackChangesDialog/72.27.1528.873@72.27.1528.873" timestamp="1588970567189" />
+    <state x="359" y="163" width="1022" height="737" key="SettingsEditor" timestamp="1588959320400">
       <screen x="72" y="27" width="1528" height="873" />
     </state>
-    <state x="527" y="72" width="780" height="783" key="find.popup/72.27.1528.873@72.27.1528.873" timestamp="1588806084049" />
+    <state x="359" y="163" width="1022" height="737" key="SettingsEditor/72.27.1528.873@72.27.1528.873" timestamp="1588959320400" />
+    <state width="498" height="446" key="SwitcherDM" timestamp="1588986895109">
+      <screen x="72" y="27" width="1528" height="873" />
+    </state>
+    <state width="498" height="446" key="SwitcherDM/72.27.1528.873@72.27.1528.873" timestamp="1588986895109" />
+    <state x="172" y="127" width="1328" height="673" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1588970336667">
+      <screen x="72" y="27" width="1528" height="873" />
+    </state>
+    <state x="172" y="127" width="1328" height="673" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/72.27.1528.873@72.27.1528.873" timestamp="1588970336667" />
+    <state x="172" y="127" width="1328" height="673" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1588959823044">
+      <screen x="72" y="27" width="1528" height="873" />
+    </state>
+    <state x="172" y="127" width="1328" height="673" key="com.intellij.history.integration.ui.views.FileHistoryDialog/72.27.1528.873@72.27.1528.873" timestamp="1588959823044" />
+    <state x="285" y="42" width="1064" height="783" key="find.popup" timestamp="1588965437070">
+      <screen x="72" y="27" width="1528" height="873" />
+    </state>
+    <state x="285" y="42" width="1064" height="783" key="find.popup/72.27.1528.873@72.27.1528.873" timestamp="1588965437070" />
+    <state x="499" y="214" width="672" height="678" key="search.everywhere.popup" timestamp="1588982435113">
+      <screen x="72" y="27" width="1528" height="873" />
+    </state>
+    <state x="499" y="214" width="672" height="678" key="search.everywhere.popup/72.27.1528.873@72.27.1528.873" timestamp="1588982435113" />
   </component>
   <component name="masterDetails">
     <states>

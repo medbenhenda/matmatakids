@@ -12,7 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Project
 {
-  use TimestampableEntity;
+    use TimestampableEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -36,7 +37,7 @@ class Project
     private $endDate;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Don", mappedBy="Project")
+     * @ORM\OneToMany(targetEntity="App\Entity\Don", mappedBy="project")
      */
     private $dons;
 
@@ -46,15 +47,16 @@ class Project
     private $createdBy;
 
 
-
     public function __construct()
     {
         $this->dons = new ArrayCollection();
     }
 
-public function __toString() {
-  return $this->name;
-}
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

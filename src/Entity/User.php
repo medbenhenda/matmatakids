@@ -88,7 +88,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Don", mappedBy="creaedBy")
+     * @ORM\OneToMany(targetEntity="App\Entity\Don", mappedBy="createdBy")
      */
     private $dons;
 
@@ -376,7 +376,7 @@ class User implements UserInterface
     {
         if (!$this->dons->contains($don)) {
             $this->dons[] = $don;
-            $don->setCreaedBy($this);
+            $don->setCreatedBy($this);
         }
 
         return $this;
@@ -387,7 +387,7 @@ class User implements UserInterface
         if ($this->dons->contains($don)) {
             $this->dons->removeElement($don);
             // set the owning side to null (unless already changed)
-            if ($don->getCreaedBy() === $this) {
+            if ($don->getCreatedBy() === $this) {
                 $don->setCreaedBy(null);
             }
         }

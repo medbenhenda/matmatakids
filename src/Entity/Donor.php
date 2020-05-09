@@ -214,6 +214,19 @@ class Donor
         return $this->firstName . ' ' . $this->lastName;
     }
 
+    public function constructName()
+    {
+        return $this->id.'_'.$this->firstName . '_' . $this->lastName;
+    }
+
+    /**
+     * @return string
+     */
+    public function constructAddress(): string
+    {
+        return $this->address . ' '.$this->getZipCode().' '.$this->getCity().' '.$this->getCountry();
+    }
+
     public function getCreatedBy(): ?User
     {
         return $this->createdBy;

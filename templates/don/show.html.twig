@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Don{% endblock %}
+
+{% block body %}
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h1 class="mt-4">Don</h1>
+                <div class="card mb-4">
+                    <div class="d-flex flex-row-reverse bd-highlight mb-2">
+                        <div class="p-2 bd-highlight">
+                            {% if don.receipt %}
+                                <a href="{{ path('don_receipt_regenerate', {don: don.id}) }}">Regenerate receipt</a>
+                                | <a href="{{ path('don_receipt_view', {don: don.id}) }}">view receipt</a>
+                            {% else %}
+                                <a href="{{ path('don_receipt_generate', {'don': don.id}) }}">Generate
+                                    receipt</a>
+                            {% endif %}
+                        </div>
+                        <div class="p-2 bd-highlight">
+                            <a href="{{ path('don_index') }}">Back to list</a>
+                        </div>
+                        <div class="p-2 bd-highlight">
+                            <a href="{{ path('don_edit', {'id': don.id}) }}">Edit</a>
+                        </div>
+                        <div class="p-2 bd-highlight">{{ include('don/_delete_form.html.twig') }}</div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <th>Id</th>
+                                    <td>{{ don.id }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Donor</th>
+                                    <td>{{ don.donor }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Amount</th>
+                                    <td>{{ don.amount }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Date</th>
+                                    <td>{{ don.date ? don.date|date('Y-m-d H:i:s') : '' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Don type</th>
+                                    <td>{{ don.type }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Project</th>
+                                    <td>{{ don.project }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Receipt</th>
+                                    <td>
+                                        {% if don.receipt %}
+                                        <span class="fa-layers fa-fw" style="color:green">
+                                            <i class="fas fa-thumbs-up fa-2x"></i>
+                                            <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-7 down-3 right-10" style="color:#fff; font-weight:900">Yes</span>
+                                        </span>
+                                        {% else %}
+                                            <span class="fa-layers fa-fw" style="color:darkred">
+                                                <i class="fas fa-thumbs-down fa-2x"></i>
+                                                <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-7 up-5 right-10" style="color:#fff; font-weight:900">No</span>
+                                            </span>
+                                        {% endif %}
+                                        </td>
+                                </tr>
+                                <tr>
+                                    <th>CreatedAt</th>
+                                    <td>{{ don.createdAt ? don.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>UpdatedAt</th>
+                                    <td>{{ don.updatedAt ? don.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+{% endblock %}
+

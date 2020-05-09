@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Donor{% endblock %}
+
+{% block body %}
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h1 class="mt-4">Edit donor</h1>
+                <div class="card mb-4">
+                    <div class="d-flex flex-row-reverse bd-highlight mb-2">
+                        <div class="p-2 bd-highlight">{{ include('donor/_delete_form.html.twig') }}</div>
+                        <div class="p-2 bd-highlight"><a href="{{ path('donor_index') }}">back to list</a></div>
+                    </div>
+                    <div class="card-header"><i class="fas fa-donate mr-1"></i></div>
+                    <div class="card-body">
+                        {{ include('donor/_form.html.twig', {'button_label': 'Update'}) }}
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}
