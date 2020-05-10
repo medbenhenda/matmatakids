@@ -1,0 +1,41 @@
+{% apply inline_css(source('@css/styles.css')) %}
+<html lang="fr">
+<head>
+    <title>{{ email.subject }}</title>
+    <style>
+        .col-md-2 {
+            flex: 0 0 16.6666666667%;
+            max-width: 16.6666666667%;
+        }
+    </style>
+</head>
+<body>
+{% block content %}
+    <div class="container">
+        <div class="header text-center">
+            <div class="offset-4 col-md-2">
+            <a href="https://www.matmata-kids.com">
+                <img src="https://matmata-kids.com/wp-content/uploads/2020/02/new-LOGO-MATMATA-KIDS-3.png" class="img-thumbnail" alt="Matmata kids">
+                {#<img src="{{ email.image('@images/logo.png') }}" class="logo" alt="SpaceBar Logo">#}
+            </a>
+            </div>
+        </div>
+    </div>
+            <h5>Chèr(e) {{ email.toName }},</h5>
+            <p>Vous avez récemment soutenu notre action en nous envoyant un don, Matmata kids tenait à vous remercier
+                pour votre générosité. Grâce à vous, nos acitons et nos projets se mettent en place.</p>
+            <p>Votre don fera l'objet d'un reçu fiscal que nous le mettons à votre disposition en attachement dans ce
+                mail.</p>
+            <p>Il vous permettra de déduire de vos impôts, la déduction fiscale sera de 66% dans la limite de 20% de
+                votre revenu imposable. <br/>L'excédent est reportable sur les cinq années suivantes.</p>
+            <p>Une fois encore, toute notre équipe vous remercier chaleureusement de votre participation.</p>
+            <p>Nous vous prions de croire, Chère Madame / Cher Monsieur, en l'expression de nos salutations dévouées.</p>
+            <p style="font-weight: bold;">Matmata kids</p>
+
+
+
+{% endblock %}
+
+</body>
+</html>
+{% endapply %}

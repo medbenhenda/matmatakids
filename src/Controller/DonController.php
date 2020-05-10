@@ -7,14 +7,23 @@ use App\Entity\Donor;
 use App\Form\DonateType;
 use App\Form\DonorType;
 use App\Repository\DonRepository;
+use App\Service\Mailer;
 use App\Service\Reciept;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Asset\PathPackage;
+use Symfony\Component\Asset\VersionStrategy\StaticVersionStrategy;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -105,13 +114,14 @@ class DonController extends AbstractController
 
     /**
      * @Route("/generate-receipt/{don}", name="don_receipt_generate")
+     * @param Mailer $cMailer
      * @param Reciept $receipt
      * @param Don $don
      * @return Response
      */
-    public function generateReceipt(Reciept $receipt, Don $don): Response
+    public function generateReceipt(Mailer $cMailer, Reciept $receipt, Don $don): Response
     {
-        $this->pdfGeneration($receipt, $don);
+        $this->pdfGeneration($cMailer, $receipt, $don);
         return $this->redirectToRoute('don_receipt_view', ['don' => $don->getId()]);
     }
 
@@ -119,11 +129,12 @@ class DonController extends AbstractController
     /**
      * @Route("/generate-bulk-receipt", name="don_receipt_generate_bulk", options = { "expose" = true })
      * @param Request $request
+     * @param Mailer $cMailer
      * @param DonRepository $donRepository
      * @param Reciept $receipt
      * @return Response
      */
-    public function generateBulkReceipt(Request $request, DonRepository $donRepository, Reciept $receipt): Response
+    public function generateBulkReceipt(Request $request, Mailer $cMailer, DonRepository $donRepository, Reciept $receipt): Response
     {
         $data = ['status' => true, 'message' => ''];
         try {
@@ -131,7 +142,7 @@ class DonController extends AbstractController
             foreach ($dons as $id) {
                 $don = $donRepository->find($id);
                 $don->getReceiptFile() ?? $receipt->deleteReceipt($don->getReceiptFile(), 'receipt');
-                $this->pdfGeneration($receipt, $don);
+                $this->pdfGeneration($cMailer, $receipt, $don);
             }
             $this->addFlash('success', 'All receipt are generated!');
         } catch (Exception $e) {
@@ -145,14 +156,15 @@ class DonController extends AbstractController
 
     /**
      * @Route("/regenerate-receipt/{don}", name="don_receipt_regenerate")
-     * @param Reciept   $receipt
-     * @param Don       $don
+     * @param Mailer $cMailer
+     * @param Reciept $receipt
+     * @param Don $don
      * @return Response
      */
-    public function regenerateReceipt(Reciept $receipt, Don $don): Response
+    public function regenerateReceipt(Mailer $cMailer, Reciept $receipt, Don $don): Response
     {
         $receipt->deleteReceipt($don->getReceiptFile(), 'receipt');
-        return $this->pdfGeneration($receipt, $don);
+        return $this->pdfGeneration($cMailer, $receipt, $don);
     }
 
     /**
@@ -211,11 +223,13 @@ class DonController extends AbstractController
     }
 
     /**
+     * @param Mailer $mailer
      * @param Reciept $receipt
      * @param Don $don
+     * @param string $sender
      * @return BinaryFileResponse
      */
-    private function pdfGeneration(Reciept $receipt, Don $don): BinaryFileResponse
+    private function pdfGeneration(Mailer $mailer, Reciept $receipt, Don $don): BinaryFileResponse
     {
         $file = $receipt->generatePdfReceipt($don);
         $fileName = basename($file);
@@ -225,13 +239,15 @@ class DonController extends AbstractController
             'Content-Type',
             'application/pdf'
         );
-
         $don->setReceiptFile($fileName);
         $don->setReceipt(true);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($don);
         $entityManager->flush();
         $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $fileName);
+        // send the email:
+        $mailer->sendReceipt($don);
+
         return $response;
     }
 }

@@ -150,6 +150,9 @@
             "config/packages/knp_snappy.yaml"
         ]
     },
+    "league/html-to-markdown": {
+        "version": "4.9.1"
+    },
     "liip/imagine-bundle": {
         "version": "1.8",
         "recipe": {
@@ -512,6 +515,15 @@
     "symfony/security-http": {
         "version": "v5.0.5"
     },
+    "symfony/sendgrid-mailer": {
+        "version": "4.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.4",
+            "ref": "b46e4f8f1adb2864f0aa9c0ff57aea3324a07199"
+        }
+    },
     "symfony/serializer": {
         "version": "v5.0.5"
     },
@@ -610,6 +622,12 @@
     },
     "tecnickcom/tcpdf": {
         "version": "6.3.5"
+    },
+    "tijsverkoyen/css-to-inline-styles": {
+        "version": "2.2.2"
+    },
+    "twig/cssinliner-extra": {
+        "version": "v3.0.3"
     },
     "twig/extra-bundle": {
         "version": "v3.0.3"

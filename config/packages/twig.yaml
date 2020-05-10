@@ -1,2 +1,5 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
+    paths:
+        'public/img': img
+        'public/css': css
