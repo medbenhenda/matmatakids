@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Donor;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -33,6 +34,24 @@ class DonorRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    /**
+     * @param Donor $donor
+     * @return int|mixed|string
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findSumAmountOfDonor(Donor $donor)
+    {
+        return $this->createQueryBuilder('d')
+            ->join("d.dons", "p")->addSelect("p")
+            ->addSelect('SUM(p.amount) AS total_sum')
+            ->where('d.id = :donor_id')
+            ->setParameter('donor_id', $donor->getId())
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
     // /**
     //  * @return Donor[] Returns an array of Donor objects
     //  */

@@ -64,6 +64,7 @@ DirectoryIndex index.php
         # RedirectTemp cannot be used instead
     </IfModule>
 </IfModule>
+
 <Directory /var/www/project/public/build>
         <IfModule mod_rewrite.c>
             RewriteEngine On

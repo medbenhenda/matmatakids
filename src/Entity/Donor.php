@@ -70,6 +70,15 @@ class Donor
      */
     private $createdBy;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true, options={"default"=false})
+     */
+    private $isAdherent;
+
+    /**
+     * @ORM\Column(type="string", length=8, nullable=true)
+     */
+    private $validityAdhesion;
 
 
     public function __construct()
@@ -235,6 +244,30 @@ class Donor
     public function setCreatedBy(?User $createdBy): self
     {
         $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    public function getIsAdherent(): ?bool
+    {
+        return $this->isAdherent;
+    }
+
+    public function setIsAdherent(bool $isAdherent): self
+    {
+        $this->isAdherent = $isAdherent;
+
+        return $this;
+    }
+
+    public function getValidityAdhesion(): ?string
+    {
+        return $this->validityAdhesion;
+    }
+
+    public function setValidityAdhesion(?string $validityAdhesion): self
+    {
+        $this->validityAdhesion = $validityAdhesion;
 
         return $this;
     }

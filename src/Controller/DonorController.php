@@ -25,8 +25,22 @@ class DonorController extends AbstractController
         $donors = $donorRepository->findDonors();
 
         return $this->render('donor/index.html.twig', [
-            'controller_name' => 'DonController',
-            'donors' => $donors
+            'donors' => $donors,
+            'title' => 'Donor',
+        ]);
+    }
+
+    /**
+     * @Route("/adherents", name="donor_adherents", methods={"GET"})
+     * @param DonorRepository $donorRepository
+     * @return Response
+     */
+    public function adherents(DonorRepository $donorRepository): Response
+    {
+        $donors = $donorRepository->findBy(['isAdherent' => true]);
+
+        return $this->render('donor/adherent.html.twig', [
+            'adherents' => $donors,
         ]);
     }
 

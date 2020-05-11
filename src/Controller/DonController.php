@@ -9,21 +9,14 @@ use App\Form\DonorType;
 use App\Repository\DonRepository;
 use App\Service\Mailer;
 use App\Service\Reciept;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Asset\PathPackage;
-use Symfony\Component\Asset\VersionStrategy\StaticVersionStrategy;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Address;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -56,17 +49,14 @@ class DonController extends AbstractController
         $form = $this->createForm(DonorType::class, $donor);
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
-
             if ($form->isSubmitted() && $form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
-
                 $em->persist($donor);
                 $em->flush();
 
                 return $this->redirectToRoute('don_index');
             }
         }
-
 
         return $this->render('don/new.html.twig', [
             'don' => $don,
@@ -134,14 +124,20 @@ class DonController extends AbstractController
      * @param Reciept $receipt
      * @return Response
      */
-    public function generateBulkReceipt(Request $request, Mailer $cMailer, DonRepository $donRepository, Reciept $receipt): Response
-    {
+    public function generateBulkReceipt(
+        Request $request,
+        Mailer $cMailer,
+        DonRepository $donRepository,
+        Reciept $receipt
+    ): Response {
         $data = ['status' => true, 'message' => ''];
         try {
             $dons = $request->request->get('dons');
             foreach ($dons as $id) {
                 $don = $donRepository->find($id);
-                $don->getReceiptFile() ?? $receipt->deleteReceipt($don->getReceiptFile(), 'receipt');
+                if ($don->getReceiptFile()) {
+                    $receipt->deleteReceipt($don->getReceiptFile(), 'receipt');
+                }
                 $this->pdfGeneration($cMailer, $receipt, $don);
             }
             $this->addFlash('success', 'All receipt are generated!');
@@ -226,7 +222,6 @@ class DonController extends AbstractController
      * @param Mailer $mailer
      * @param Reciept $receipt
      * @param Don $don
-     * @param string $sender
      * @return BinaryFileResponse
      */
     private function pdfGeneration(Mailer $mailer, Reciept $receipt, Don $don): BinaryFileResponse

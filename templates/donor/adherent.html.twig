@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+{% block title %}Adherent list{% endblock %}
+{% block body %}
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h1 class="mt-4">Adherents</h1>
+                <div class="card mb-4">
+                    <div class="card-header"><i class="fas fa-table mr-1"></i>Adherents list</div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>FirstName</th>
+                                    <th>LastName</th>
+                                    <th>Email</th>
+                                    <th>Year Validity</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for adherent in adherents %}
+                                    <tr>
+                                        <td>{{ adherent.id }}</td>
+                                        <td>{{ adherent.firstName }}</td>
+                                        <td>{{ adherent.lastName }}</td>
+                                        <td>{{ adherent.email }}</td>
+                                        <td>{{ adherent.validityAdhesion }}</td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="12">no records found</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}

@@ -152,7 +152,7 @@ class Reciept
         $pdf->Image($signature, 50, 230, 50, 30, 'PNG', '', '', true, 150, '', false, false, 0, false, false, false);
 
         $filename = $don->getDonor()->constructName(). '_'.$don->getDate()->format('Ymdhis'). '.pdf';
-        $filePath = $publicResourcesFolderPath . '../receipt/' . $filename;
+        $filePath = $this->parameterBag->get('kernel.project_dir') . '/public/receipt/' . $filename;
         $pdf->Output($filePath, 'F');
         //$pdf->Output($filename, 'D');
         return $filePath;

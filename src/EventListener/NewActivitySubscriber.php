@@ -2,7 +2,10 @@
 
 namespace App\EventListener;
 
+use App\Entity\Don;
+use App\Entity\Donor;
 use App\Entity\Folder;
+use App\Repository\DonorRepository;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Events;
 use Symfony\Component\Security\Core\Security;
@@ -21,10 +24,16 @@ class NewActivitySubscriber implements EventSubscriber
      */
     protected $security;
 
-    public function __construct(EntityManager $em, Security $security)
+    /**
+     * @var DonorRepository
+     */
+    protected $donorRepository;
+
+    public function __construct(EntityManager $em, Security $security, DonorRepository $donorRepository)
     {
         $this->em = $em;
         $this->security = $security;
+        $this->donorRepository = $donorRepository;
     }
     // this method can only return the event names; you cannot define a
     // custom method name to execute when each event triggers
@@ -43,6 +52,7 @@ class NewActivitySubscriber implements EventSubscriber
     public function postPersist(LifecycleEventArgs $args)
     {
         $this->setOwner('persist', $args);
+        $this->checkAdhesion($args);
     }
 
     public function postRemove(LifecycleEventArgs $args)
@@ -53,6 +63,7 @@ class NewActivitySubscriber implements EventSubscriber
     public function postUpdate(LifecycleEventArgs $args)
     {
         $this->setOwner('update', $args);
+        $this->checkAdhesion($args);
     }
 
     private function setOwner(string $action, LifecycleEventArgs $args)
@@ -69,6 +80,30 @@ class NewActivitySubscriber implements EventSubscriber
             if (!$entity->getTransactionDate()) {
                 $entity->setTransactionDate(new \DateTime('now'));
                 $this->em->persist($entity);
+                $this->em->flush();
+            }
+        }
+    }
+
+    /**
+     * @param LifecycleEventArgs $args
+     * @throws \Doctrine\ORM\ORMException
+     */
+    private function checkAdhesion(LifecycleEventArgs $args): void
+    {
+        if ($args->getObject() instanceof Don) {
+
+            /** @var Don $don */
+            $don = $args->getObject();
+            /** @var Donor $donor */
+            $donor = $don->getDonor();
+            $sumAmount = $this->donorRepository->findSumAmountOfDonor($donor);
+
+            if ($sumAmount['total_sum'] >= 30) {
+                $donor = $don->getDonor();
+                $donor->setIsAdherent(true);
+                $donor->setValidityAdhesion(date('Y'));
+                $this->em->persist($donor);
                 $this->em->flush();
             }
         }
