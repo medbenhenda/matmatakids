@@ -1,20 +1,95 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello AdminController!{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
 
+    <link rel="stylesheet" href="{{ asset('node_modules/chart.js/dist/Chart.min.css') }}" type="text/css"/>
+{% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Dashboard</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-primary text-white mb-4">
+                                <div class="card-body"><i class="fas fa-donate mr-1"></i> Nombre des dons :
+                                    <div class="text-center font-weight-bold font-weight-bold"> {{ count_dons }}</div></div>
+                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                    <a class="small text-white stretched-link" href="{{path('don_index')}}">View Details</a>
+                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-warning text-white mb-4">
+                                <div class="card-body"><i class="fas fa-hand-holding-usd mr-1"></i> Nombre des donateurs :
+                                    <div class="text-center font-weight-bold"> {{ count_donors }}</div></div>
+                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                    <a class="small text-white stretched-link" href="{{path('donor_index')}}">View Details</a>
+                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-success text-white mb-4">
+                                <div class="card-body"><i class="fas fa-address-book mr-1"></i> Nombre des dossiers :
+                                    <div class="text-center font-weight-bold"> {{ count_folders  }}</div></div>
+                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                    <a class="small text-white stretched-link" href="{{path('case')}}">View Details</a>
+                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-danger text-white mb-4">
+                                <div class="card-body"><i class="fas fa-hands-helping mr-1"></i> Nombre des parrains :
+                                    <div class="text-center font-weight-bold"> {{ count_sponsors }}</div></div>
+                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                    <a class="small text-white stretched-link" href="{{path('sponsor')}}">View Details</a>
+                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card mb-4" id="chart_month">
+                                <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Don par mois</div>
+                                <div class="card-body"><canvas id="myChart" width="400" height="100"></canvas></div>
+                            </div>
+                        </div>
+                        <div class="col-xl-12">
+                            <div class="card mb-4">
+                                <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Don par projet</div>
+                                <div class="card-body">
+                                    <canvas id="myChart2" width="400" height="100"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/matmatakids/src/Controller/AdminController.php'|file_link(0) }}">src/Controller/AdminController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/matmatakids/templates/admin/index.html.twig'|file_link(0) }}">templates/admin/index.html.twig</a></code></li>
-    </ul>
-</div>
+                </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid">
+                    <div class="d-flex align-items-center justify-content-between small">
+
+
+                    </div>
+                </div>
+            </footer>
+        </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('node_modules/chart.js/dist/Chart.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/matmatakids_chart.js') }}"></script>
+
 {% endblock %}

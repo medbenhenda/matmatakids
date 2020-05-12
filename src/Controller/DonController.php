@@ -6,9 +6,11 @@ use App\Entity\Don;
 use App\Entity\Donor;
 use App\Form\DonateType;
 use App\Form\DonorType;
+use App\Form\DonType;
 use App\Repository\DonRepository;
 use App\Service\Mailer;
 use App\Service\Reciept;
+use Doctrine\DBAL\DBALException;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -181,14 +183,14 @@ class DonController extends AbstractController
      */
     public function edit(Request $request, Don $don): Response
     {
-        $donor = $don->getDonor();
-        $form = $this->createForm(DonorType::class, $donor);
+        //$donor = $don->getDonor();
+        $form = $this->createForm(DonType::class, $don);
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
 
-                $em->persist($donor);
+                $em->persist($don);
                 $em->flush();
 
                 return $this->redirectToRoute('don_index');

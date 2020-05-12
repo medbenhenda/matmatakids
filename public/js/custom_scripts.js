@@ -6,7 +6,6 @@ jQuery(document).ready(function () {
         let amount = button.data('amount') ;
         let ref = button.data('ref');
         let modal = $(this);
-        let year = $('#selectYear').val();
         modal.find('.modal-title').text('');
         modal.find('.modal-body input#affectation-name').val(affectation);
         modal.find('.modal-body input#month-name').val(month);

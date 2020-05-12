@@ -22,3 +22,6 @@ doctrine:
                 prefix: Gedmo\Translatable\Entity
                 # make sure vendor library location is correct
                 dir: '%kernel.project_dir%/vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity'
+        dql:
+            datetime_functions:
+                date_format: App\DQL\DateFormatFunction

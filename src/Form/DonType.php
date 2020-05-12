@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Don;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -25,13 +26,13 @@ class DonType extends AbstractType
                 'attr' => ['class' => 'form-control'],
                 'row_attr' => ['class' => 'col-md-6 mb-3', ],
             ])
-            ->add('date', null, [
+            ->add('date', DateType::class, [
                 'widget' => 'single_text',
                 'label_attr' => ['class' => 'text-sm-left'],
                 'attr' => ['class' => 'form-control js-datepicker'],
                 'row_attr' => ['class' => 'col-md-6 mb-3', ],
                 'html5' => false,
-                'format' => 'YYYY-mm-dd'
+                'format' => 'YYYY-MM-dd'
             ])
             ->add('type', null, [
                 'label_attr' => ['class' => 'text-sm-left', ],

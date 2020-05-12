@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Project;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\DBALException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,6 +20,29 @@ class ProjectRepository extends ServiceEntityRepository
         parent::__construct($registry, Project::class);
     }
 
+    /**
+     * return the dons number grouped by projecs
+     * the returned data is used for the chart in dashboard
+     * @return mixed[]
+     * @throws DBALException
+     */
+    public function getDonsGroupedByProject()
+    {
+        $data = $this->createQueryBuilder('p')
+            ->innerJoin('p.dons', 'd')
+            ->addSelect('count(p.id) as count_dons')
+            ->groupBy('p.id')
+            ->getQuery()
+            ->getResult()
+            ;
+        $result = [];
+        foreach ($data as $item) {
+            $result['labels'][] = $item[0]->getName();
+            $result['values'][] = $item['count_dons'];
+        }
+
+        return $result;
+    }
     // /**
     //  * @return Project[] Returns an array of Project objects
     //  */

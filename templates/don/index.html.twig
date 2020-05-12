@@ -40,7 +40,7 @@
                                 {% for don in dons %}
                                     <tr>
                                         <td><input type="checkbox" class='checkall' name="dons" value="{{ don.id }}"/></td>
-                                        <td>{{ don.date|date("d/m/Y", "Europe/Paris") }}</td>
+                                        <td>{{ don.date|date("d/m/Y") }}</td>
                                         <td><a href="{{ path('donor_show', {'id': don.donor.id}) }}">{{ (don.donor.firstName ~ ' ' ~ don.donor.lastName)|e }}</a></td>
                                         <td>{{ don.donor.email|e }}</td>
                                         <td>{{ (don.donor.address ~ ' ' ~ don.donor.zipCode ~ ' ' ~ don.donor.city ~ ' ' ~ don.donor.country)|e }}</td>

@@ -33,7 +33,7 @@ class DonateType extends AbstractType
                'attr' => ['class' => 'form-control js-datepicker'],
                'row_attr' => ['class' => 'col-md-6 mb-3', ],
                'html5' => false,
-               'format' => 'YYYY-mm-dd'
+               'format' => 'YYYY-MM-dd'
             ])
             ->add('type', null, [
               'label_attr' => ['class' => 'text-sm-left'],

@@ -2,18 +2,60 @@
 
 namespace App\Controller;
 
+use App\Entity\Don;
+use App\Entity\Donor;
+use App\Entity\Folder;
+use App\Entity\Project;
+use App\Entity\Sponsor;
+use App\Repository\DonRepository;
+use App\Repository\ProjectRepository;
+use Doctrine\DBAL\DBALException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminController extends AbstractController
 {
+
+    /**
+     * @Route("/statsdash", name="statsdash", methods={"GET"}, options = { "expose" = true })
+     * @param Request $request
+     * @param DonRepository $donRepository
+     * @param ProjectRepository $pRepository
+     * @return Response
+     * @throws DBALException
+     */
+    public function donStats(Request $request, DonRepository $donRepository, ProjectRepository $pRepository): Response
+    {
+        $data = $donRepository->getDonsGroupedByMonth();
+        $dataProjects = $pRepository->getDonsGroupedByProject();
+        $result['month'] = $data;
+        $result['project'] = $dataProjects;
+        return new JsonResponse($result);
+    }
+
     /**
      * @Route("/", name="admin")
+     * @param DonRepository $donRepository
+     * @param ProjectRepository $pRepository
+     * @return Response
+     * @throws DBALException
      */
-    public function index()
+    public function index(): Response
     {
+        $repository = $this->getDoctrine()->getRepository(Don::class);
+        $repositoryDonor = $this->getDoctrine()->getRepository(Donor::class);
+        $repositoryFolder = $this->getDoctrine()->getRepository(Folder::class);
+        $repositorySponsors = $this->getDoctrine()->getRepository(Sponsor::class);
+        $repositoryProjects = $this->getDoctrine()->getRepository(Project::class);
         return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
+            'count_dons' => count($repository->findAll()),
+            'count_donors' => count($repositoryDonor->findAll()),
+            'count_folders' => count($repositoryFolder->findAll()),
+            'count_sponsors' => count($repositorySponsors->findAll()),
+            'count_projects' => count($repositoryProjects->findAll()),
         ]);
     }
 }

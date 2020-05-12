@@ -4,7 +4,7 @@ jQuery(document).ready(function () {
             todayBtn: "linked",
             autoclose: true,
             toggleActive: true,
-            format : 'yyyy-mm-dd'
+            format : 'yyyy-MM-dd'
         }
     );
 });
