@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Matmata kids{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
 
@@ -69,6 +69,34 @@
                                 <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Don par projet</div>
                                 <div class="card-body">
                                     <canvas id="myChart2" width="400" height="100"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="card mb-4">
+                                <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Activities</div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered"  width="100%" cellspacing="0">
+                                            <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Dernier accès</th>
+                                                <th>Derniere adresse IP</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for item in logs_user %}
+                                            <tr>
+                                                <td>{{ item.id }}</td>
+                                                <td>{{ item.data.lastLogin|date('d-m-Y H:i:s') }}</td>
+                                                <td>{% if item.data.ipLastLogin is defined %}{{ item.data.ipLastLogin }} {% endif %}</td>
+                                            </tr>
+                                            </tbody>
+                                            {% endfor %}
+                                        </table>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

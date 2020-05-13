@@ -82,6 +82,16 @@ class Document
      */
     private $expenses;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Subvention", inversedBy="images")
+     */
+    private $subvention;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Subvention", inversedBy="documents")
+     */
+    private $subventionDoc;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -190,6 +200,30 @@ class Document
     public function setExpenses(?Expenses $expenses): self
     {
         $this->expenses = $expenses;
+
+        return $this;
+    }
+
+    public function getSubvention(): ?Subvention
+    {
+        return $this->subvention;
+    }
+
+    public function setSubvention(?Subvention $subvention): self
+    {
+        $this->subvention = $subvention;
+
+        return $this;
+    }
+
+    public function getSubventionDoc(): ?Subvention
+    {
+        return $this->subventionDoc;
+    }
+
+    public function setSubventionDoc(?Subvention $subventionDoc): self
+    {
+        $this->subventionDoc = $subventionDoc;
 
         return $this;
     }

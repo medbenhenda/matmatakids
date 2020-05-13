@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'form/custom_theme.html.twig' %}
+{% block title %}New User{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css"
+          crossorigin="anonymous">
+{% endblock %}
+
+{% block body %}
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h1 class="mt-4">Create new User</h1>
+                <div class="card mb-4">
+                    <div class="d-flex flex-row-reverse bd-highlight mb-2">
+                        <div class="p-2 bd-highlight"><a href="{{ path('user_index') }}">back to list</a></div>
+                    </div>
+                    <div class="card-header"><i class="fas fa-donate mr-1"></i>New user</div>
+                    <div class="card-body">
+                        {{ include('user/_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" crossorigin="anonymous" ></script>
+    <script src="{{ asset('js/date.js') }}"></script>
+{% endblock %}
+

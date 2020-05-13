@@ -3,6 +3,7 @@ jQuery(document).ready(function () {
     var path = '/statsdash';
     var labels = [];
     var values = [];
+    var bg_colors = [];
     $.ajax({
         url: path,
         type: "GET",
@@ -11,6 +12,7 @@ jQuery(document).ready(function () {
         success: function (data) {
             labels = data.month.labels;
             values = data.month.values;
+            bg_colors = data.month.background_color;
             Chart.platform.disableCSSInjection = true;
             let ctx = document.getElementById('myChart');
             let myChart = new Chart(ctx, {
@@ -18,8 +20,9 @@ jQuery(document).ready(function () {
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: '# Nombre de dons par moi',
+                        label: '# Nombre de dons par mois',
                         data: values,
+                        backgroundColor: bg_colors,
                         borderWidth: 1
                     }]
                 },
@@ -34,15 +37,14 @@ jQuery(document).ready(function () {
                 }
             });
 
-            labelsp = data.project.labels;
-            valuesp = data.project.values;
-
+            let labelsp = data.project.labels;
+            let valuesp = data.project.values;
+            let bg_colorsp = data.month.background_color;
 
             let pdata = {
                 datasets: [{
                     data: valuesp,
-                    backgroundColor: ['#0c5460',
-                        '#721c24'],
+                    backgroundColor: bg_colorsp,
                     borderWidth: 0,
                     hoverBackgroundColor: ["#96b7b9","#718283","#5c6b6d"]
                 }],

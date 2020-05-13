@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Project{% endblock %}
+
+{% block body %}
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h1 class="mt-4">Project</h1>
+                <div class="card mb-4">
+                    <div class="d-flex flex-row-reverse bd-highlight mb-2">
+                        <div class="p-2 bd-highlight">
+                            <a href="{{ path('project_index') }}">Back to list</a>
+                        </div>
+                        <div class="p-2 bd-highlight">
+                            <a href="{{ path('project_edit', {'id': project.id}) }}">Edit</a>
+                        </div>
+                        <div class="p-2 bd-highlight">{{ include('project/_delete_form.html.twig') }}</div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <th>Id</th>
+                                    <td>{{ project.id }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <td>{{ project.name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>StartDate</th>
+                                    <td>{{ project.startDate ? project.startDate|date('Y-m-d') : '' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>EndDate</th>
+                                    <td>{{ project.endDate ? project.endDate|date('Y-m-d') : '' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>CreatedAt</th>
+                                    <td>{{ project.createdAt ? project.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>UpdatedAt</th>
+                                    <td>{{ project.updatedAt ? project.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+{% endblock %}

@@ -57,15 +57,13 @@
                     </nav>
                 </div>
 
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#projects"
-                  aria-expanded="false" aria-controls="projects">
-                  <div class="sb-nav-link-icon"><i class="fas fa-atom"></i></div>
-                    Projects & actions
-                  <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                <a class="nav-link" href="{{ path('project_index')}}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-atom"></i></div>
+                    Projects
                 </a>
 
 
-                <a class="nav-link" href="{{ path('admin')}}">
+                <a class="nav-link" href="{{ path('subvention_index')}}">
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                     Dossiers de subventions
                 </a>
@@ -74,12 +72,22 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                     Expenses
                 </a>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#administration"
+                   aria-expanded="false" aria-controls="administration" id="administrationRoot">Administration
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="administration" aria-labelledby="headingOne" data-parent="#administrationRoot">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="{{ path('user_index')}}">Users</a>
+                        <a class="nav-link" href="{{ path('user_new')}}">New user</a>
+                    </nav>
+                </div>
 
             </div>
         </div>
         <div class="sb-sidenav-footer">
             <div class="small">Logged in as:</div>
-            Start Bootstrap
+            {{ app.user.firstName ~ ' ' ~app.user.lastName }}
         </div>
     </nav>
 </div>

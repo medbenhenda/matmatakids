@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Subvention index{% endblock %}
+
+{% block body %}
+
+    <div id="layoutSidenav_content">
+        <main>
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            <div class="container-fluid">
+                <h1 class="mt-4">Les Subventionq de Matmata kids</h1>
+                <div class="card mb-4">
+                    <div class="d-flex flex-row-reverse bd-highlight mb-2">
+                        <div class="p-2 bd-highlight"><a href="{{ path('subvention_new') }}">Create new</a></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Entreprise</th>
+                                    <th>EntrepriseAddress</th>
+                                    <th>EntrepriseEmail</th>
+                                    <th>EntreprisePhone1</th>
+                                    <th>EntreprisePhone2</th>
+                                    <th>Subject</th>
+                                    <th>Description</th>
+                                    <th>DepositeDate</th>
+                                    <th>actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for subvention in subventions %}
+                                    <tr>
+                                        <td>{{ subvention.id }}</td>
+                                        <td>{{ subvention.entreprise }}</td>
+                                        <td>{{ subvention.entrepriseAddress }}</td>
+                                        <td>{{ subvention.entrepriseEmail }}</td>
+                                        <td>{{ subvention.entreprisePhone1 }}</td>
+                                        <td>{{ subvention.entreprisePhone2 }}</td>
+                                        <td>{{ subvention.subject }}</td>
+                                        <td>{{ subvention.description }}</td>
+                                        <td>{{ subvention.depositeDate ? subvention.depositeDate|date('Y-m-d') : '' }}</td>
+                                        <td>
+                                            <a href="{{ path('subvention_show', {'id': subvention.id}) }}">show</a>
+                                            <a href="{{ path('subvention_edit', {'id': subvention.id}) }}">edit</a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="12">no records found</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+{% endblock %}

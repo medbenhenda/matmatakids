@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
+ * @Gedmo\Mapping\Annotation\Loggable()
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks
  */
@@ -142,6 +143,23 @@ class User implements UserInterface
      */
     private $expenses;
 
+    /**
+     * @Gedmo\Mapping\Annotation\Versioned
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $lastLogin;
+
+    /**
+     * @Gedmo\Mapping\Annotation\Versioned
+     * @ORM\Column(type="string", length=16, nullable=true)
+     */
+    private $ipLastLogin;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Subvention", mappedBy="createdBy")
+     */
+    private $subventions;
+
 
 
     public function __construct()
@@ -157,6 +175,7 @@ class User implements UserInterface
         $this->proposingTransactions = new ArrayCollection();
         $this->responsibleTransactions = new ArrayCollection();
         $this->expenses = new ArrayCollection();
+        $this->subventions = new ArrayCollection();
     }
 
     /**
@@ -699,6 +718,61 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($expense->getCreatedBy() === $this) {
                 $expense->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getLastLogin(): ?\DateTimeInterface
+    {
+        return $this->lastLogin;
+    }
+
+    public function setLastLogin(?\DateTimeInterface $lastLogin): self
+    {
+        $this->lastLogin = $lastLogin;
+
+        return $this;
+    }
+
+    public function getIpLastLogin(): ?string
+    {
+        return $this->ipLastLogin;
+    }
+
+    public function setIpLastLogin(?string $ipLastLogin): self
+    {
+        $this->ipLastLogin = $ipLastLogin;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Subvention[]
+     */
+    public function getSubventions(): Collection
+    {
+        return $this->subventions;
+    }
+
+    public function addSubvention(Subvention $subvention): self
+    {
+        if (!$this->subventions->contains($subvention)) {
+            $this->subventions[] = $subvention;
+            $subvention->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubvention(Subvention $subvention): self
+    {
+        if ($this->subventions->contains($subvention)) {
+            $this->subventions->removeElement($subvention);
+            // set the owning side to null (unless already changed)
+            if ($subvention->getCreatedBy() === $this) {
+                $subvention->setCreatedBy(null);
             }
         }
 
