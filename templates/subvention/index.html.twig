@@ -44,7 +44,7 @@
                                         <td>{{ subvention.entreprisePhone1 }}</td>
                                         <td>{{ subvention.entreprisePhone2 }}</td>
                                         <td>{{ subvention.subject }}</td>
-                                        <td>{{ subvention.description }}</td>
+                                        <td>{{ subvention.description|u.truncate(50, '...')|raw }}</td>
                                         <td>{{ subvention.depositeDate ? subvention.depositeDate|date('Y-m-d') : '' }}</td>
                                         <td>
                                             <a href="{{ path('subvention_show', {'id': subvention.id}) }}">show</a>
