@@ -43,6 +43,10 @@ class Don
      */
     private $type;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isProfessional;
 
     /**
      * @ORM\Column(type="boolean", options={"default":true}, nullable=true)
