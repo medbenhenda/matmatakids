@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Service;
 
 use App\Entity\Adherent;
@@ -50,10 +51,10 @@ class Reciept
     public function pdfPreview(string $receipt, ?string $path)
     {
         if ($path) {
-            $receipt = $path.'/'.$receipt;
+            $receipt = $path . '/' . $receipt;
         }
         header('Content-Type: application/pdf');
-        header('Content-Disposition: inline; filename='.$receipt);
+        header('Content-Disposition: inline; filename=' . $receipt);
         header('Content-Transfer-Encoding: binary');
         header('Accept-Ranges: bytes');
 
@@ -61,13 +62,13 @@ class Reciept
     }
 
     /**
-     * @param string        $receipt
-     * @param string|null   $path
+     * @param string $receipt
+     * @param string|null $path
      */
     public function deleteReceipt(string $receipt, ?string $path): void
     {
         if ($path) {
-            $receipt = $path.'/'.$receipt;
+            $receipt = $path . '/' . $receipt;
         }
 
         if ($this->fileSystem->exists($receipt)) {
@@ -77,8 +78,18 @@ class Reciept
 
     public static function contentReceipt(Don $don)
     {
-        return '<p>Article 200 du Code Général des Impôts</p>
-        <p style="font-weight: bold;">Matmata Kids</p>
+        $firstParagraph = '<p>Article 200 du Code Général des Impôts</p>';
+        $lastParagraph = '<p>Le bénéficiaire certifie sur l\'honneur que les dons et versements qu\'il reçoit ouvrent droit à la
+réduction d\'impôt prévue à l\'article 200 du Code Général des Impôts. Particulier : Vous pouvez
+déduire 66% de votre don dans la limite de 20% de votre revenu imposable.</p>';
+        if ($don->getIsProfessional()) {
+            $firstParagraph = 'Article 238 bis du Code Général des Impôts';
+            $lastParagraph = 'Le bénéficiaire certifie sur l\'honneur que les dons et versements qu\'il reçoit ouvrent droit à la
+réduction d\'impôt prévue à l\'article 238 bis du Code Général des Impôts.';
+        }
+
+        return $firstParagraph .
+            '<p style="font-weight: bold;">Matmata Kids</p>
         <p>12 Rue Juillet</p>
         <p>75020 Paris</p>
         <p>Œuvre ou organisme d\'intérêt général</p>
@@ -89,15 +100,15 @@ class Reciept
         L’association intervient dans le domaine de l’éducation, la santé et le développement des activités sportives et culturelles.</p>
         <p style="font-weight: bold;">Donateur : </p>
         <p>Nom et Prénom : ' . $don->getDonor() . ' </p>
-        <p>Adresse : '.$don->getDonor()->constructAddress().'</p>
+        <p>Adresse : ' . $don->getDonor()->constructAddress() . '</p>
         <p style="font-weight: bold;">Bénéficiaire : </p>
         <p>Matmata Kids reconnaît avoir reçu, au titre des versements ouvrant droit à une réduction d\'impôt,<br/>
-        la somme de : ***'.$don->getAmount().' Euros  ***<br/>
-        Date du don :  ' . $don->getDate()->format('d-m-Y'). ' 
+        la somme de : ***' . $don->getAmount() . ' Euros  ***<br/>
+        Date du don :  ' . $don->getDate()->format('d-m-Y') . ' 
         <br/> Forme du don : Don manuel  <br/>Nature du don : Numéraire</p>
-        <p>Mode de versement : '.$don->getType().'</p>
-        <p>Le bénéficiaire certifie sur l\'honneur que les dons et versements qu\'il reçoit ouvrent droit à la réduction d\'impôt prévue à l\'article 200 du Code Général des Impôts. Particulier : Vous pouvez déduire 66% de votre don dans la limite de 20% de votre revenu imposable.</p>
-        ';
+        <p>Mode de versement : ' . $don->getType() . '</p>
+        <p></p>
+        ' . $lastParagraph;
     }
 
 
@@ -113,11 +124,11 @@ class Reciept
         $pdf = new MkTCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->SetCreator('Matmata kids');
         $pdf->SetAuthor('Matmata kids');
-        $pdf->SetTitle('Receipt for : '.$don->getDonor().' '.$don->getId() . '/'.$don->getDate()->format('Y'));
+        $pdf->SetTitle('Receipt for : ' . $don->getDonor() . ' ' . $don->getId() . '/' . $don->getDate()->format('Y'));
         $pdf->SetSubject('Receipt for Don');
-        $pdf->SetKeywords('Matmata kids, Receipt, don, RECU FISCALE POUR DON');
+        $pdf->SetKeywords('Matmata kids, Receipt, don, RECU FISCAL POUR DON');
         // set default header data
-        $pdf->SetHeaderData($logo, 120, 'RECU FISCALE POUR DON', '', [33, 66, 99], [33, 66, 99]);
+        $pdf->SetHeaderData($logo, 120, 'RECU FISCAL POUR DON', '', [33, 66, 99], [33, 66, 99]);
 
         // set header and footer fonts
         $pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
@@ -143,7 +154,7 @@ class Reciept
         // set cell margins
         $pdf->setCellMargins(1, 1, 1, 1);
         $pdf->SetFillColor(255, 255, 255);
-        $pdf->MultiCell(60, 20, "N° d'ordre du reçu\n" . $don->getId().'/'.$don->getDate()->format('Y'), 1, 'C', 1, 1, '140', '20', true);
+        $pdf->MultiCell(40, 15, "N° d'ordre du reçu\n" . $don->getId() . '/' . $don->getDate()->format('Y'), 1, 'C', 1, 1, '160', '15', true);
 
         $pdf->Ln(4);
         $html = self::contentReceipt($don);
@@ -151,7 +162,7 @@ class Reciept
 
         $pdf->Image($signature, 50, 230, 50, 30, 'PNG', '', '', true, 150, '', false, false, 0, false, false, false);
 
-        $filename = $don->getDonor()->constructName(). '_'.$don->getDate()->format('Ymdhis'). '.pdf';
+        $filename = $don->getDonor()->constructName() . '_' . $don->getDate()->format('Ymdhis') . '.pdf';
         $filePath = $this->parameterBag->get('kernel.project_dir') . '/public/receipt/' . $filename;
         $pdf->Output($filePath, 'F');
         //$pdf->Output($filename, 'D');

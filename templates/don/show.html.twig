@@ -44,6 +44,10 @@
                                     <td>{{ don.amount }}</td>
                                 </tr>
                                 <tr>
+                                    <th>Professionel?</th>
+                                    <td>{{ don.isProfessional ? 'Profossionnel' : 'Particulier' }}</td>
+                                </tr>
+                                <tr>
                                     <th>Date</th>
                                     <td>{{ don.date ? don.date|date('Y-m-d H:i:s') : '' }}</td>
                                 </tr>

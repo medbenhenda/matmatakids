@@ -175,4 +175,20 @@ class Don
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getIsProfessional()
+    {
+        return $this->isProfessional;
+    }
+
+    /**
+     * @param mixed $isProfessional
+     */
+    public function setIsProfessional($isProfessional): void
+    {
+        $this->isProfessional = $isProfessional;
+    }
 }

@@ -26,6 +26,12 @@ class DonType extends AbstractType
                 'attr' => ['class' => 'form-control'],
                 'row_attr' => ['class' => 'col-md-6 mb-3', ],
             ])
+            ->add('isProfessional', CheckboxType::class, [
+                'label' => ' Professionnel? ',
+                'label_attr' => ['class' => 'text-sm-left'],
+                'attr' => ['class' => 'form-control'],
+                'row_attr' => ['class' => 'col-md-6 mb-3', ],
+            ])
             ->add('date', DateType::class, [
                 'widget' => 'single_text',
                 'label_attr' => ['class' => 'text-sm-left'],

@@ -32,6 +32,7 @@
                                     <th>Address</th>
                                     <th>Amount</th>
                                     <th>Receipt</th>
+                                    <th>Professionnel?</th>
                                     <th>actions</th>
                                 </tr>
                                 </thead>
@@ -51,6 +52,13 @@
                                                 </span>
                                             {% else %}
                                                 <span style="font-size: 2em; color: red;"><i class="fas fa-exclamation-triangle"></i></span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if don.isProfessional %}
+                                                Professionnel
+                                            {% else %}
+                                                Particulier
                                             {% endif %}
                                         </td>
                                         <td>

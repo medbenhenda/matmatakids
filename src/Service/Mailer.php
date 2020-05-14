@@ -26,11 +26,12 @@ class Mailer
             ->htmlTemplate('receipt/receipt.html.twig')
             ->from(new Address($this->parameterBag->get('email_sender'), 'Matmata kids'))
             ->to(new Address($don->getDonor()->getEmail(), $don->getDonor()))
-            ->subject('Reçu fiscale Matmata kids')
-            ->attachFromPath($pdf, sprintf('weekly-report-%s.pdf', date('Y-m-d')));
+            ->subject('Reçu fiscal Matmata kids')
+            ->attachFromPath($pdf, sprintf('reçu-fiscal-%s.pdf', date('Y-m-d')));
         try {
             $this->mailer->send($email);
         } catch (TransportExceptionInterface $e) {
+
             //@TODO add custom message and notification
         }
     }
