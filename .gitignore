@@ -26,8 +26,9 @@
 /public/media/cache/
 ###< liip/imagine-bundle ###
 
-###> generated pdf receipt ###
+###> generated pdf receipt  and uploads###
 /public/receipt/
+/public/uploads/
 ###< generated pdf receipt ###
 
 ###> IDE ###
