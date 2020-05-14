@@ -31,6 +31,10 @@
 /public/uploads/
 ###< generated pdf receipt ###
 
+###> node modules###
+/public/node_modules/
+###< node modules ###
+
 ###> IDE ###
 /.idea/
 
