@@ -9,5 +9,5 @@ else
     echo "directories not moved because there not existed"
 fi
 
-#npm install chart.js --save
-#composer install
+npm install chart.js --save
+composer install
