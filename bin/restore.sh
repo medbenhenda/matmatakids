@@ -2,9 +2,9 @@
 echo "current directory: $(pwd)"
 cd /var/www/matmatakids/matmatakids
 echo "current directory after cd: $(pwd)"
-if [ -d "public/uploads" ]
+if [ -d "/var/www/matmatakids/back/uploads" ]
 then
-    mv public/bundles public/media public/node_modules public/receipt public/uploads /var/www/matmatakids/back
+    mv -r /var/www/matmatakids/back/ public/
 else
     echo "directories not moved because there not existed"
 fi
