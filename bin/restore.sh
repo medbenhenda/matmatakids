@@ -9,6 +9,6 @@ else
     echo "directories not moved because there not existed"
 fi
 
-npm install chart.js --save
+npm install --prefix ./public chart.js --save
 composer install
 php bin/console doctrine:migrations:migrate
