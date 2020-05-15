@@ -11,3 +11,4 @@ fi
 
 npm install chart.js --save
 composer install
+php bin/console doctrine:migrations:migrate
