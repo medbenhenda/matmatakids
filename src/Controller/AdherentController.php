@@ -5,21 +5,11 @@ namespace App\Controller;
 use App\Entity\Adherent;
 use App\Form\AdherentType;
 use App\Repository\AdherentRepository;
-use App\Service\MkTCPDF;
-use App\Service\Reciept;
-use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
-use Knp\Snappy\Pdf;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Asset\PathPackage;
-use Symfony\Component\Asset\VersionStrategy\StaticVersionStrategy;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-use Symfony\Component\Mime\FileinfoMimeTypeGuesser;
 use Symfony\Component\Routing\Annotation\Route;
-use WhiteOctober\TCPDFBundle\Controller\TCPDFController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/adherent")
@@ -42,6 +32,7 @@ class AdherentController extends AbstractController
      * @Route("/new", name="adherent_new", methods={"GET","POST"})
      * @param Request $request
      * @return Response
+     * @IsGranted("ROLE_ADMIN")
      */
     public function new(Request $request): Response
     {
@@ -80,6 +71,7 @@ class AdherentController extends AbstractController
      * @param Request $request
      * @param Adherent $adherent
      * @return Response
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, Adherent $adherent): Response
     {
@@ -103,6 +95,7 @@ class AdherentController extends AbstractController
      * @param Request $request
      * @param Adherent $adherent
      * @return Response
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, Adherent $adherent): Response
     {

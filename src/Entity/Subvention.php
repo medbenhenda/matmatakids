@@ -66,31 +66,39 @@ class Subvention
     private $createdBy;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Document", mappedBy="subvention")
-     */
-    private $images;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Document", mappedBy="subventionDoc")
+     * @ORM\OneToMany(targetEntity="App\Entity\Document", mappedBy="subventionDoc", cascade={"persist", "remove"})
      */
     private $documents;
 
+    /**
+     * Subvention constructor.
+     */
     public function __construct()
     {
         $this->images = new ArrayCollection();
         $this->documents = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getEntreprise(): ?string
     {
         return $this->entreprise;
     }
 
+    /**
+     * @param string $entreprise
+     * @return $this
+     */
     public function setEntreprise(string $entreprise): self
     {
         $this->entreprise = $entreprise;
@@ -98,11 +106,18 @@ class Subvention
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getEntrepriseAddress(): ?string
     {
         return $this->entrepriseAddress;
     }
 
+    /**
+     * @param string $entrepriseAddress
+     * @return $this
+     */
     public function setEntrepriseAddress(string $entrepriseAddress): self
     {
         $this->entrepriseAddress = $entrepriseAddress;
@@ -110,11 +125,18 @@ class Subvention
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getEntrepriseEmail(): ?string
     {
         return $this->entrepriseEmail;
     }
 
+    /**
+     * @param string|null $entrepriseEmail
+     * @return $this
+     */
     public function setEntrepriseEmail(?string $entrepriseEmail): self
     {
         $this->entrepriseEmail = $entrepriseEmail;
@@ -122,11 +144,18 @@ class Subvention
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getEntreprisePhone1(): ?string
     {
         return $this->entreprisePhone1;
     }
 
+    /**
+     * @param string|null $entreprisePhone1
+     * @return $this
+     */
     public function setEntreprisePhone1(?string $entreprisePhone1): self
     {
         $this->entreprisePhone1 = $entreprisePhone1;
@@ -134,11 +163,18 @@ class Subvention
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getEntreprisePhone2(): ?string
     {
         return $this->entreprisePhone2;
     }
 
+    /**
+     * @param string|null $entreprisePhone2
+     * @return $this
+     */
     public function setEntreprisePhone2(?string $entreprisePhone2): self
     {
         $this->entreprisePhone2 = $entreprisePhone2;
@@ -146,11 +182,18 @@ class Subvention
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getSubject(): ?string
     {
         return $this->subject;
     }
 
+    /**
+     * @param string $subject
+     * @return $this
+     */
     public function setSubject(string $subject): self
     {
         $this->subject = $subject;
@@ -158,11 +201,18 @@ class Subvention
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
+    /**
+     * @param string $description
+     * @return $this
+     */
     public function setDescription(string $description): self
     {
         $this->description = $description;
@@ -170,11 +220,18 @@ class Subvention
         return $this;
     }
 
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getDepositeDate(): ?\DateTimeInterface
     {
         return $this->depositeDate;
     }
 
+    /**
+     * @param \DateTimeInterface|null $depositeDate
+     * @return $this
+     */
     public function setDepositeDate(?\DateTimeInterface $depositeDate): self
     {
         $this->depositeDate = $depositeDate;
@@ -182,45 +239,21 @@ class Subvention
         return $this;
     }
 
+    /**
+     * @return User|null
+     */
     public function getCreatedBy(): ?User
     {
         return $this->createdBy;
     }
 
+    /**
+     * @param User|null $createdBy
+     * @return $this
+     */
     public function setCreatedBy(?User $createdBy): self
     {
         $this->createdBy = $createdBy;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Document[]
-     */
-    public function getImages(): Collection
-    {
-        return $this->images;
-    }
-
-    public function addImage(Document $image): self
-    {
-        if (!$this->images->contains($image)) {
-            $this->images[] = $image;
-            $image->setSubvention($this);
-        }
-
-        return $this;
-    }
-
-    public function removeImage(Document $image): self
-    {
-        if ($this->images->contains($image)) {
-            $this->images->removeElement($image);
-            // set the owning side to null (unless already changed)
-            if ($image->getSubvention() === $this) {
-                $image->setSubvention(null);
-            }
-        }
 
         return $this;
     }
@@ -233,6 +266,10 @@ class Subvention
         return $this->documents;
     }
 
+    /**
+     * @param Document $document
+     * @return $this
+     */
     public function addDocument(Document $document): self
     {
         if (!$this->documents->contains($document)) {
@@ -243,6 +280,10 @@ class Subvention
         return $this;
     }
 
+    /**
+     * @param Document $document
+     * @return $this
+     */
     public function removeDocument(Document $document): self
     {
         if ($this->documents->contains($document)) {

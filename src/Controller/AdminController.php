@@ -7,7 +7,7 @@ use App\Entity\Donor;
 use App\Entity\Folder;
 use App\Entity\Project;
 use App\Entity\Sponsor;
-use App\Entity\User;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use App\Repository\DonRepository;
 use App\Repository\ProjectRepository;
 use App\Service\Helper;
@@ -52,7 +52,6 @@ class AdminController extends AbstractController
      * @param DonRepository $donRepository
      * @param ProjectRepository $pRepository
      * @return Response
-     * @throws DBALException
      */
     public function index(): Response
     {

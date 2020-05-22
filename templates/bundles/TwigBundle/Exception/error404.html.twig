@@ -1,0 +1,7 @@
+{% extends 'error.html.twig' %}
+
+{% block body %}
+    <img class="mb-4 img-error" src="assets/img/error-404-monochrome.svg" />
+    <p class="lead">This requested URL was not found on this server.</p>
+    <a href="{{ path('admin') }}"><i class="fas fa-arrow-left mr-1"></i>Return to Dashboard</a>
+{% endblock %}

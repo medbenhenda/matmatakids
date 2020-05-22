@@ -29,6 +29,7 @@
 ###> generated pdf receipt  and uploads###
 /public/receipt/
 /public/uploads/
+/public/subventions/
 ###< generated pdf receipt ###
 
 ###> node modules###

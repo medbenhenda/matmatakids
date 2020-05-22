@@ -115,9 +115,11 @@
 											<div class="card" style="width: 100%;">
 												<ul class="list-group list-group-flush">
 													{% for proof in item.proof %}
-														<li class="list-group-item">  {{ proof.title }}<br><img
+														<li class="list-group-item">  {{ proof.title }}<br>
+															<img
 																src="{{ vich_uploader_asset(proof, 'imageFile', 'App\\Entity\\Document') }}"
-																class="img-thumbnail" alt="{{ proof.title }}"/></li>
+																class="img-thumbnail" alt="{{ proof.title }}"
+															/></li>
 													{% endfor %}
 												</ul>
 											</div>

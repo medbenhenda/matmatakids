@@ -1,4 +1,43 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+<div class="my-custom-class-for-errors">
+    {{ form_errors(form) }}
+</div>
+
+<div class="form-row">
+        {{ form_row(form.entreprise) }}
+        {{ form_row(form.entrepriseAddress) }}
+</div>
+<div class="form-row">
+        {{ form_row(form.entrepriseEmail) }}
+        {{ form_row(form.entreprisePhone1) }}
+    {{ form_row(form.entreprisePhone2) }}
+</div>
+
+<div class="form-row">
+        {{ form_row(form.subject) }}
+</div>
+<div class="form-row">
+        {{ form_row(form.description) }}
+</div>
+
+<div class="form-row">
+        {{ form_row(form.depositeDate) }}
+</div>
+
+
+<div class="form-row">
+    <div class="form-group col-md-12">
+        <div class="card" style="">
+            <ul class="list-group itemsRef" data-prototype="{{ form_widget(form.documents.vars.prototype)|e('html_attr') }}">
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" value="documents" class="contextName"/>
+{{ form_rest(form) }}
+<button class="btn btn-primary">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+

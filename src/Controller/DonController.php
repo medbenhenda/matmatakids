@@ -10,7 +10,6 @@ use App\Form\DonType;
 use App\Repository\DonRepository;
 use App\Service\Mailer;
 use App\Service\Reciept;
-use Doctrine\DBAL\DBALException;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -20,6 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/don")
@@ -208,6 +208,7 @@ class DonController extends AbstractController
      * @param Request $request
      * @param Don $don
      * @return Response
+     * @IsGranted("ROLE_SUPER_ADMIN")
      */
     public function delete(Request $request, Don $don): Response
     {

@@ -1,0 +1,9 @@
+{% extends 'error.html.twig' %}
+
+{% block body %}
+    <h1>Oops! An Error Occurred</h1>
+    <h2>The server returned a "403 Forbidden".</h2>
+    <p class="lead">Unauthorized</p>
+    <p>L'accès à cette page est non accordé</p>
+    <a href="{{ path('admin') }}"><i class="fas fa-arrow-left mr-1"></i>Return to Dashboard</a>
+{% endblock %}

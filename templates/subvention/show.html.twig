@@ -19,55 +19,79 @@
                     </div>
 
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <tbody>
-                                <tr>
-                                    <th>Id</th>
-                                    <td>{{ subvention.id }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Entreprise</th>
-                                    <td>{{ subvention.entreprise }}</td>
-                                </tr>
-                                <tr>
-                                    <th>EntrepriseAddress</th>
-                                    <td>{{ subvention.entrepriseAddress }}</td>
-                                </tr>
-                                <tr>
-                                    <th>EntrepriseEmail</th>
-                                    <td>{{ subvention.entrepriseEmail }}</td>
-                                </tr>
-                                <tr>
-                                    <th>EntreprisePhone1</th>
-                                    <td>{{ subvention.entreprisePhone1 }}</td>
-                                </tr>
-                                <tr>
-                                    <th>EntreprisePhone2</th>
-                                    <td>{{ subvention.entreprisePhone2 }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Subject</th>
-                                    <td>{{ subvention.subject }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Description</th>
-                                    <td>{{ subvention.description }}</td>
-                                </tr>
-                                <tr>
-                                    <th>DepositeDate</th>
-                                    <td>{{ subvention.depositeDate ? subvention.depositeDate|date('Y-m-d') : '' }}</td>
-                                </tr>
-                                <tr>
-                                    <th>CreatedAt</th>
-                                    <td>{{ subvention.createdAt ? subvention.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                                </tr>
-                                <tr>
-                                    <th>UpdatedAt</th>
-                                    <td>{{ subvention.updatedAt ? subvention.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                        <div class="row">
+                            <div class="col-md-8 border-right">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                        <tr>
+                                            <th>Id</th>
+                                            <td>{{ subvention.id }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Entreprise</th>
+                                            <td>{{ subvention.entreprise }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>EntrepriseAddress</th>
+                                            <td>{{ subvention.entrepriseAddress }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>EntrepriseEmail</th>
+                                            <td>{{ subvention.entrepriseEmail }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>EntreprisePhone1</th>
+                                            <td>{{ subvention.entreprisePhone1 }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>EntreprisePhone2</th>
+                                            <td>{{ subvention.entreprisePhone2 }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Subject</th>
+                                            <td>{{ subvention.subject }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Description</th>
+                                            <td>{{ subvention.description }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>DepositeDate</th>
+                                            <td>{{ subvention.depositeDate ? subvention.depositeDate|date('Y-m-d') : '' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>CreatedAt</th>
+                                            <td>{{ subvention.createdAt ? subvention.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>UpdatedAt</th>
+                                            <td>{{ subvention.updatedAt ? subvention.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card" style="width: 100%;">
+                                    <ul class="list-group list-group-flush">
+                                        {% for doc in subvention.documents %}
+                                            <li class="list-group-item">  {{ doc.title }}<br>
+                                                {% if doc.path|mime_type == 'image' %}
+                                                    <img src="{{ asset(doc.path) }}"
+                                                     alt="{{ doc.title }}" class="img-thumbnail"/>
+                                                {% else %}
+                                                    <span>
+                                                        <a href="{{ path('download_document', {
+                                                            document: doc.id
+                                                        }) }}"><span class="fa fa-download"></span></a>
+                                                    </span>
+                                                {% endif %}
+                                                </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,8 +1,8 @@
-jQuery(document).ready(function() {
-var context = $('.contextName').val();
-var $collectionHolder;
-var $addTagButton = $('<button type="button" class="add_tag_link">Add a ' + context + '</button>');
-var $newLinkLi = $('<li class="list-group-item"></li>').append($addTagButton);
+jQuery(document).ready(function () {
+    var context = $('.contextName').val();
+    var $collectionHolder;
+    var $addTagButton = $('<label>'+context+' &nbsp;</label><button type="button" class="add_tag_link">Add a ' + context + '</button>');
+    var $newLinkLi = $('<li class="list-group-item"></li>').append($addTagButton);
 
     // Get the ul that holds the collection of tags
     $collectionHolder = $('ul.itemsRef');
@@ -14,22 +14,23 @@ var $newLinkLi = $('<li class="list-group-item"></li>').append($addTagButton);
     // index when inserting a new item (e.g. 2)
     $collectionHolder.data('index', $collectionHolder.find('input').length);
 
-    $addTagButton.on('click', function(e) {
+    $addTagButton.on('click', function (e) {
         // add a new tag form (see next code block)
         addProofForm($collectionHolder, $newLinkLi);
     });
-    function build() {
+    function build()
+    {
 
     }
-    function addProofForm($collectionHolder, $newLinkLi) {
-
+    function addProofForm($collectionHolder, $newLinkLi)
+    {
         var prototype = $collectionHolder.data('prototype');
 
         // get the new index
         var index = $collectionHolder.data('index');
 
         var newForm = prototype;
-        // You need this only if you didn't set 'label' => false in your tags field in TaskType
+        // You need this only if you didn't set 'label' => false in your tags field in FormType
         // Replace '__name__label__' in the prototype's HTML to
         // instead be a number based on how many items we have
         // newForm = newForm.replace(/__name__label__/g, index);
