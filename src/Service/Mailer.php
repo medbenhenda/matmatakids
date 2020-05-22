@@ -31,7 +31,6 @@ class Mailer
         try {
             $this->mailer->send($email);
         } catch (TransportExceptionInterface $e) {
-
             //@TODO add custom message and notification
         }
     }

@@ -17,14 +17,17 @@ class FileUploader
         $this->slugger = $slugger;
     }
 
-    public function upload(UploadedFile $file)
+    public function upload(UploadedFile $file, $destination = null)
     {
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $safeFilename = $this->slugger->slug($originalFilename);
         $fileName = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
 
         try {
-            $file->move($this->getTargetDirectory(), $fileName);
+            if (!$destination) {
+                $destination = $this->getTargetDirectory();
+            }
+            $file->move($destination, $fileName);
         } catch (FileException $e) {
             // ... handle exception if something happens during file upload
         }
