@@ -7,8 +7,10 @@ use App\Form\UserType;
 use App\Repository\UserRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
@@ -33,6 +35,49 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/createsadmin/{email}", name="create_s_admin")
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param MailerInterface $mailer
+     * @param ParameterBagInterface $parameterBag
+     * @param string $email
+     * @return Response
+     * @throws TransportExceptionInterface
+     */
+    public function createSAdmin(UserPasswordEncoderInterface $passwordEncoder, MailerInterface $mailer, ParameterBagInterface $parameterBag, string $email)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $password = $this->randomPassword();
+        $user = new User();
+        $user->setEmail($email);
+        $user->setFirstName('sadmin');
+        $user->setLastName('matmatakids');
+        $user->setMobile('');
+        $user->setAddress('Paris');
+        $user->setCity('city');
+        $user->setCountry('France');
+        $user->setPassword($passwordEncoder->encodePassword(
+            $user,
+            $password
+        ));
+        $user->setRoles(['ROLE_SUPER_ADMIN','ROLE_ADMIN', 'ROLE_USER', 'ROLE_ALLOWED_TO_SWITCH' ]);
+        $em->persist($user);
+        $em->flush();
+
+
+        $email = (new TemplatedEmail())
+            ->from(new Address($parameterBag->get('email_sender'), 'Matmata kids'))
+            ->to($user->getEmail())
+            ->subject('Matmatakids services: Your password')
+            ->htmlTemplate('user/email.html.twig')
+            ->context([
+                'password' => $password,
+            ])
+        ;
+
+        $mailer->send($email);
+        return $this->redirectToRoute('admin');
+    }
     /**
      * @Route("/new", name="user_new", methods={"GET","POST"})
      * @param Request $request
@@ -113,48 +158,6 @@ class UserController extends AbstractController
         }
 
         return $this->redirectToRoute('user_index');
-    }
-
-    /**
-     * @Route("/createsadmin/{email}", name="create_s_admin")
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param MailerInterface $mailer
-     * @param string $email
-     * @return Response
-     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
-     */
-    public function createSAdmin(UserPasswordEncoderInterface $passwordEncoder, MailerInterface $mailer, string $email): Response
-    {
-        $em = $this->getDoctrine()->getManager();
-        $password = $this->randomPassword();
-        $user = new User();
-        $user->setEmail($email);
-        $user->setFirstName('sadmin');
-        $user->setLastName('matmatakids');
-        $user->setMobile('');
-        $user->setAddress('Paris');
-        $user->setCity('city');
-        $user->setCountry('France');
-        $user->setPassword($passwordEncoder->encodePassword(
-            $user,
-            $password
-        ));
-        $user->setRoles(['ROLE_SUPER_ADMIN','ROLE_ADMIN', 'ROLE_USER', 'ROLE_ALLOWED_TO_SWITCH' ]);
-        $em->persist($user);
-        $em->flush();
-
-
-        $email = (new TemplatedEmail())
-            ->from(new Address($this->parameterBag->get('email_sender'), 'Matmata kids'))
-            ->to($user->getEmail())
-            ->subject('Matmatakids services: Your password')
-            ->htmlTemplate('user/email.html.twig')
-            ->context([
-                'password' => $password,
-            ])
-        ;
-
-        $mailer->send($email);
     }
 
     private function randomPassword($length = 8)
