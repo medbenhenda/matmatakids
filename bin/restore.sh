@@ -30,7 +30,7 @@ else
     echo "$DIRR is Empty"
 
 fi
-
+sudo chown -R sphynx:www-data ./
 npm install --prefix ./public chart.js --save
 composer install
 php bin/console doctrine:migrations:migrate
