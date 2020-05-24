@@ -1,0 +1,36 @@
+{% apply inline_css(source('@css/styles.css')) %}
+    <html lang="fr">
+    <head>
+        <title>{{ email.subject }}</title>
+        <style>
+            .col-md-2 {
+                flex: 0 0 16.6666666667%;
+                max-width: 16.6666666667%;
+            }
+        </style>
+    </head>
+    <body>
+    {% block content %}
+        <div class="container">
+            <div class="header text-center">
+                <div class="offset-4 col-md-2">
+                    <a href="https://www.matmatakids.xyz">
+                        <img src="https://matmata-kids.com/wp-content/uploads/2020/02/new-LOGO-MATMATA-KIDS-3.png" class="img-thumbnail" alt="Matmata kids">
+                        {#<img src="{{ email.image('@images/logo.png') }}" class="logo" alt="SpaceBar Logo">#}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <h5>Hi {{ email.toName }},</h5>
+
+        <p>Votre mot de passe est : </p> <i><sub>{{ password }}</sub></i>
+        <p><b style="color: darkred;">Attention: Vous devez changer votre mot de passe</b></p>
+        <p style="font-weight: bold;">Matmata kids</p>
+
+
+
+    {% endblock %}
+
+    </body>
+    </html>
+{% endapply %}
