@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Beneficiary{% endblock %}
+
+{% block body %}
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h1 class="mt-4">Beneficiary</h1>
+                <div class="card mb-4">
+                    <div class="d-flex flex-row-reverse bd-highlight mb-2">
+                        <div class="p-2 bd-highlight">
+                            <a href="{{ path('beneficiary_index') }}">Back to list</a>
+                        </div>
+                        <div class="p-2 bd-highlight">
+                            <a href="{{ path('beneficiary_edit', {'id': beneficiary.id}) }}">Edit</a>
+                        </div>
+                        <div class="p-2 bd-highlight">{{ include('beneficiary/_delete_form.html.twig') }}</div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8 border-right">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                        <tr>
+                                            <th>Id</th>
+                                            <td>{{ beneficiary.id }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>FirstName</th>
+                                            <td>{{ beneficiary.firstName }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>LastName</th>
+                                            <td>{{ beneficiary.lastName }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Birthdate</th>
+                                            <td>{{ beneficiary.birthdate ? beneficiary.birthdate|date('d-m-Y') : '' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Phone</th>
+                                            <td>{{ beneficiary.phone }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Email</th>
+                                            <td>{{ beneficiary.email }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Address</th>
+                                            <td>{{ beneficiary.address }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>ZipCode</th>
+                                            <td>{{ beneficiary.zipCode }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>City</th>
+                                            <td>{{ beneficiary.city }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Country</th>
+                                            <td>{{ beneficiary.country }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>SchoolLevel</th>
+                                            <td>{{ beneficiary.schoolLevel }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>IsOrphan</th>
+                                            <td>{{ beneficiary.isOrphan ? 'Yes' : 'No' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>IsHandicapped</th>
+                                            <td>{{ beneficiary.isHandicapped ? 'Yes' : 'No' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>IsUnhealty</th>
+                                            <td>{{ beneficiary.isUnhealty ? 'Yes' : 'No' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>IsSchoolBoy</th>
+                                            <td>{{ beneficiary.isSchoolBoy ? 'Yes' : 'No' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>ParticularCase</th>
+                                            <td>{{ beneficiary.particularCase }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>FavoriteActivity</th>
+                                            <td>{{ beneficiary.favoriteActivity }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>HaveAFolder</th>
+                                            <td>{{ beneficiary.haveAFolder ? 'Yes' : 'No' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>CreatedAt</th>
+                                            <td>{{ dump(beneficiary.createdAt) }}--{{ beneficiary.createdAt ? beneficiary.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>UpdatedAt</th>
+                                            <td>{{ beneficiary.updatedAt ? beneficiary.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+{% endblock %}

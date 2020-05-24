@@ -46,10 +46,16 @@ class Project
      */
     private $createdBy;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Beneficiary", mappedBy="project")
+     */
+    private $beneficiaries;
+
 
     public function __construct()
     {
         $this->dons = new ArrayCollection();
+        $this->beneficiaries = new ArrayCollection();
     }
 
     public function __toString()
@@ -144,6 +150,34 @@ class Project
     public function setCreatedBy(?User $createdBy): self
     {
         $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Beneficiary[]
+     */
+    public function getBeneficiaries(): Collection
+    {
+        return $this->beneficiaries;
+    }
+
+    public function addBeneficiary(Beneficiary $beneficiary): self
+    {
+        if (!$this->beneficiaries->contains($beneficiary)) {
+            $this->beneficiaries[] = $beneficiary;
+            $beneficiary->addProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBeneficiary(Beneficiary $beneficiary): self
+    {
+        if ($this->beneficiaries->contains($beneficiary)) {
+            $this->beneficiaries->removeElement($beneficiary);
+            $beneficiary->removeProject($this);
+        }
 
         return $this;
     }

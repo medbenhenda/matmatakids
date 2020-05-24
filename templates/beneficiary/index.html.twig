@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Beneficiary index{% endblock %}
+
+{% block body %}
+
+    <div id="layoutSidenav_content">
+        <main>
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            <div class="container-fluid">
+                <h1 class="mt-4">Beneficiary index</h1>
+                <div class="card mb-4">
+                    <div class="d-flex flex-row-reverse bd-highlight mb-2">
+                        <div class="p-2 bd-highlight"><a href="{{ path('beneficiary_new') }}">Create new</a></div>
+                    </div>
+                    <div class="card-header"><i class="fas fa-table mr-1"></i>Beneficiary index</div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>FirstName</th>
+                                    <th>LastName</th>
+                                    <th>Birthdate</th>
+                                    <th>Address</th>
+                                    <th>CreatedAt</th>
+                                    <th>UpdateddAt</th>
+                                    <th>actions</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                {% for beneficiary in beneficiaries %}
+                                    <tr>
+                                        <td>{{ beneficiary.firstName }}</td>
+                                        <td>{{ beneficiary.lastName }}</td>
+                                        <td>{{ beneficiary.birthdate ? beneficiary.birthdate|date('Y-m-d') : '' }}</td>
+                                        <td>{{ beneficiary.address }}</td>
+                                        <td>{{ beneficiary.createdAt ? beneficiary.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                                        <td>{{ beneficiary.updatedAt ? beneficiary.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                                        <td>
+                                            <a href="{{ path('beneficiary_show', {'id': beneficiary.id}) }}">show</a>
+                                            <a href="{{ path('beneficiary_edit', {'id': beneficiary.id}) }}">edit</a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="21">no records found</td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script src="{{ asset('js/bulk_select.js') }}"></script>
+{% endblock %}

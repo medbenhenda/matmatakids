@@ -80,6 +80,11 @@ class Folder
      */
     private $folderItems;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Beneficiary", mappedBy="folder", cascade={"persist", "remove"})
+     */
+    private $beneficiary;
+
     public function __construct()
     {
         $this->proof = new ArrayCollection();
@@ -87,10 +92,19 @@ class Folder
         $this->folderItems = new ArrayCollection();
     }
 
-
     public function __toString()
     {
         return $this->id . '/' . $this->createdAt->format('Y');
+    }
+
+    public function getName()
+    {
+        return $this->firstName . ' ' . $this->lastName;
+    }
+
+    public function getDisplayedName()
+    {
+        return $this->id . '/' . $this->createdAt->format('Y') . ' ('.$this->getName().')';
     }
 
     public function getId(): ?int
@@ -294,6 +308,24 @@ class Folder
             if ($folderItem->getFolder() === $this) {
                 $folderItem->setFolder(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getBeneficiary(): ?Beneficiary
+    {
+        return $this->beneficiary;
+    }
+
+    public function setBeneficiary(?Beneficiary $beneficiary): self
+    {
+        $this->beneficiary = $beneficiary;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newFolder = null === $beneficiary ? null : $this;
+        if ($beneficiary->getFolder() !== $newFolder) {
+            $beneficiary->setFolder($newFolder);
         }
 
         return $this;
