@@ -160,6 +160,11 @@ class User implements UserInterface
      */
     private $subventions;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Beneficiary", mappedBy="createdBy")
+     */
+    private $beneficiaries;
+
 
 
     public function __construct()
@@ -176,6 +181,7 @@ class User implements UserInterface
         $this->responsibleTransactions = new ArrayCollection();
         $this->expenses = new ArrayCollection();
         $this->subventions = new ArrayCollection();
+        $this->beneficiaries = new ArrayCollection();
     }
 
     /**
@@ -773,6 +779,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($subvention->getCreatedBy() === $this) {
                 $subvention->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Beneficiary[]
+     */
+    public function getBeneficiaries(): Collection
+    {
+        return $this->beneficiaries;
+    }
+
+    public function addBeneficiary(Beneficiary $beneficiary): self
+    {
+        if (!$this->beneficiaries->contains($beneficiary)) {
+            $this->beneficiaries[] = $beneficiary;
+            $beneficiary->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBeneficiary(Beneficiary $beneficiary): self
+    {
+        if ($this->beneficiaries->contains($beneficiary)) {
+            $this->beneficiaries->removeElement($beneficiary);
+            // set the owning side to null (unless already changed)
+            if ($beneficiary->getCreatedBy() === $this) {
+                $beneficiary->setCreatedBy(null);
             }
         }
 
